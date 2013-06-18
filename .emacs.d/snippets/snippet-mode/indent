@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Indentation avoidance (indent-line fixed)
+# key: indent
+# 
+# 参照:
+# <http://fukuyama.co/yasnippet>
+# --
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))

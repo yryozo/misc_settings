@@ -1,4 +1,3 @@
-
 ;;; for Japanese environment
 (cond ((string-match "21." emacs-version)
        (progn
@@ -41,6 +40,9 @@
 ;; 			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
 ;; 
 
+;;; for font settings
+(set-default-font "Ricty-13.5")
+
 ;; ;;;; emacsclientからの接続時処理
 ;; ;; <= server-visit-hook は使いにくいので after-make-frame-functions を使うことにした
 ;; (setq server-visit-hook 
@@ -74,10 +76,46 @@
 	     (keyboard-translate ?\C-h ?\C-?) ; 他にいい方法が思いつかないので, ここで処理.
 	     (cond ((window-system frame)     ; もしGUIのフレームなら, 
 	    ;; font 設定
-		    (set-frame-font "DejaVu Sans Mono-10")
+		    ;;;; set-frame-font
+		    ;;(set-frame-font "DejaVu Sans Mono-10")
+		    ;; 
+		    ;; <http://d.hatena.ne.jp/kitokitoki/20110502/p2> 
+		    ;; 横幅が 1:2 になるのは、12pt, 13.5pt, 15pt, 18pt など.
+		    ;; (set-frame-font "Ricty-12")
+		    (set-frame-font "Ricty-13.5")
+
+		    ;;;; 
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("IPAGothic" . "unicode-bmp"))
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("MigMix 1P" . "unicode-bmp"))
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("MigMix 2P" . "unicode-bmp"))
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("MigMix 1M" . "unicode-bmp"))
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("MigMix 2M" . "unicode-bmp"))
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("Migu 1P" . "unicode-bmp"))
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("Migu 1C" . "unicode-bmp"))
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("Migu 1M" . "unicode-bmp"))   ; <= 作者の人お勧め
+		    ;;(set-fontset-font (frame-parameter nil 'font)
+		    ;;		      'japanese-jisx0208
+		    ;;		      '("Migu 2M" . "unicode-bmp"))
 		    (set-fontset-font (frame-parameter nil 'font)
 				      'japanese-jisx0208
-				      '("IPAGothic" . "unicode-bmp"))
+				      '("Ricty" . "unicode-bmp"))   ;  <= Inconsolata + Migu 1M
+
 	    ;; ウィンドウサイズの設定
 		    ;(maximize-screen frame)))  ; ウィンドウサイズを最大化.
 		    (set-frame-size frame 
@@ -155,16 +193,22 @@
 (transient-mark-mode t)
 
 ;;; for kill, yank (= cut, copy, paste)
-;;;; FYI: <http://www.gnu.org/software/emacs/manual/html_node/emacs/Clipboard.html>
-;;;;
-;;;;<http://dan-project.blog.so-net.ne.jp/2012-11-25>
-;;;;Emacs 24 で yank の仕様が変更された.
+;; <http://www.emacswiki.org/emacs/CopyAndPaste>
+;; 
+;;;; Emacs 24 対策
+;; FYI: <http://www.gnu.org/software/emacs/manual/html_node/emacs/Clipboard.html>
+;; <http://dan-project.blog.so-net.ne.jp/2012-11-25>
+;; Emacs 24 で yank の仕様が変更された.
 (if (>= emacs-major-version 24)
     (progn
-      (setq select-active-regions nil)      ; これは Emacs 23.1 の挙動. 22 の挙動が好ければ t にする (範囲選択するだけで着るリングにコピーするようになる)
-      (setq x-select-enable-clipboard nil)
+      (setq select-active-regions nil)      ; これは Emacs 23.1 の挙動. 22 の挙動が好ければ t にする (範囲選択するだけでキルリングにコピーするようになる)
+
+      ;; (setq x-select-enable-clipboard nil)  ; これは nil に戻さなくていい. kill-region/kill-ring-save でコピーしたい
+      (setq x-select-enable-clipboard t)
+
       (setq x-select-enable-primary t)
-      (setq mouse-drag-copy-region t)))
+      (setq mouse-drag-copy-region t)
+      ))
 
 ;;;; for "yank した文字列をハイライト表示したい"
 (when (or window-system (eq emacs-major-version '21))
@@ -180,24 +224,55 @@
         (sit-for 0.5)
         (delete-overlay ol)))))
 
-;;;; 
-(defun my-kill-ring-save ()
-  (interactive)
-  ;(kill-ring-save (point) (mark))
-  (clipboard-kill-ring-save (point) (mark))
-  (exchange-point-and-mark)
-  (sit-for 0.8)
-  (exchange-point-and-mark))
-(defun my-kill-region ()
-  (interactive)
-  ;(kill-ring-save (point) (mark))
-  (clipboard-kill-region (point) (mark))
-  ;(exchange-point-and-mark)
-  ;(sit-for 0.8)
-  ;(exchange-point-and-mark)
-  )
-(global-set-key "\C-w" 'my-kill-ring-save)
-(global-set-key "\M-w" 'my-kill-region)
+;;;; for "yank した文字列を自動でインデントしたい"
+;; <http://www.emacswiki.org/emacs/AutoIndentation>
+;; C-u 付きで呼ぶと通常の挙動になる.
+(dolist (command '(yank yank-pop))
+  (eval `(defadvice ,command (after indent-region activate)
+	   (and (not current-prefix-arg)
+		(member major-mode '(emacs-lisp-mode lisp-mode
+						     clojure-mode    scheme-mode
+						     haskell-mode    ruby-mode
+						     rspec-mode      python-mode
+						     c-mode          c++-mode
+						     objc-mode       latex-mode
+						     plain-tex-mode))
+		(let ((mark-even-if-inactive transient-mark-mode))
+		  (indent-region (region-beginning) (region-end) nil))))))
+
+;;;; C-w/M-w の入れ替え & クリップボード連携
+;; clipboard-kill-ring-save/clipboard-kill-region は, cua-mode の矩形制御と相性が悪いので止めにした.
+;; 
+;; そもそも, 最近は interprogram-cut-function という仕組みで, 
+;; 普通の kill-ring-save/kill-region でも X アプリに伝わるようになっている模様.
+;; (ここにセットされている関数が呼ばれる. デフォルトは x-select-text)
+;; 
+;; ただし, x-select-text は
+;; x-select-enable-primary や x-select-enable-clipboard という変数が 
+;; t でなければ設定してくれない.
+;; (正確には, それぞれ PRIMARY/CLIPBOARD に設定するかどうかを制御する. 
+;; どちらかというと CLIPBOARD の方が問題)
+;; 
+;; (defun my-kill-ring-save ()
+;;   (interactive)
+;;   ;(kill-ring-save (point) (mark))
+;;   (clipboard-kill-ring-save (point) (mark))
+;;   (exchange-point-and-mark)
+;;   (sit-for 0.8)
+;;   (exchange-point-and-mark))
+;; (defun my-kill-region ()
+;;   (interactive)
+;;   ;(kill-ring-save (point) (mark))
+;;   (clipboard-kill-region (point) (mark))
+;;   ;(exchange-point-and-mark)
+;;   ;(sit-for 0.8)
+;;   ;(exchange-point-and-mark)
+;;   )
+;; (global-set-key "\C-w" 'my-kill-ring-save)
+;; (global-set-key "\M-w" 'my-kill-region)
+;; 
+(global-set-key "\C-w" 'kill-ring-save)
+(global-set-key "\M-w" 'kill-region)
 
 
 ;;; for previous-other-window
@@ -225,6 +300,25 @@
     (global-set-key [down] 'scroll-up-just-one)
 					;  (lambda (n) (interactive "p") (scroll-up n)))
     ))
+
+;;; for cua-mode
+;; cua モードを有効にする. ただし, キーバインドは使わない.
+(cua-mode t)
+(setq cua-enable-cua-keys nil)
+
+;;;; ;;;; C-RET を C-SPC に変える
+;; <http://my.opera.com/crckyl/blog/index.dml/tag/emacs>
+;; cua-mode での C-SPC は cua-set-mark というコマンドになっているので, ここに defadvise すればいい.
+;; 
+;; (defadvice cua-set-mark (around start-rectangle-mark activate)
+;;   (if (and (region-active-p) (eq last-command 'cua-set-mark))
+;;       (cua-toggle-rectangle-mark)
+;;     ad-do-it))
+
+
+;;;; TODO: cua-replace-region を無効化する
+;; <http://www.archivum.info/help-gnu-emacs@gnu.org/2008-11/01268/Re-cua-mode-and-cua-replace-region.html>
+;; (マークした後で少し修正しようとすると全部消されて置き換えになってしまう...)
 
 ;;; 
 (defun point-to-top ()
@@ -306,10 +400,53 @@
 (add-hook 'c-mode-hook
 	  '(lambda () (local-set-key "\C-c\C-u" 'uncomment-region)))
 
+
 ;;; for view-mode
 ;; <http://www.emacswiki.org/emacs/ViewMode>
 ;; C-x C-q で view-mode
 (setq view-read-only t)
+(require 'view)
+
+;; <http://d.hatena.ne.jp/khiker/20061027/1161982764>
+;; デフォルトで, 以下のようなキーバインドが設定される.
+;; / 	正規表現で前を検索
+;; \ 	正規表現で後を検索
+;; n 	次の検索とマッチしたものへ移動
+;; p 	前の検索とマッチしたものへ移動
+;; イコール記号 	現在カーソルのある行の行番号をミニバッファに出力
+;; 
+;; < 	バッファの先頭に移動
+;; > 	バッファの最後に移動
+;; z 	1ページ分スクロール(PageDown)
+;; w 	1ページ分前にスクロール(PageUp)
+;; d 	半ページ分スクロール
+;; u 	半ページ分前にスクロール
+;; C-m	1行下へ
+;; y 	1行上へ
+;; . 	マークする
+;; x 	現在のカーソルのある場所とマークのある場所を交換する
+;; q 	view-modeを終了
+
+;; <http://www40.atwiki.jp/cupnes/pages/28.html>
+;; 少し less (vi?) っぽくしてみた
+(define-key view-mode-map (kbd "j") 'View-scroll-line-forward)
+(define-key view-mode-map (kbd "k") 'View-scroll-line-backward)
+(define-key view-mode-map (kbd "h") 'backward-char)
+(define-key view-mode-map (kbd "l") 'forward-char)
+(define-key view-mode-map (kbd "N") 'View-search-last-regexp-backward)
+(define-key view-mode-map (kbd "?") 'View-search-regexp-backward)
+(define-key view-mode-map (kbd "G") 'end-of-buffer)
+(define-key view-mode-map (kbd "g") 'beginning-of-buffer)
+(define-key view-mode-map (kbd "p") 'beginning-of-buffer)
+(define-key view-mode-map (kbd "b") 'View-scroll-page-backward)
+(define-key view-mode-map (kbd "f") 'View-scroll-page-forward)
+
+
+;;; for bookmark
+;; <http://www.bookshelf.jp/texi/emacs-man/21-3/jp/emacs_12.html#SEC79>
+;; (setq bookmark-default-file "~/.emacs.d/bookmarks") ; 保存先のファイル名
+(setq bookmark-save-flag 1) ; ブックマーク情報を変更する度に (= 1回変更する度に) ファイルに保存
+;; (setq bookmark-search-size 16) ; ブックマーク位置の前後何文字分の内容を保存するか. ブックマークは周辺の文脈情報と一緒に保存されるので、ファイルが少し変更されていたとしても正しい位置をみつけだせる.
 
 ;;; for uniquify
 ; 同名のバッファをわかりやすくする
@@ -324,21 +461,54 @@
 ;; 削除確認等が yes/no の代わりに y/n で可能
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;;; for recentf-mode
-; <http://d.hatena.ne.jp/tomoya/20110217/1297928222>
-; 開いたファイルは、recentf-save-file に設定されているファイル (デフォルトでは ~/.recentf) に記録される
-; 保存のタイミングは、Emacs の終了時か、recentf-mode をオフにしたときなので、強制終了した場合は、残念ながら保存されません。
-(when (require 'recentf nil t)
-  (setq recentf-max-saved-items 2000)
-  (setq recentf-exclude '(".recentf"))
-  (setq recentf-auto-cleanup 10)
-  (setq recentf-auto-save-timer
-        (run-with-idle-timer 30 t 'recentf-save-list))
-  (recentf-mode 1))
-; Emacs には操作していない時間に、何か裏で作業をさせるためのアイドルタイマーという機能があります。これを利用すると、ぼーっと考えている時間を利用して、自動的にあれこれ保存させることが出来るというわけです。
-; recentf-auto-cleanup は、ファイルに保存する前に .recentf に保存するための情報を整理してくれます。これもアイドルタイマーを利用してくれます。
-; 実際に自動保存の部分は (run-with-idle-timer 30 t 'recentf-save-list) という記述となっています。run-with-idle-timer 関数に「時間」と「2度目も実行するかどうか」、そして実行したい関数を指定します。
+;;; for recentf
+;; -> <99-miscs.el> 参照
 
+;;; for ffap
+;; <http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html>
+;; C-x C-f 時に, カーソル位置のファイルもしくは URL がデフォルトで設定される.
+;; また, その他にも以下のようなキーバインドが設定される.
+;; 
+;;   C-x C-f filename <RET>
+;;       Find filename, guessing a default from text around point (find-file-at-point).
+;;   C-x C-r
+;;       ffap-read-only, analogous to find-file-read-only.
+;;   C-x C-v
+;;       ffap-alternate-file, analogous to find-alternate-file.
+;;   C-x d directory <RET>
+;;       Start Dired on directory, defaulting to the directory name at point (dired-at-point).
+;;   C-x C-d
+;;       ffap-list-directory, analogous to list-directory.
+;;   C-x 4 f
+;;       ffap-other-window, analogous to find-file-other-window.
+;;   C-x 4 r
+;;       ffap-read-only-other-window, analogous to find-file-read-only-other-window.
+;;   C-x 4 d
+;;       ffap-dired-other-window, like dired-other-window.
+;;   C-x 5 f
+;;       ffap-other-frame, analogous to find-file-other-frame.
+;;   C-x 5 r
+;;       ffap-read-only-other-frame, analogous to find-file-read-only-other-frame.
+;;   C-x 5 d
+;;       ffap-dired-other-frame, analogous to dired-other-frame.
+;;   M-x ffap-next
+;;       Search buffer for next file name or URL, then find that file or URL.
+;;   S-Mouse-3
+;;       ffap-at-mouse finds the file guessed from text around the position of a mouse click.
+;;   C-S-Mouse-3
+;;       Display a menu of files and URLs mentioned in current buffer, then find the one you select (ffap-menu). 
+(ffap-bindings)
+(global-set-key "\C-x\C-v" 'find-alternate-file)  ; ffap-alternate-file だけは肌に合わないので直しておく
+
+;;; ;;; for tramp
+;; ;; ~/.ssh/id_dsa があると, 何故か (require 'tramp) 時に何度も passphrase を聞かれる...
+;; ;; 何か壊れてるのか??
+;; ;; <= <http://lists.gnu.org/archive/html/help-gnu-emacs/2005-02/msg00471.html>
+;; ;;    <http://lists.gnu.org/archive/html/help-gnu-emacs/2005-02/msg00475.html>
+;; ;;    この事例に似ているような気がするが... こっちは結局どうなったんだ??
+;; (require 'tramp)
+;; ;; <http://www.gnu.org/software/tramp/#Password-handling>
+;; (setq password-cache-expiry nil)	; 一度保存したパスワードは時間制限無しでキャッシュする
 
 ;;; for shell-mode
 (setq explicit-shell-file-name "/bin/bash")
@@ -370,10 +540,18 @@
 
 
 ;;; for eldoc
+;; <http://www.emacswiki.org/emacs/ElDoc>
+;;   elisp モードにおいて, 関数シンボルにカーソルが触れるとミニバッファに説明が表示されるようになるマイナーモード.
+;; <http://d.hatena.ne.jp/rubikitch/20090207/1233936430>
+;;   eldocはEmacs Lisp（他言語も一部対応）でカーソル位置の関数の仮引数をエコーエリアに表示してくれるやつ。
+;;   標準添付だし、Emacs Lisp書く人ならふつー入れてるよね。
 (autoload 'turn-on-eldoc-mode "eldoc" nil t)
 (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
 (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
+
+;; 
+;; (setq eldoc-echo-area-use-multiline-p t)
 
 ;; for integrate emacs kill-ring and X11 cut-buffer.
 ;(setq x-select-enable-clipboard t)
@@ -415,9 +593,55 @@
 	     (local-set-key [?\C-\S-n] 'artist-next-line*4)
 	     (local-set-key [?\C-\S-p] 'artist-previous-line*4)))
 
+;;; for semantic
+;; <http://www.gnu.org/software/emacs/manual/html_node/semantic/index.html#Top> : Semantic Manual
+;; elisp で書かれたプログラミング言語のパーサー.
+;; CEDET プロジェクトの一部??
+;; パース結果を使って, imenu や speedbar, whichfunc, hippie-expand 等を強化できる.
+(semantic-mode 1)  ; semantic を有効にする
+
+
+;;; for imenu
+(custom-set-variables '(imenu-max-items 5000))
+(custom-set-variables '(imenu-max-item-length 500))
+
+(require 'cl)
+(require 'imenu)
+
+;;;; imenu を使用するメジャーモードの選択
+;; java-mode と javascript-mode で which-func を使う場合
+; (setq which-func-modes (append which-func-modes '(java-mode javascript-mode)))  ; which-func を使用するメジャーモード. t なら利用可能な全てのメジャーモードで使う. デフォルトは t.
+
+;;;; for which-func
+;; <http://dev.ariel-networks.com/Members/matsuyama/imenu/>
+;; imenu のインデックスを用いて、現在どの関数を編集しているか（Which Function）をモードラインに表示してくれる機能です。
+;; which-func という名前は、単に関数のインデックスがよく作られるからそのように名付けられたのですが、一般的には which-func はポイント付近にあるインデックスの項目名を表示する機能と言えます。
+(require 'which-func)
+(which-func-mode t)
+
+;;;; for semantic 連携
+;; <http://d.hatena.ne.jp/whitypig/20100329/1269817326>
+;;   <http://alexott.net/en/writings/emacs-devenv/EmacsCedet.html>
+;; <http://dev.ariel-networks.com/Members/matsuyama/imenu/>
+;; CEDET [4] / Semantic を使うと、標準のインデックスより詳細なインデックスを利用できるようになります [5] 。
+;; 
+;; <= でも, helm から使うと C-z のチラ見の際に変になるんだよなぁ...
+;;    <= なんかちかちか点滅してくれるのが原因か？ そんなのを頑張ってくれなくても...
+;;    <= helm-imenu は諦めて, helm-semantic-or-imenu を使うことにする??
+(defun my-semantic-hook ()
+  (imenu-add-to-menubar "TAGS"))
+(add-hook 'semantic-init-hooks 'my-semantic-hook)
+
+
 ;;; for speedbar
-;;-- <http://www.emacswiki.org/emacs/SpeedBar>
+;; <http://www.emacswiki.org/emacs/SpeedBar>
 (require 'speedbar)
+
+;;;; speedbar の対象にするメジャーモードの設定
+;; <http://www.miura-takeshi.com/2010/0121-100438.html>
+(add-hook 'speedbar-mode-hook
+          '(lambda ()
+             (speedbar-add-supported-extension '("howm"))))
 
 ;;;; 起動時にオンにする  (<= うるさいので要らないか)
 ; (when window-system          ; start speedbar if we're using a window system
@@ -486,6 +710,7 @@
 ; 
 ; ;; F4 で Speedbar
 ; (global-set-key [f4] 'speedbar-get-focus)
+
 
 
 ;;; for auto-insert

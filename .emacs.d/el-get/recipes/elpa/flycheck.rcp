@@ -1,0 +1,4 @@
+(:name flycheck
+:auto-generated t
+:type elpa
+:description "On-the-fly syntax checking (Flymake done right) [github]")

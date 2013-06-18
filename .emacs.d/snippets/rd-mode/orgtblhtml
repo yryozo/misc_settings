@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: orgtbl(org table) for HTML
+# key: orgtblhtml
+# type: command
+# --
+(let* ((table-name (make-temp-name "table"))
+       (snippet-text (format
+"<!-- Turn-ON: (turn-on-orgtbl), Turn-OFF: (orgtbl-mode -1) -->
+<!-- BEGIN RECEIVE ORGTBL ${1:%s} -->
+<!-- END RECEIVE ORGTBL $1 -->
+
+<!-- 
+#+ORGTBL: SEND $1 orgtbl-to-html
+| $0 | 
+-->
+"
+	table-name)))
+  (yas/expand-snippet snippet-text))

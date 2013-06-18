@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: snippet sample (self capitalizing)
+# key: snippet_sample_self_capitalizing
+# 
+# 入力される文字列を upcase で自動的に大文字にしながら受け付ける例
+# (yas-text で文字列を参照できる)
+# --
+${1:put_your_text_here$$(upcase yas-text)}

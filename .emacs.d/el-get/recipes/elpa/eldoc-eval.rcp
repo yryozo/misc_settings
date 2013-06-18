@@ -1,0 +1,4 @@
+(:name eldoc-eval
+:auto-generated t
+:type elpa
+:description "Show eldoc when using M-: [github]")

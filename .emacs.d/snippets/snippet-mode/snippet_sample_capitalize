@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: snippet sample (capitalize)
+# key: snippet_sample_capitalize
+# 
+# capibalize で先頭を大文字にしながらミラーする例
+# (yas-text でミラー文字列を参照できる)
+# --
+${1:sample_text}
+${1:$(capitalize yas-text)}

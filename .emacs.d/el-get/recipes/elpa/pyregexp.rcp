@@ -1,0 +1,4 @@
+(:name pyregexp
+:auto-generated t
+:type elpa
+:description "[deprecated, use visual-regexp/visual-regexp-steroids instead] A Python regexp/replace command for Emacs with interactive visual feedback [github]")

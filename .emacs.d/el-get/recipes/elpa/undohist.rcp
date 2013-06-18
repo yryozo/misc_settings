@@ -1,0 +1,4 @@
+(:name undohist
+:auto-generated t
+:type elpa
+:description "Persistent Undo History for GNU Emacs [github]")

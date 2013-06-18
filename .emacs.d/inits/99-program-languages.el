@@ -73,6 +73,9 @@
 
 
 ;;; for python-mode
+;; なお, 標準バンドルの python.el もある.
+;; python-mode はコミュニティによる開発. 
+;; python-mode の方が機能が豊富. python.el はそれを追いかけるような感じ.
 (autoload 'python-mode "python-mode"
   "Major mode for editing Python programs" t)
 (setq auto-mode-alist
@@ -85,17 +88,21 @@
       (cons '("\\.rb$" . ruby-mode) auto-mode-alist))
 (setq interpreter-mode-alist (cons '("ruby" . ruby-mode)
                                      interpreter-mode-alist))
-(autoload 'run-ruby "inf-ruby"
-  "Run an inferior Ruby process")
-(autoload 'inf-ruby-keys "inf-ruby"
-  "Set local key defs for inf-ruby in ruby-mode")
 (autoload 'rubydb "rubydb3x"
   "run rubydb on program file in buffer *gud-file*.
 the directory containing file becomes the initial working directory
 and source-file directory for your debugger." t) ;追加
-(add-hook 'ruby-mode-hook
-          '(lambda ()
-            (inf-ruby-keys)))
+
+;;;; for ruby-electric
+;; 括弧などを自動で挿入する
+
+;;;; for inf-ruby-mode
+;; Emacs から irb を利用できる
+;; (C-c C-s で *ruby* バッファが作られ irb が起動する)
+(autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
+(autoload 'inf-ruby-setup-keybindings "inf-ruby" "" t)
+(eval-after-load 'ruby-mode
+  '(add-hook 'ruby-mode-hook 'inf-ruby-setup-keybindings))
 
 ;;; for cpp-complt
 ;; (add-hook 'c-mode-common-hook
@@ -123,6 +130,9 @@ and source-file directory for your debugger." t) ;追加
 
 ;;; for perl-mode
 ;;;; for cperl-mode
+;; <>
+;; 構文解析を C 言語っぽくした perl-mode なので cperl-mode, らしい.
+
 (autoload 'cperl-mode "cperl-mode" "alternate mode for editing Perl programs" t)
 (setq auto-mode-alist
       (cons '("\\.\\([pP][Llm]\\|al\\)$" . cperl-mode)  auto-mode-alist ))
@@ -144,6 +154,8 @@ and source-file directory for your debugger." t) ;追加
 ;;             (local-set-key "\M-\t" 'perlplus-complete-symbol)
 ;;             (perlplus-setup)))
 
+;;;; for perl-completion
+
 ;;; for prolog
 (require 'prolog)
 ;(add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
@@ -153,6 +165,8 @@ and source-file directory for your debugger." t) ;追加
 (setq prolog-consult-string "[user].\n")
 
 ;;; for javascript
+;; TODO: Google が出している js2-mode というのが良さそうである.
+
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 (autoload 'javascript-mode "javascript" nil t)
 (setq javascript-indent-level 4)

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: snippet sample (text length)
+# key: snippet_sample_text_length
+# 
+# 文字列長と同じ長さの '=' を上下に挟む例
+# (yas-text でミラー文字列を参照できる)
+# --
+${1:$(make-string (string-width yas-text) ?\=)}
+${1:Title}
+${1:$(make-string (string-width yas-text) ?\=)}

@@ -1,0 +1,4 @@
+(:name ldg-mode
+:auto-generated t
+:type elpa
+:description "Helper code for use with the "ledger" command-line tool [github]")

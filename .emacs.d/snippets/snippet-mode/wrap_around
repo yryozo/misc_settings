@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Wrap around the selected region
+# key: wrap_around
+# --
+# binding: ${1:C-c s}
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil)  (begin-string "${2:=begin}") (end-string "${3:=end}"))
+# --
+\`begin-string\`
+\`yas-selected-text\`\`end-string\`
+\$0\`(scroll-up-line)\`

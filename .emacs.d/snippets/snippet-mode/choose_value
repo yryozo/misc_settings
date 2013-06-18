@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: choose value
+# key: choose_value
+# --
+\${${1:1}:\$\$(yas-choose-value '(${3:"relative" "absolute" "fixed"}))
