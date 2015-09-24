@@ -13,142 +13,63 @@
 ;; 	   (require 'egg nil t))          ;; git があるときだけ egg を読み込む
 
 
-;;; for el-get
-;; 
-;; <http://shibayu36.hatenablog.com/entry/2013/03/14/081524>
-;; <http://shishithefool.blogspot.jp/2012/04/el-get-emacs.html>
-;; M-x el-get-list-packages で利用できるpackageを一覧できます。
-;; 欲しいところでiを押して、その後xを押せばinstallが始まります。
-;; するとel-get-dirで指定したdirectoryにインストールされます。簡単ですね。
-;; 
-;; h を押下すればミニバッファにコマンドのヘルプが表示されます。? を押して詳細を確認できるのがすばらしいです。
-;; 
-;; それ以外にもM-x el-get-install とかM-x el-get-remove みたいなコマンドがあります。
-;; 
-;; なお、el-get 自身のアップデートには M-x el-get-self-update が、
-;; インストールしているもの全てのアップデートには M-x el-get-update-all というショートカットが用意されています。
-;; 
-;; <http://d.hatena.ne.jp/zqwell-ss/20130324/1364139367>
-;; 定期的に実行することを記載しておきます。
-;;
-;;  * (el-get-emacswiki-refresh)
-;;      emacswiki に存在する elisp の recipe を自動で生成. 
-;;      (通常はバックグラウンドで行う. 失敗したら C-u を付けて foreground で行うといい模様)
-;;  * (el-get-elpa-build-local-recipes)
-;;      package.el を通してインストールできるもののレシピを自動生成
-;; 
-;; <https://github.com/dimitri/el-get>
-;; 
-;;   * M-x el-get-self-update
-;;     Update only one package, el-get itself.
-;; 
-;;   * M-x el-get-update
-;;     Will prompt for an installed package name, with completion, then update it. This will run the build commands and init the package again.
-;; 
-;;   * M-x el-get-update-all
-;;     Will update all packages that have the installed status in your status file. Before the update you will be prompted for confirmation that you wish to proceed.
-;;     Beware that using this function can lead to hours of settings review: more often than not updating a package requires some adjustments to your setup. Updating all of them at once will require reviewing almost all your setup.
-;; 
-;;   * M-x el-get-reload
-;;     Reload the given package files. Happens automatically at update time too.
-
-
-;;;; lazy installation
-
-;; stable version を使いたい人向け
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
-
-;; ;; develop version (master branch) を使いたい人向け
-;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-;; 
-;; (unless (require 'el-get nil 'noerror)
-;;   (with-current-buffer
-;;       (url-retrieve-synchronously
-;;        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-;;     (let (el-get-master-branch)
-;;       (goto-char (point-max))
-;;       (eval-print-last-sexp))))
-;; 
-;; (el-get 'sync)
-
-;; <http://d.hatena.ne.jp/zqwell-ss/20130324/1364139367>
-;; <http://shibayu36.hatenablog.com/entry/2013/04/30/175740>
-;; マイレシピを手軽に追加する場合は以下に書く
-;; (自分が適当に作ってgithubに置いたものをel-getで管理するには
-;; 以下のようにrecipeを追加する必要があります。
-;; el-get-sourcesのリストを作っておくとel-get-installコマンドでインストールできるようになります。)
-(setq el-get-sources
-      '(
-        ;; 以下追加例
-        ;; (:name ruby-mode-trunk-head
-        ;;        :type http
-        ;;        :description "Major mode for editing Ruby files. (trunk-head)"
-        ;;        :url "http://bugs.ruby-lang.org/projects/ruby-trunk/repository/raw/misc/ruby-mode.el")
-        ;; (:name php-mode-github
-        ;;        :type github
-        ;;        :website "https://github.com/ejmr/php-mode"
-        ;;        :description "Major mode for editing PHP files. (on Github based on SourceForge version))"
-        ;;        :pkgname "ejmr/php-mode")
-        ))
-
-
 ;;; for auto-install (旧称 install-elisp)
-;; <http://www.emacswiki.org/emacs/AutoInstall>
-;; <http://d.hatena.ne.jp/keyword/install-elisp>
-;;   簡単なelispインストーラ。探したけどなぜか存在しなかったのでid:rubikitchが作成した。
-;;   ダウンロード、~/.emacs.dへの保存、バイトコンパイル、現在のEmacsセッションへのロードを自動化する。
-;;   install-elisp.elをインストールすることでインターネット上にあるelispを「M-x install-elisp elispのURL」でダウンロードする。
-;;   ダウンロード後、本当にインストールする場合は「C-c C-c」を押すと保存～ロードを自動でやってくれる。
-;; 
-;;   現在、install-elisp.elの後継バージョンとしてauto-install.elが作成されている。現メンテナは id:rubikitch である。
-;;   auto-install.elは非同期化や複数のファイルにまたがるパッケージのインストールなどがサポートされている。
-;;   (auto-install-compatibility-setup) を.emacsに入れておけばinstall-elisp.elとの互換性を保つことができる。
-;; 
-;; 使い方:
-;;   * M-x install-elisp (= auto-install-from-url)
-;;   * M-x install-elisp-from-emacswiki (= auto-install-from-emacswiki)
-;;   * M-x install-elisp-from-gist (= auto-install-from-gist)
-;;   * M-x auto-install-batch  
-;;     <http://www.emacswiki.org/emacs/AutoInstall#toc9>
-;;     複数ファイルからなる elisp 用. 特定の elisp にのみ対応 (anything, icicles, 等).
-;;  
-;;   Type “C-c C-c” to continue the install process.
-;;   Type “C-c C-d” to view differences from the old version. This does nothing if you have no older version.
-;;   Type “C-c C-q” to abort the install process.
+; ;; <http://www.emacswiki.org/emacs/AutoInstall>
+; ;; <http://d.hatena.ne.jp/keyword/install-elisp>
+; ;;   簡単なelispインストーラ。探したけどなぜか存在しなかったのでid:rubikitchが作成した。
+; ;;   ダウンロード、~/.emacs.dへの保存、バイトコンパイル、現在のEmacsセッションへのロードを自動化する。
+; ;;   install-elisp.elをインストールすることでインターネット上にあるelispを「M-x install-elisp elispのURL」でダウンロードする。
+; ;;   ダウンロード後、本当にインストールする場合は「C-c C-c」を押すと保存～ロードを自動でやってくれる。
+; ;; 
+; ;;   現在、install-elisp.elの後継バージョンとしてauto-install.elが作成されている。現メンテナは id:rubikitch である。
+; ;;   auto-install.elは非同期化や複数のファイルにまたがるパッケージのインストールなどがサポートされている。
+; ;;   (auto-install-compatibility-setup) を.emacsに入れておけばinstall-elisp.elとの互換性を保つことができる。
+; ;; 
+; ;; 使い方:
+; ;;   * M-x install-elisp (= auto-install-from-url)
+; ;;   * M-x install-elisp-from-emacswiki (= auto-install-from-emacswiki)
+; ;;   * M-x install-elisp-from-gist (= auto-install-from-gist)
+; ;;   * M-x auto-install-batch  
+; ;;     <http://www.emacswiki.org/emacs/AutoInstall#toc9>
+; ;;     複数ファイルからなる elisp 用. 特定の elisp にのみ対応 (anything, icicles, 等).
+; ;;  
+; ;;   Type “C-c C-c” to continue the install process.
+; ;;   Type “C-c C-d” to view differences from the old version. This does nothing if you have no older version.
+; ;;   Type “C-c C-q” to abort the install process.
+;  
+; (require 'auto-install)
+;  
+; ;; EmacsWiki からパッケージ名を取得する
+; (auto-install-update-emacswiki-package-name t)
+;  
+; ;; install-elisp.el と互換の挙動にする
+; (auto-install-compatibility-setup)
+;  
+; ;;;; インストール先のディレクトリの設定
+; ;; (setq auto-install-directory "~/.emacs.d/auto-install/")   ; デフォルト設定のまま
+; (add-to-list 'load-path auto-install-directory)
+;  
+; ;;;; プロキシの設定
+; ;; wget を使うようにする設定 (http_proxy 環境変数で proxy を超えられるようになる. デフォルトで t)
+; ;; (setq auto-install-use-wget t)
+;  
+; ;; wget を使わない場合は url-proxy-services をセットすればいい模様?
+; ;; (setq url-proxy-services '(("http" . "localhost:8339")))
 
-(require 'auto-install)
-
-;; EmacsWiki からパッケージ名を取得する
-(auto-install-update-emacswiki-package-name t)
-
-;; install-elisp.el と互換の挙動にする
-(auto-install-compatibility-setup)
-
-;;;; インストール先のディレクトリの設定
-;; (setq auto-install-directory "~/.emacs.d/auto-install/")   ; デフォルト設定のまま
-(add-to-list 'load-path auto-install-directory)
-
-;;;; プロキシの設定
-;; (setq url-proxy-services '(("http" . "localhost:8339")))
 
 ;;; for color-theme
 ;;;; for solarized theme
-(when (require 'color-theme)
-  (color-theme-initialize)
-  ;; color-theme-solorized.el
-  (when (require 'color-theme-solarized)
-    (color-theme-solarized-light)))
-    ;(color-theme-solarized-dark)))
+(if (< emacs-major-version 24)
+    (progn
+      (when (require 'color-theme)
+	(color-theme-initialize)
+	;; color-theme-solorized.el
+	(when (require 'color-theme-solarized)
+					;(color-theme-solarized-light)
+	  (color-theme-solarized-dark)
+	  ))))
+(if (>= emacs-major-version 24)
+    (load-theme 'solarized t))
 
 ;;;; for zenburn theme
 ;; (if (< emacs-major-version 24)
@@ -342,7 +263,7 @@
 ; <http://d.hatena.ne.jp/tomoya/20110217/1297928222>
 ; 開いたファイルは, recentf-save-file に設定されているファイル (デフォルトでは ~/.recentf) に記録される
 ; 保存のタイミングは、Emacs の終了時か、recentf-mode をオフにしたときなので、強制終了した場合は、残念ながら保存されません。
-(custom-set-variables '(recentf-save-file "~/.emacs.d/.recentf"))  ; 履歴の保存先
+(custom-set-variables '(recentf-save-file (locate-user-emacs-file ".recentf")))  ; 履歴の保存先
 (require 'recentf)
 (setq recentf-max-saved-items 200000)
 ; (setq recentf-max-menu-items 20) ; メニューでの表示件数. メニューはほとんど見ないから関係ないけど...
@@ -371,6 +292,115 @@
 (setq undo-strong-limit 240000)
 
 
+;;; for ffap
+;;;   for ffap-
+;; <http://www.emacswiki.org/emacs/ffap-.el>
+;; dired-mode では ffap を使わないようにする
+(require 'ffap-)
+
+;;;   for スペースを含むパス
+;; <http://www.bookshelf.jp/soft/meadow_23.html>
+;;  「 C:/Program Files/」のようにスペースを含むパスが書いてあると ffap が認識してくれ ないことがあります． 
+;;  リージョンで選択することで強制的に認識させることができます． 
+;;  (ffap で認識されなかったら，リージョンでパスを選択し，C-x C-fとします)
+
+(defun my-find-file-at-point-or-region (&optional arg)
+  "Find filename at point or selected by region.
+   This function is useful, when filename contain spaces, and so
+   can't be fully found by `find-file-at-point'. In this case user
+   should manually select full filename and invoke this command.
+   Also maps UNIX filenames to Window$ filenames."
+  (interactive "P")
+  (let ((filename
+	 (if (and transient-mark-mode mark-active)
+	     (buffer-substring-no-properties (mark) (point))
+	   (ffap-string-at-point))))
+    (and (eq system-type 'windows-nt)
+	 filename
+	 (string-match "^/dos/\\([A-Za-z]\\)\\(.*\\)" filename)
+	 (setq filename
+	       (concat (match-string 1 filename)
+		       ":" (match-string 2 filename))))
+    (or (and filename (file-exists-p filename))
+	(setq filename (ffap-guesser)))
+    (if (and filename (file-directory-p filename))
+	(setq filename (file-name-as-directory filename)))
+    (find-file-at-point (ffap-prompter filename))))
+
+(define-key global-map "\C-x\C-f" 'my-find-file-at-point-or-region)
+
+;;;   for linenumber ("filename:line" 型の書式) に対応する
+;; <http://www.emacswiki.org/emacs/FindFileAtPoint>
+;; こちらはプロンプトも聞かずに即座にジャンプする. 
+;; C-x C-f とはちょっと違う使い勝手だけどめちゃくちゃスムーズではある.
+;; 
+;; <= (ffap-file-at-point) を (ffap-prompter) に置き換えると C-x C-f の上位互換っぽくなる.
+;; 
+;; (defun my-find-file-at-point-with-line ()
+;;   "Opens the file at point and goes to line-number."
+;;   (interactive)
+;;   (let ((fname (ffap-file-at-point)))
+;;     (if fname
+;;  	(let ((line
+;;  	       (save-excursion
+;;  		 (goto-char (cadr ffap-string-at-point-region))
+;;  		 (and (re-search-backward ":\\([0-9]+\\)"
+;;  					  (line-beginning-position) t)
+;;  		      (string-to-int (match-string 1))))))
+;;  	  ;; (message "file:%s,line:%s" fname line)
+;;  	  (when (and (tramp-tramp-file-p default-directory)
+;;  		     (= ?/ (aref fname 0)))
+;;  	    ;; if fname is an absolute path in remote machine, it will not return a tramp path,fix it here.
+;;  	    (let ((pos (position ?: default-directory)))
+;;  	      (if (not pos) (error "failed find first tramp indentifier ':'"))
+;;  	      (setf pos (position ?: default-directory :start (1+ pos)))
+;;  	      (if (not pos) (error "failed find second tramp indentifier ':'"))
+;;  	      (setf fname (concat (substring default-directory 0 (1+ pos)) fname))))
+;;  	  (message "fname:%s" fname)
+;;  	  (find-file-existing fname)
+;;  	  (when line (goto-line line)))
+;;       (error "File does not exist."))))
+
+;; <http://stackoverflow.com/questions/3139970/open-a-file-at-line-with-filenameline-syntax>
+;; 以下のような実装方法もある模様
+;; 
+;; (defun find-file-at-point-with-line (&optional filename)
+;;   "Opens file at point and moves point to line specified next to file name."
+;;   (interactive)
+;;   (let* ((filename (or filename (ffap-prompter)))
+;;  	 (line-number
+;;  	  (and (or (looking-at ".* line \\(\[0-9\]+\\)")
+;;  		   (looking-at ".*:\\(\[0-9\]+\\):"))
+;;  	       (string-to-number (match-string-no-properties 1)))))
+;;     (message "%s --> %s" filename line-number)
+;;     (cond ((ffap-url-p filename)
+;;  	   (let (current-prefix-arg)
+;;  	     (funcall ffap-url-fetcher filename)))
+;;  	  ((and line-number
+;;  		(file-exists-p filename))
+;;  	   (progn (find-file-other-window filename)
+;;  		  (goto-line line-number)))
+;;  	  ((and ffap-pass-wildcards-to-dired
+;;  		ffap-dired-wildcards
+;;  		(string-match ffap-dired-wildcards filename))
+;;  	   (funcall ffap-directory-finder filename))
+;;  	  ((and ffap-dired-wildcards
+;;  		(string-match ffap-dired-wildcards filename)
+;;  		find-file-wildcards
+;;  		;; Check if it's find-file that supports wildcards arg
+;;  		(memq ffap-file-finder '(find-file find-alternate-file)))
+;;  	   (funcall ffap-file-finder (expand-file-name filename) t))
+;;  	  ((or (not ffap-newfile-prompt)
+;;  	       (file-exists-p filename)
+;;  	       (y-or-n-p "File does not exist, create buffer? "))
+;;  	   (funcall ffap-file-finder
+;;  		    ;; expand-file-name fixes "~/~/.emacs" bug sent by CHUCKR.
+;;  		    (expand-file-name filename)))
+;;  	  ;; User does not want to find a non-existent file:
+;;  	  ((signal 'file-error (list "Opening file buffer"
+;;  				     "no such file or directory"
+;;  				     filename))))))
+
 ;;; for mic-paren
 (require 'mic-paren)
 (paren-activate)
@@ -379,7 +409,12 @@
 (autoload 'gtags-mode "gtags" "" t)
 
 ;;; for cscope
+; <https://github.com/dkogan/xcscope.el>
+; 前と変わった? 前は apt のパッケージになってるやつを使ってたが, ELPA から入れたやつは改良版らしい.
+;   "This is a continuation of the xcscope.el (by Darryl Okahata) that ships in the CVS tree of cscope itself. 
+;    The code in the cscope tree is stable, so this tree expands on the original source, fixing various bugs and adding features."
 (require 'xcscope)
+(cscope-setup)
 
 ;;; for c-eldoc
 ;; <http://www.emacswiki.org/cgi-bin/wiki/CEldocMode>
@@ -442,64 +477,6 @@
   ;; (setq migemo-dictionary "somewhere/migemo/euc-jp/migemo-dict")
   ;; (setq migemo-user-dictionary nil)
   ;; (setq migemo-regex-dictionary nil)
-
-
-;;; for IMEs
-
-;;;   for anthy
-;(set-input-method "japanese-anthy")
-;;;   for boiling-anthy
-;(require 'anthy)
-;(autoload 'boiling-rK-trans "boiling-anthy" "romaji-kanji conversion" t)
-;(autoload 'boiling-rhkR-trans "boiling-anthy" "romaji-kana conversion" t)
-;(global-set-key [?\C-\;] 'boiling-rK-trans)
-;;(global-set-key "\M-o" 'boiling-rhkR-trans)
-
-;;;   for canna
-(set-input-method "japanese-egg-canna")
-(setq egg-mode-hook
-      '(lambda ()
-         (its-defrule "tha" "てゃ" nil t)
-         (its-defrule "thi" "てぃ" nil t)
-         (its-defrule "thu" "てゅ" nil t)
-         (its-defrule "the" "てぇ" nil t)
-         (its-defrule "tho" "てょ" nil t)
-         (its-defrule "dha" "でゃ" nil t)
-         (its-defrule "dhi" "でぃ" nil t)
-         (its-defrule "dhu" "でぅ" nil t)
-         (its-defrule "dhe" "でぇ" nil t)
-         (its-defrule "dho" "でぉ" nil t)
-         (its-defrule "va" "う゛ぁ" nil t)
-         (its-defrule "vi" "う゛ぃ" nil t)
-         (its-defrule "vu" "う゛ぅ" nil t)
-         (its-defrule "ve" "う゛ぇ" nil t)
-         (its-defrule "vo" "う゛ぉ" nil t)
-;	 (its-defrule "/" "・" nil t)
-	 (its-defrule "~" "〜" nil t)
-       )
-)
-(define-key its-mode-map "\C-g" 'its-cancel-input)
-;(define-key its-mode-map "\C-j" 'its-exit-mode)
-(define-key egg-conversion-map "\C-g" 'egg-abort-conversion)
-;(define-key egg-conversion-map "\C-j" 'egg-exit-conversion)
-;(define-key menudiag-mode-map "\C-j" 'menudiag-select-this-item)
-
-;(setq egg-conversion-auto-candidate-menu 5)
-;(setq menudiag-select-without-return t)
-;(setq its-hira-period "．")
-;(setq its-hira-comma  "，")
-;(setq its-hira-enable-zenkaku-alphabet nil)
-;; (setq its-delete-by-keystroke t)
-;(setq its-delete-by-character t)
-
-;;;   for yc
-(setq yc-rK-trans-key [?\C-\;]) ; C-j ではなく C-; で変換(load する前に設定すること)
-(load "yc") ; これでフェンスモードは使用可能
-(global-yc-mode) ; 全バッファで ANK-漢字変換を有効にする
-; (setq yc-use-color t) ; <= 見づらくない？
-; (setq yc-use-fence (not (eq window-system 'x)))
-(setq yc-use-fence t)
-; (global-set-key "\M-\ " 'yc-mode) ; 一時的に無効にするときに使う
 
 
 ;;; for dired
@@ -741,14 +718,14 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;;   hs-hide-initial-comment-block
 ;;
 (autoload 'hideshowvis-enable "hideshowvis" "Highlight foldable regions")
-
+ 
 ;;;; 諸設定
 ;; コメントは、隠さず表示する。
 (setq hs-hide-comments-when-hiding-all nil)
-
+ 
 ;; 隠した(hide)行は、isearchの対象にしない(outlineモードにも影響)
 (setq search-invisible nil)  ;; 「'open」or「t」
-
+ 
 ;;;; ruby-mode 用の hs-special-modes-alist の設定
 ;; <http://sheepman.sakura.ne.jp/diary/?date=20050131#p03>
 ;; 
@@ -791,15 +768,15 @@ by yama @ Thu Mar 29 23:37:45 2007"
   (if (not (member ruby-mode-hs-info hs-special-modes-alist))
     (setq hs-special-modes-alist
       (cons ruby-mode-hs-info hs-special-modes-alist))))
-
+ 
 ;;;; カスタマイズ用の変数設定
 ;; ;; Hide the comments too when you do a 'hs-hide-all'
 ;; (setq hs-hide-comments nil)
 ;; ;; Set whether isearch opens folded comments, code, or both
 ;; ;; where x is code, comments, t (both), or nil (neither)
 ;; (setq hs-isearch-open 'x)
-
-;;;; 備考: hideshow を使った自作 elisp 用
+ 
+;; ;;;; 備考: hideshow を使った自作 elisp 用
 ;; hs-block-start-regexp, hs-block-end-regexp 
 ;;   ブロックの先頭／最後を表す正規表現
 ;; hs-block-start-mdata-select
@@ -831,17 +808,19 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;;              toggle the visibility of all the blocks.
 
 ;;;   hideshow を有効にするモードの設定
-(dolist (hook (list ;'emacs-lisp-mode-hook
-		    ;'lisp-interaction-mode-hook
-                    'c++-mode-hook
-		    'ruby-mode-hook 
-		    ))
-  ;;(add-hook hook '(lambda() (hs-minor-mode 1)))  ; hs-show-mode を有効にする
-  (add-hook hook 
-	    '(lambda()
-	       (hideshowvis-enable)   ; hideshowvis-mode を有効にする
-	       (hs-org/minor-mode)))  ; hideshow-org-mode を有効にする
-  )
+;; 結構使いにくいので無くてもいいかな...
+
+;;(dolist (hook (list ;'emacs-lisp-mode-hook
+;; 		    ;'lisp-interaction-mode-hook
+;;                    'c++-mode-hook  
+;; 		    'ruby-mode-hook 
+;; 		    ))
+;;  ;;(add-hook hook '(lambda() (hs-minor-mode 1)))  ; hs-show-mode を有効にする
+;;  (add-hook hook 
+;; 	    '(lambda()
+;; 	       (hideshowvis-enable)   ; hideshowvis-mode を有効にする
+;; 	       (hs-org/minor-mode)))  ; hideshow-org-mode を有効にする
+;;  )
 
 
 ;;;   例: C# モード用の設定
@@ -896,12 +875,12 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;;   ??
 ;; C-c @ C-q	hide-ifdef-toggle-read-only
 ;;   非表示状態では read-only にするかどうかを切り替える
-
+ 
 (dolist (hook (list 'c-mode-hook
                     'c++-mode-hook
-		    ))
+ 		    ))
   (add-hook hook 
-	    '(lambda() (hide-ifdef-mode t)))
+ 	    '(lambda() (hide-ifdef-mode t)))
   )
 
 ;;; for imenu
@@ -983,7 +962,7 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;; マークのセーブ
 (setq-default bm-buffer-persistence t)
 ;; セーブファイル名の設定
-(setq bm-repository-file "~/.emacs.d/.bm-repository")
+(setq bm-repository-file (locate-user-emacs-file ".bm-repository"))
 ;; 起動時に設定のロード
 (setq bm-restore-repository-on-load t)
 (add-hook 'after-init-hook 'bm-repository-load)
@@ -1107,12 +1086,28 @@ by yama @ Thu Mar 29 23:37:45 2007"
 
 ;;;; バッファに対しては、カーソルを合わせただけで中身を表示する
 ;; <http://shakenbu.org/yanagi/d/?date=201202>
+;; <https://github.com/shishi/.emacs.d/blob/master/inits/10-helm.el>
 ;; C-z を押さないと中身を見ることができません。
 ;; これまで使っていた iswitchb では、選択を確定する前に選択中のバッファを表示するようにしていたので、この機能はぜひ欲しいと思っていました。
-(add-hook 'helm-move-selection-after-hook
-  (lambda ()
-    (when (eq (cdr (assq 'type (helm-get-current-source))) 'buffer)
-      (helm-execute-persistent-action))))
+
+;;(add-hook 'helm-move-selection-after-hook
+;;  (lambda ()
+;;    (when (eq (cdr (assq 'type (helm-get-current-source))) 'buffer)
+;;      (helm-execute-persistent-action))))
+
+(defun show-buffer-move-by-move-extend ()
+  (interactive)
+  (when (or (memq (assoc-default 'type (helm-get-current-source)) '(buffer sexp))   ;; buffer か sexp
+	    (equal (cdr (assq 'name (helm-get-current-source))) "Grep")             ;; 又は grep
+            (equal (cdr (assq 'name (helm-get-current-source))) "Imenu")            ;; 又は Imenu
+            (equal (cdr (assq 'name (helm-get-current-source))) "Etags")            ;; 又は Etags
+            (equal (cdr (assq 'name (helm-get-current-source))) "Exuberant ctags")  ;; 又は 
+	    )
+    (helm-execute-persistent-action))
+  ;; (y-or-n-p (message "%s" (anything-get-current-source)))
+  )
+(add-hook 'helm-move-selection-after-hook 'show-buffer-move-by-move-extend)
+
 
 ;;;; for helm-migemo
 (require 'helm-migemo)
@@ -1128,7 +1123,7 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;; - When type C-z, selected command is described without quiting.
 (require 'helm-descbinds)
 (helm-descbinds-mode)
-(global-set-key (kbd "C-c b") 'helm-descbinds)
+;(global-set-key (kbd "C-c b") 'helm-descbinds)
 
 ;;;;; prior to emacs24
 ;  (helm-descbinds-mode 1)
@@ -1140,8 +1135,8 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;; <http://d.hatena.ne.jp/yuheiomori0718/20120207/1328620261>
 ;; helm-source-locate のようなもの. ただし, 複数クエリでのマッチが出来る.
 ;; 
-;; 辞を作るために, 予め make-filelist.rb を回しておく必要がある.
-;; 探範囲は ~/.make-filelist.rb でカスタマイズ可能. 
+;; 辞書を作るために, 予め make-filelist.rb を回しておく必要がある.
+;; 探索範囲は ~/.make-filelist.rb でカスタマイズ可能. 
 ;;   (あるいは, make-filelist.rb にコマンドライン引数を渡すと, そこだけが探索される
 ;;    $ ruby make-filelist.rb ~ /etc > ~/partial.filelist   )
 ;; 
@@ -1246,10 +1241,54 @@ by yama @ Thu Mar 29 23:37:45 2007"
 
 
 ;;;   for helm-bm
-;; <>
-;; (install-elisp "https://raw.github.com/thomasf/dotfiles-thomasf-emacs/master/emacs.d/lisp/helm-bm.el")  <= こっちをインストール
-;;   (install-elisp "https://raw.github.com/lewang/le_emacs_libs/master/helm-bm.el")  <= こっちにもある. 少しだけ違うが, まあ上の方がいいかな.
+;; <http://rubikitch.com/2014/11/22/helm-bm/>
+;; ELPA にきてたので, そちらに更新
+;; 以前は以下のものを使っていた.
+;;   (install-elisp "https://raw.github.com/thomasf/dotfiles-thomasf-emacs/master/emacs.d/lisp/helm-bm.el")  <= こっちをインストール
+;;     (install-elisp "https://raw.github.com/lewang/le_emacs_libs/master/helm-bm.el")  <= こっちにもある. 少しだけ違うが, まあ上の方がいいかな.
 (require 'helm-bm)
+(global-set-key (kbd "C-c b") 'helm-bm)  ; #TODO helm-descbinds との競合解消
+
+
+;;;   for helm-from-my-template (private)
+;;;; helper-function
+(defun helm-candidates-from-my-template (fpath)
+  "Create helm candidates' strings from a file splitted by empty lines"
+  (with-temp-buffer 
+    (insert-file-contents fpath nil nil nil t)
+    ;; process it ...
+    ;; (goto-char 0) ; move to begining of file's content (in case it was open)
+    ;; ... do something here
+    ;; (write-file fpath) ;; write back to the file
+    
+    ;; split the buffer by empty lines
+    (split-string 
+     (buffer-string) ; return the buffer's contents as a string
+     "\n\n")
+    )
+  )
+
+(defvar helm-my-template-file (locate-user-emacs-file "my_template"))
+
+(defvar helm-c-source-from-my-template
+  '((name . "Code dictionary")
+    (candidates . (lambda () (helm-candidates-from-my-template helm-my-template-file)))
+    (action ("Insert" . yas-expand-snippet))
+    ;(action ("Insert" . insert))
+    (multiline)
+    (migemo)))
+;(helm-other-buffer '(helm-c-source-from-my-template) "*helm my completion*")
+
+(defun helm-my-text-completion ()
+  (interactive)
+  (helm-other-buffer '(helm-c-source-yasnippet
+					;helm-c-source-code-dictionary
+		       helm-c-source-from-my-template
+		       )
+		     "*helm my completion*"))
+
+; 作ったコマンドをショートカットキーに登録
+;(define-key my-mode-map (kbd "C-c y") 'helm-my-text-completion)
 
 
 ;;;   for my helm 
@@ -1414,19 +1453,50 @@ by yama @ Thu Mar 29 23:37:45 2007"
 		     helm-def-source--emacs-faces
 		     helm-def-source--helm-attributes)))
 	  :buffer "*helm my apropos*"
-	  :preselect (and default (concat "\\_<" (regexp-quote default) "\\_>")))))
+	  :input default                                                            ; クエリの初期値
+	  :preselect (and default (concat "\\_<" (regexp-quote default) "\\_>"))))  ; ぴったりの要素が存在すれば最初から選択
+  )
 ; とりあえず helm-apropos と helm-man-woman を上書き
 (define-key helm-command-map (kbd "a")  'helm-my-apropos)
 (define-key helm-command-map (kbd "m")  'helm-my-apropos)
 
+;;;; howm 検索用
+;; 情報検索用と一緒にしようと思ったが, helm-do-grep-1 がそういう作りになっていないので pending
+;; <http://vaughndickson.com/2013/03/07/keybinding-for-emacs-helm-to-recursively-grep-certain-file-extensions-in-your-src-directories/>
+
+(defun helm-my-howm-grep ()
+  (interactive)
+  (helm-do-grep-1 '("~/howm")
+                  '(4)
+                  nil
+                  '("*.howm" "*.txt")))
+
+(global-set-key (kbd "C-c g") 'helm-my-howm-grep)
+
+
 
 ;;; for yasnippet
 (require 'yasnippet)
+
+;; # (自分用) snippet 管理方法
+;;   * 自分が独自に作った snippet は, 以下のディレクトリに格納.
+;;     (add-to-list 'yas/root-directory "~/.emacs.d/snippets")
+;;   * その他に, 以下のディレクトリにある snippet を使用. (yas-snippet-dirs に設定)
+;;     ("~/.emacs.d/snippets"
+;;      "~/.emacs.d/elpa/yasnippet-*/snippets")
+;;   * ELPA で付いてくる標準 snippet (.emacs.d/elpa/yasnippet-*/snippets) のうち, 
+;;     自分の使いにくい物は, 独自ディレクトリ("~/.emacs.d/snippets")の設定で上書き
+;;       (例: c++-mode の map, etc)
+;;     または, ファイルを削除 
+;;       (例: ruby-mode の if, ife, for, forin, time,  etc) (<= 2013-05-13-234544.howm 参照)
+
+;;;; snippet 管理用のディレクトリの設定
 ;; デフォルトのままなので特に設定する必要なし. ~/.emacs.d/snippets というフォルダを作っておくこと.
-;; (setq yas-snippet-dirs
-;;       '("~/.emacs.d/snippets" ;; 作成するスニペットはここに入る
-;;         "~/.emacs.d/elisp/yasnippet/snippets" ;; 最初から入っていたスニペット(省略可能)
-;;         ))
+;; ;(setq yas-snippet-dirs
+;; ;      '("~/.emacs.d/snippets" ;; 作成するスニペットはここに入る
+;; ;        ...
+;; ;        ))
+
 (yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
 
 ;;;; キーバインド
@@ -1513,10 +1583,208 @@ by yama @ Thu Mar 29 23:37:45 2007"
 (require 'helm-c-yasnippet)
 (setq helm-c-yas-space-match-any-greedy t) ;[default: nil]
 (global-set-key (kbd "C-c y") 'helm-c-yas-complete)
-(yas--initialize)
+(yas-global-mode 1)  ;(yas--initialize) <= 昔はこうだった
 
 (add-to-list 'helm-c-source-yasnippet '(migemo))      ; migemo 対応
 
+
+;;;   for additional snippets
+; 特になし
+; 
+;; <https://github.com/AndreaCrotti/yasnippet-snippets>
+;; M-x (yas/reload-all) to activate them; 
+;; (add-to-list 'yas/root-directory "~/yasnippet-snippets/") 
+;; ;  <= 標準として ELPA で付いてくるようになったので除外
+
+;;; for auto-complete
+;; <http://cx4a.org/software/auto-complete/manual.ja.html>
+ 
+(when (require 'auto-complete-config nil t)
+  (ac-config-default)
+ 
+;;;; 辞書の保存場所の設定 
+  ;; ELPA で入れた場合, デフォルトでは elpa によるインストールディレクトリ内になっている.
+  ;; 自分で独自の辞書ディレクトリを持ちたい場合は追加してもいい.
+  ;; なお, 検索対象は「メジャーモード名と同名のファイル」のみ.
+  ;; 
+  ;; (add-to-list 'ac-dictionary-directories (locate-user-emacs-file "dict"))
+ 
+;;;; 補完履歴のキャッシュ先
+  (setq ac-comphist-file (locate-user-emacs-file "elisp/auto-complete/ac-comphist.dat"))
+ 
+;;;; 諸変数のカスタマイズ
+  ;; <http://cloverrose.hateblo.jp/entry/2013/04/12/145825>
+  ;; <http://www.gfd-dennou.org/member/uwabami/cc-env/Emacs/auto-complete_config.html>
+  ;; 
+  ;; (setq ac-auto-start 2)  ;; n文字以上の単語の時に補完を開始. nil に設定すると自動補完されなくなる
+  ;; (setq ac-delay 0.05)  ;; n秒後に補完開始
+  ;; (setq ac-use-fuzzy t)  ;; 曖昧マッチ有効
+  ;; (setq ac-use-comphist t)  ;; 補完推測機能有効
+  ;; (setq ac-auto-show-menu 0.05)  ;; n秒後に補完メニューを表示
+  ;; (setq ac-quick-help-delay 0.5)  ;; n秒後にクイックヘルプを表示
+  ;; (setq ac-ignore-case nil)  ;; 大文字・小文字を区別する
+  ;; (setq ac-use-comphist t)  ;; 補完候補をソート
+  ;; (setq ac-candidate-limit nil)  ;; 補完候補表示を無制限に
+  ;; (setq ac-dwim t)  ;; デフォルトで t
+  ;; (setq ac-disable-faces nil)  ;; 文字列中やコメント中でも補完を有効にする
+ 
+  ;; ;; auto-complete の候補に日本語を含む単語が含まれないようにする
+  ;; ;; http://d.hatena.ne.jp/IMAKADO/20090813/1250130343
+  ;; (defadvice ac-word-candidates (after remove-word-contain-japanese activate)
+  ;;   (let ((contain-japanese (lambda (s) (string-match (rx (category japanese)) s))))
+  ;;     (setq ad-return-value
+  ;;           (remove-if contain-japanese ad-return-value))))
+ 
+;;;; キーバインド
+  ;; <http://www.gfd-dennou.org/member/uwabami/cc-env/Emacs/auto-complete_config.html>
+  ;; 
+  ;; (setq ac-use-menu-map t)  ; C-n, C-p, C-s 等を有効にする (ac-menu-map というマップが有効化される)
+  ;; 
+  ;; (define-key ac-completing-map (kbd "C-s")   'ac-isearch)
+  ;; (define-key ac-completing-map (kbd "M-/")   'ac-stop)
+  ;; (define-key ac-completing-map (kbd "RET") nil) ; return での補完禁止
+ 
+  ;; <http://acidnote.com/2013/05/js2-autocomplete/>
+  ;; 設定次第で任意のモードで任意の補完辞書を呼び出させることも出来るっぽい。
+  ;; <= (make-local-variable 'ac-dictionary-files) しといた方がいいのでは??
+  ;; 
+  ;; (add-hook 'hoge-mode-hook ;; 適用先のモード
+  ;;   '(lambda ()
+  ;;     (add-to-list 'ac-dictionary-files 
+  ;;        "~/.emacs.d/elpa/auto-complete-20130330.1836/dict/hoge") ;; 参照したい辞書へのパス
+  ;; ))
+ 
+  (define-key ac-completing-map (kbd "M-s")   'ac-isearch)
+ 
+ 
+  ;; M-TAB で明示的に auto-comlete を発動
+  (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+ 
+ 
+;;;; 対応するメジャーモードの設定
+  ;;  (setq ac-modes (append '(js2-mode)))
+ 
+ 
+;;;; 情報源(sources)の設定
+  ;; ac-sources を設定すればいい.
+  ;; 注意: ac-sources はバッファローカルなので, hook 等で setq するといい.
+ 					;(push 'ac-source-filename ac-sources)
+ 
+  ;; <http://fukuyama.co/yasnippet>
+  ;; どのモードでも共通にベースとなるソースを作っておく.
+  ;;   (defvar my-ac-sources
+  ;;     '(ac-source-yasnippet             ;; yasnipet を追加
+  ;;       ac-source-abbrev
+  ;;       ac-source-dictionary
+  ;;       ac-source-words-in-same-mode-buffers))
+  ;; 
+  ;; あるいは ac-sources を直接変更.
+  (setq-default ac-sources 
+ 		`(,@ac-sources ac-source-yasnippet))   ;; YASnippet を補完候補に追加
+ 
+  ;; add-hook で各モードのソースを調整
+  ;;  (defun ac-scss-mode-setup ()
+  ;;    (setq-default ac-sources (append '(ac-source-css-property) my-ac-sources)))
+  ;;  (add-hook 'scss-mode-hook 'ac-scss-mode-setup)
+  ;; 
+  ;;  (defun ac-web-mode-setup ()
+  ;;    (setq-default ac-sources my-ac-sources))
+  ;;  (add-hook 'web-mode-hook 'ac-web-mode-setup)
+  ;; 
+  ;;  (defun ac-coffee-mode-setup ()
+  ;;    (setq-default ac-sources my-ac-sources))
+  ;;  (add-hook 'coffee-mode-hook 'ac-coffee-mode-setup)
+ 
+ 
+;;;; look コマンドで英単語を補完
+  ;; <http://d.hatena.ne.jp/kitokitoki/20101205/p2>
+  ;; (require 'auto-complete-config)
+  ;; 
+  ;; (defun my-ac-look ()
+  ;;   "look コマンドの出力をリストで返す"
+  ;;   (interactive)
+  ;;   (unless (executable-find "look")
+  ;;     (error "look コマンドがありません"))
+  ;;   (let ((search-word (thing-at-point 'word)))
+  ;;     (with-temp-buffer
+  ;;       (call-process-shell-command "look" nil t 0 search-word)
+  ;;       (split-string-and-unquote (buffer-string) "\n"))))
+  ;; 
+  ;; (defun ac-complete-look ()
+  ;;   (interactive)
+  ;;   (let ((ac-menu-height 50)
+  ;;         (ac-candidate-limit t))
+  ;;   (auto-complete '(ac-source-look))))
+  ;; 
+  ;; ;; 表示数制限を変更しない場合
+  ;; ;;(defun ac-complete-look ()
+  ;; ;;  (interactive)
+  ;; ;;  (auto-complete '(ac-source-look)))
+  ;; 
+  ;; (defvar ac-source-look
+  ;;   '((candidates . my-ac-look)
+  ;;     (requires . 2)))  ;; 2文字以上ある場合にのみ対応させる
+  ;; 
+  ;; ;; キーは好きなのを割り当てて下さい
+  ;; (global-set-key (kbd "M-h") 'ac-complete-look)
+ 
+ 
+  ;; いちいち M-h で明示的に呼び出すのが面倒なら、以下のように設定。
+  ;; 重そうなのでお勧めはしません。
+  ;; (setq ac-source-look
+  ;;   '((candidates . my-ac-look)
+  ;;     (requires . 4)))  ;; 4文字以上の入力のみ対象とするように変更. 2 だと候補が多すぎてうっとうしい
+  ;; 
+  ;; ;; 補完対象とするモードの ac-sources に対して追加
+  ;; (push 'ac-source-look ac-sources)
+ 
+  )
+ 
+;;;   for ac-helm
+;; 
+(require 'ac-helm)  ;; Not necessary if using ELPA package
+;(define-key ac-complete-mode-map (kbd "C-:") 'ac-complete-with-helm)
+(define-key ac-completing-map (kbd "C-M-s")   'ac-complete-with-helm)
+ 
+;; ;; M-TAB で明示的に auto-comlete & ac-helm を発動
+;; (define-key ac-mode-map (kbd "M-TAB") 
+;;   (lambda ()
+;;     (interactive)
+;;     (auto-complete)
+;;     (ac-complete-with-helm)))
+ 
+ 
+;;;   for ac-ja
+;; <http://sheephead.homelinux.org/2011/10/11/6869/>
+(require 'ac-ja)
+;; ac-source-dabbrev-ja を補完候補に追加
+;; (全ての source から候補を取るわけではなく, 最初に候補を返した source だけを見る模様.
+;;  ac-source-words-in-same-mode-buffers が先にあると取られることが多いので, こっちを先頭にしてみる)
+(setq-default ac-sources 
+	      `(ac-source-dabbrev-ja ,@ac-sources))
+
+;; yc 入力時に auto-complete されるようにしてみる
+;; <http://sheephead.homelinux.org/2011/10/11/6869/>
+;; <https://gist.github.com/yryozo/5843877>
+(eval-after-load "yc"
+  '(progn
+     (defadvice yc-kakutei (after ac-yc-kakutei last)
+       "yc-kakuteiの後にauto-complete-modeによる補完を実行するadvice"
+       (unless (minibufferp)
+         (ac-start)))
+     (ad-activate 'yc-kakutei)))
+
+;; <= ac-trigger-commands を使っても実現可能??
+
+;; (add-hook 'yc-mode-hook
+;;           (lambda () 
+;;             "skk-kakuteiのadviceを活性化" 
+;;             (interactive)
+;;             (ad-activate 'yc-rK-trans)))
+;;  
+;; (defadvice yc-mode-exit (before ad-skk-mode-exit last)
+;;   "skk-modeから抜ける時にskk-kakuteiのadviceを不活性化。"
+;;   (ad-deactivate 'skk-kakutei))
 
 ;;; for markdown-mode
 (autoload 'markdown-mode "markdown-mode"
@@ -1538,6 +1806,147 @@ by yama @ Thu Mar 29 23:37:45 2007"
 (add-hook 'markdown-mode-hook
           '(lambda ()
 	     (local-set-key (kbd "M-RET") 'markdown-insert-list-item)))
+
+;;; ;;; for key-combo
+;; ;; 同じキーを連続して入力したときの動作を変更する
+;; ;; <http://d.hatena.ne.jp/uk-ar/20111208/1322572618>
+;; ;; 
+;; ;; <= 使ってみたけど, なんか色々な処理とぶつかるので微妙. 
+;; ;;    (C-u 関係を結構奪ってくれる気がする. outshine の C-u C-i とか. 
+;; ;;    あと cua-mode での編集ともなんかぶつかってるっぽい)
+;; 
+;; (require 'key-combo)
+;; (key-combo-mode 1)
+
+;; ;;;; デフォルトの設定を読み込む場合
+;; (key-combo-load-default)
+
+;; ;; ;;;; グローバルな key-combo 設定
+;; ;; ;;  (key-combo-define-global (kbd "=") '(" = " " == " " === " ))
+;; ;; ;;  (key-combo-define-global (kbd "=>") " => ")
+;; ;;  
+;; ;;  
+;; ;; (defvar key-combo-global-default
+;; ;;   '(;; instead of using (goto-char (point-min))
+;; ;;     ;; use beginning-of-buffer for keydescription
+;; ;;     ("C-a"   . (back-to-indentation move-beginning-of-line
+;; ;;                                     beginning-of-buffer key-combo-return))
+;; ;;     ("C-e"   . (end-of-line end-of-buffer key-combo-return))
+;; ;;     ))
+;; ;;  
+;; ;; (key-combo-load-default-1 (current-global-map)
+;; ;;  			  key-combo-global-default)
+;; ;;  
+;; ;;  
+;; ;; ;;;; 各モードに対するキー設定
+;; ;; (setq key-combo-lisp-mode-hooks
+;; ;;       '(lisp-mode-hook
+;; ;;         emacs-lisp-mode-hook
+;; ;;         lisp-interaction-mode-hook
+;; ;;         inferior-gauche-mode-hook
+;; ;;         scheme-mode-hook))
+;; ;;  
+;; ;; (setq key-combo-lisp-default
+;; ;;       '(("."  . " . ")
+;; ;;         (","  . (key-combo-execute-orignal))
+;; ;;         (",@" . " ,@")
+;; ;;         (";"  . (";;;; " ";"))
+;; ;;         ("="  . ("= " "eq " "equal "))
+;; ;;         (">=" . ">= ")))
+;; ;;  
+;; ;; (setq key-combo-common-mode-hooks
+;; ;;       '(c-mode-common-hook
+;; ;;         php-mode-hook
+;; ;;         ruby-mode-hook
+;; ;;         cperl-mode-hook
+;; ;;         javascript-mode-hook
+;; ;;         js-mode-hook
+;; ;;         js2-mode-hook))
+;; ;;  
+;; ;; (defcustom key-combo-common-default
+;; ;;   '((","  . ", ")
+;; ;;     ("="  . (" = " " == " " === "));;" === " for js
+;; ;;     ("=>" . " => ")
+;; ;;     ("=~" . " =~ ");;for ruby regexp
+;; ;;     ("=*" . " =* ")                     ;for c
+;; ;;     ("+"  . (" + " "++"))
+;; ;;     ("+=" . " += ")
+;; ;;     ("-"  . (" - " "--"))               ;undo when unary operator
+;; ;;     ("-=" . " -= ")
+;; ;;     ("->" . " -> ");; for haskell,coffee script. overwrite in c
+;; ;;     (">"  . (key-combo-execute-original " >> "))
+;; ;;     ;; " > " should be bind in flex-autopair
+;; ;;     (">=" . " >= ")
+;; ;;     (">>=" . " >>= ")
+;; ;;     ("%"  . " % ")
+;; ;;     ("%="  . " %= ")
+;; ;;     ("^"  . " ^ ");; XOR for c
+;; ;;     ("^="  . " ^= ");; for c
+;; ;;     ("!" . key-combo-execute-original)
+;; ;;     ;; NOT for c
+;; ;;     ;; don't use " !" because of ruby symbol
+;; ;;     ;; and unary operator
+;; ;;     ("!="  . " != " ) ;;" !== " for js and php
+;; ;;     ("!==" . " !== ") ;;" !== " for js and php
+;; ;;     ("!~" . " !~ ")   ; for ruby
+;; ;;     ("~" . key-combo-execute-original)
+;; ;;     ;; for unary operator
+;; ;;     ("::" . " :: ") ;; for haskell
+;; ;;     ;; (":" . ":");;for ruby symbol
+;; ;;     ("&"  . (" & " " && "))             ;overwrite in c
+;; ;;     ("&=" . " &= ");; for c
+;; ;;     ("&&=" . " &&= ")                   ; for ruby
+;; ;;     ("*"  . " * " )                     ;overwrite in c
+;; ;;     ("*="  . " *= " )
+;; ;;     ("**"  . "**" )                     ;for power
+;; ;;     ("**=" . " **=" )                     ;for power
+;; ;;     ;; ("?" . "? `!!' :"); ternary operator should be bound in yasnippet?
+;; ;;     ;; ("?=");; for coffeescript?
+;; ;;     ("<" . (key-combo-execute-original " << "))
+;; ;;     ;; " < " should be bound in flex-autopair
+;; ;;     ("<=" . " <= ")
+;; ;;     ;; ("<?" . "<?`!!'?>");; for what?
+;; ;;     ("<<=" . " <<= ");; bit shift for c
+;; ;;     ("<-" . " <- ")
+;; ;;     ("<!" . "<!-- `!!' -->");; for html comment
+;; ;;     ("|"  . (" | " " || "));; bit OR and OR for c
+;; ;;     ;;ToDo: ruby block
+;; ;;     ("|=" . " |= ");; for c
+;; ;;     ("||=" . " ||= ")                   ; for ruby
+;; ;;     ;; ("/" . (" / " "// " "/`!!'/")) ;; devision,comment start or regexp
+;; ;;     ("/" . (key-combo-execute-original))
+;; ;;     ("/ SPC" . " / ")
+;; ;;     ("/=" . " /= ")
+;; ;;     ("*/" . "*/")
+;; ;;     ("/*" . "/* `!!' */")
+;; ;;     ("/* RET" . "/*\n`!!'\n*/");; add *? m-j
+;; ;;     ;; ("/* RET" . "/*\n*`!!'\n*/");; ToDo:change style by valiable
+;; ;;     ("{" . (key-combo-execute-original))
+;; ;;     ("{ RET" . "{\n`!!'\n}")
+;; ;;     )
+;; ;;   "Default binding which enabled by `key-combo-common-mode-hooks'"
+;; ;;   :group 'key-combo)
+;; ;;  
+;; ;; (key-combo-define-hook key-combo-common-mode-hooks
+;; ;;                        'key-combo-common-load-default
+;; ;;                        key-combo-common-default)
+;; ;; (key-combo-define-hook key-combo-lisp-mode-hooks
+;; ;;                        'key-combo-lisp-load-default
+;; ;;                        key-combo-lisp-default)
+
+;;; ;;; for smartchr
+;; 同じキーを連続して入力したときの動作を変更する
+;; https://github.com/imakado/emacs-smartchr
+;; (install-elisp "https://github.com/imakado/emacs-smartchr/raw/master/smartchr.el")
+;(require 'smartchr)
+;(add-hook 'cperl-mode-hook
+;          '(lambda ()
+;             (progn
+;               (local-set-key (kbd "F") (smartchr '("F" "$")))
+;               (local-set-key (kbd "H") (smartchr '("H" " => ")))
+;               (local-set-key (kbd "J") (smartchr '("J" "->")))
+;               (local-set-key (kbd "M") (smartchr '("M" "my ")))
+;               )))
 
 ;;; for moccur
 ;; <>
@@ -1665,8 +2074,8 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;; あるので私はpopwin.elで設定しています。
 
 (push '("*auto-async-byte-compile*") popwin:special-display-config)
-(push '("^\*helm .+\*$" :regexp t) popwin:special-display-config)
-;(push '("*helm*") popwin:special-display-config)
+;(push '("^\*helm .+\*$" :regexp t) popwin:special-display-config)
+(push '("^\*helm my .+\*$" :regexp t) popwin:special-display-config)
 ;(push '("*helm*" :position right :width 0.5) popwin:special-display-config)
 ;(push '("*helm mini*") popwin:special-display-config)
 
@@ -1749,6 +2158,118 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;; ;;  u ファイルやディレクトリをステージから削除
 ;; ;;  k ファイル自体削除
 ;; (require 'magit)
+
+;;;; for "helm で過去のコミットログを参照する"
+;; <http://qiita.com/okkez@github/items/d3143ba12c604305afd1>
+(defvar helm-c-source-git-commit-messages
+  '((name . "Git Commit Messages")
+    (init . helm-c-git-commit-messages-init)
+    (action . (("Insert" . (lambda (candidate)
+                             (insert
+                              (replace-regexp-in-string "\0" "\n" candidate))))))
+    (real-to-display . helm-c-git-commit-messages-real-to-display)
+    (migemo)
+    (multiline)
+    (candidates-in-buffer)))
+
+(defun helm-c-git-commit-messages-init ()
+  (with-current-buffer (helm-candidate-buffer 'global)
+    (call-process-shell-command
+     "git log --format=\"%x00%B\" | tr '\\n\\000\' '\\000\\n' | sed -e '/^$/d' -e 's/\\x0\\+$//'"
+     nil (current-buffer))))
+
+(defun helm-git-commit-messages ()
+  "`helm' for git commit messages."
+  (interactive)
+  (helm-other-buffer 'helm-c-source-git-commit-messages
+		     "*helm commit messages*"))
+
+(defun helm-c-git-commit-messages-real-to-display (candidate)
+  (replace-regexp-in-string "\0" "\n" candidate))
+
+(defun magit-enable-helm ()
+  ;; 過去のコミットメッセージを挿入
+  (define-key magit-log-edit-mode-map
+    (kbd "C-c i") 'helm-git-commit-messages))
+(add-hook 'magit-mode-hook
+          'magit-enable-helm)
+
+;;; ;;; for gist
+;; <https://github.com/defunkt/gist.el>
+;; GitHub の Gist に簡単に投稿するための elisp.
+;; 初回起動時にユーザー名とパスワードを聞かれる (~/.gitconfig に保存される).
+;; 
+;; gist-region や gist-buffer で投稿する模様
+;; (投稿先の URL が kill ring に保存されるので, ブログなどからリンクを張るのにも便利).
+;; (Description を付けたいなら, gist-list してから 'e')
+;; (ファイル名は元々の物がそのまま使われる模様. 気に入らなければ gist-list でファイル編集モードにして 'C-x C-w')  (<= ただし git log には残っちゃうので, 最初に上げる前に調整しとくのが賢いかもしれない)
+;; (複数ファイルからなる Gist にも対応. '+' や '-' でファイルを追加／削除可能)
+;; 
+;;   gist-list - Lists your gists in a new buffer. Use arrow keys
+;;   to browse, RET to open one in the other buffer.
+;;    
+;;   gist-region - Copies Gist URL into the kill ring.
+;;   With a prefix argument, makes a private gist.
+;;    
+;;   gist-region-private - Explicitly create a private gist.
+;;    
+;;   gist-buffer - Copies Gist URL into the kill ring.
+;;   With a prefix argument, makes a private gist.
+;;    
+;;   gist-buffer-private - Explicitly create a private gist.
+;;    
+;;   gist-region-or-buffer - Post either the current region, or if mark
+;;   is not set, the current buffer as a new paste at gist.github.com .
+;;   Copies the URL into the kill ring.
+;;   With a prefix argument, makes a private paste.
+;;    
+;;   gist-region-or-buffer-private - Explicitly create a gist from the
+;;   region or buffer.
+;; 
+;; その他に gist-list buffer では以下のようなキーバインドがある模様.
+;;   g : reload the gist list from server
+;;   e : edit current gist description
+;;   k : delete current gist
+;;   + : add a file to the current gist
+;;   - : remove a file from the current gist
+;; 
+;; また, gist の閲覧/編集中には C-x C-s や C-x C-w で保存／ファイル名変更が出来る模様.
+;;   C-x C-s : save a new version of the gist
+;;   C-x C-w : rename some file
+;; 
+;; また, dired-mode からファイルを gist にアップロードも出来る模様.
+;;   @ : make a gist out of marked files (with a prefix, make it private)
+
+;; ;;;; FIXME
+;; ;; なんだか package.el がバグっていて, 標準バンドルの eieio 1.4 を見つけてくれないので, 
+;; ;; 自前で load-path に入れておく...
+;; ;; (そのままだと, eieio 1.3 が必要だと言って ELPA から別の 1.4 を取ってくる. 
+;; ;; が, こちらの 1.4 だと semantic が動かない...)
+;; (require 'em-glob)
+;;  
+;; (dolist (dirglob '("~/.emacs.d/elpa/gist-*"
+;;  		   "~/.emacs.d/elpa/gh-*"
+;;  		   "~/.emacs.d/elpa/pcache-*"
+;;  		   "~/.emacs.d/elpa/logito-*"))
+;;   (setq load-path 
+;;  	(cons 
+;;  	 (expand-file-name (car (eshell-extended-glob dirglob))) 
+;;  	 load-path)))
+
+;;;; 
+;; (require 'gist) ; 依存している gh ライブラリが 24.4 以降必須になってしまったので一時的に削除
+
+
+;;; ;;; for yascroll
+;; (数MBクラスのファイルで使うと重すぎた. 
+;; 後, 移動しないと見えないので, 結局あんまり位置は分からない(<= いや, 高速移動中に現在地が分かるのが嬉しいかもしれないが...). 
+;; 一旦停止)
+;; ;; <http://d.hatena.ne.jp/m2ym/20110401/1301617991>
+;; ;; iPhoneのスクロールバーからインスピレーションを得て、主張しないスクロールバーモード、yascroll.elというのを作ってみました。
+;; ;; スクロール時にスクロールバーがウィンドウ右辺に現われるという単純なものです。
+;; (require 'yascroll)
+;; (global-yascroll-bar-mode 1)
+
 
 ;;; for rainbow-delimiters
 ;; <https://github.com/jlr/rainbow-delimiters>
@@ -1892,6 +2413,13 @@ by yama @ Thu Mar 29 23:37:45 2007"
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'lisp-interacton-mode-hook 'enable-paredit-mode)
 
+;;;; lisp-interacton-mode では C-j は eval-print-last-sexp に戻す
+;; <https://gist.github.com/condotti/845081/raw/97632cd8073dc0cf1320d86ddfcf83b10471f4f5/gistfile1.sls>
+(defadvice paredit-newline (around eval-print-last-sexp activate)
+  (if (eq major-mode 'lisp-interaction-mode)
+      (eval-print-last-sexp)
+    (paredit-newline)))
+
 
 ;;; for figlet
 ;; <http://www.emacswiki.org/emacs/Figlet>
@@ -1931,6 +2459,35 @@ by yama @ Thu Mar 29 23:37:45 2007"
 (setq-default boxes-args "-s 75 -a c")
 ;; 簡単に作成・修正できるようにする
 (defalias 'boxes 'boxes-mend)
+
+   ;;/*          ^-^
+   ;;           /o o\
+   ;; +----oOO_("{Y}")_OOo-----------------+
+   ;; |                                    |
+   ;; | C function headers?                |
+   ;; |                                    |
+   ;; +-----------------------------------*/
+
+   ;;/*          ^-^
+   ;;           /o o\
+   ;; +----oOO-(={Y}=)-OOo-----------------+
+
+   ;;/*          ^-^
+   ;;           /- -\
+   ;; +----oOO-( {Y} )-OOo-----------------+
+
+   ;;/*          ^-^
+   ;;           /= =\
+   ;; +----oOO-( {Y} )-OOo-----------------+
+
+   ;;/*          ^-^
+   ;;           /@ @\
+   ;; +----oOO-( {Y} )-OOo-----------------+
+
+   ;;/*          ^-^
+   ;;           /> <\
+   ;; +----oOO-( {Y} )-OOo-----------------+
+
 
 ;;; for align
 ;; <http://www.emacswiki.org/emacs/AlignCommands>
@@ -2003,7 +2560,7 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;;;; for rd-mode
 (define-key rd-mode-map (kbd "C-c t") 
   '(lambda ()  (interactive)
-     (if orgtbl-mode (orgtbl-mode 0) (turn-on-orgtbl))))
+     (if (and (boundp 'orgtbl-mode) orgtbl-mode) (orgtbl-mode 0) (turn-on-orgtbl))))
 
 ;;;; for orgtbl-to-gfm
 ;; GFM (GitHub Flavored Markdown) 向けに出力.
@@ -2037,148 +2594,11 @@ by yama @ Thu Mar 29 23:37:45 2007"
                                org-table-last-alignment ""))
          (params2
           (list
+	   :no-escape t
            :splice t
 	   :hline (concat alignment "|")
            :lstart "| " :lend " |" :sep " | ")))
     (orgtbl-to-generic table (org-combine-plists params2 params))))
-
-;;; for auto-complete
-;; <http://cx4a.org/software/auto-complete/manual.ja.html>
-
-(when (require 'auto-complete-config nil t)
-  (ac-config-default)
-
-;;;; 辞書の保存場所の設定 
-;; (ELPA で入れた場合, デフォルトでは elpa によるインストールディレクトリ内になっている)
-;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/dict")
-
-;;;; 補完履歴のキャッシュ先
-  (setq ac-comphist-file "~/.emacs.d/elisp/auto-complete/ac-comphist.dat")
-
-;;;; 諸変数のカスタマイズ
-;; <http://cloverrose.hateblo.jp/entry/2013/04/12/145825>
-;; <http://www.gfd-dennou.org/member/uwabami/cc-env/Emacs/auto-complete_config.html>
-;; 
-;; (setq ac-auto-start 2)  ;; n文字以上の単語の時に補完を開始. nil に設定すると自動補完されなくなる
-;; (setq ac-delay 0.05)  ;; n秒後に補完開始
-;; (setq ac-use-fuzzy t)  ;; 曖昧マッチ有効
-;; (setq ac-use-comphist t)  ;; 補完推測機能有効
-;; (setq ac-auto-show-menu 0.05)  ;; n秒後に補完メニューを表示
-;; (setq ac-quick-help-delay 0.5)  ;; n秒後にクイックヘルプを表示
-;; (setq ac-ignore-case nil)  ;; 大文字・小文字を区別する
-;; (setq ac-use-comphist t)  ;; 補完候補をソート
-;; (setq ac-candidate-limit nil)  ;; 補完候補表示を無制限に
-;; (setq ac-dwim t)  ;; デフォルトで t
-;; (setq ac-disable-faces nil)  ;; 文字列中やコメント中でも補完を有効にする
-
-;; ;; auto-complete の候補に日本語を含む単語が含まれないようにする
-;; ;; http://d.hatena.ne.jp/IMAKADO/20090813/1250130343
-;; (defadvice ac-word-candidates (after remove-word-contain-japanese activate)
-;;   (let ((contain-japanese (lambda (s) (string-match (rx (category japanese)) s))))
-;;     (setq ad-return-value
-;;           (remove-if contain-japanese ad-return-value))))
-
-;;;; キーバインド
-;; <http://www.gfd-dennou.org/member/uwabami/cc-env/Emacs/auto-complete_config.html>
-;; 
-;; (setq ac-use-menu-map t)
-;; (define-key ac-menu-map (kbd "C-n")         'ac-next)
-;; (define-key ac-menu-map (kbd "C-p")         'ac-previous)
-;; (define-key ac-completing-map (kbd "<tab>") 'ac-complete)
-;; (define-key ac-completing-map (kbd "M-/")   'ac-stop)
-;; (define-key ac-completing-map (kbd "RET") nil) ; return での補完禁止
-
-;; <http://acidnote.com/2013/05/js2-autocomplete/>
-;; 設定次第で任意のモードで任意の補完辞書を呼び出させることも出来るっぽい。
-;; 
-;; (add-hook 'hoge-mode-hook ;; 適用先のモード
-;;   '(lambda ()
-;;     (add-to-list 'ac-dictionary-files 
-;;        "~/.emacs.d/elpa/auto-complete-20130330.1836/dict/hoge") ;; 参照したい辞書へのパス
-;; ))
-
-;; (setq ac-use-menu-map t) ;; C-n/C-pで候補選択可能
-
-;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-
-
-;;;; 対応するメジャーモードの設定
-;;  (setq ac-modes (append '(js2-mode)))
-
-
-;;;; 情報源(sources)の設定
-;; ac-sources を設定すればいい.
-;; 注意: ac-sources はバッファローカルなので, hook 等で setq するといい.
-;(push 'ac-source-filename ac-sources)
-
-;; <http://fukuyama.co/yasnippet>
-;; どのモードでも共通にベースとなるソースを作っておく.
-;;   (defvar my-ac-sources
-;;     '(ac-source-yasnippet             ;; yasnipet を追加
-;;       ac-source-abbrev
-;;       ac-source-dictionary
-;;       ac-source-words-in-same-mode-buffers))
-;; 
-;; あるいは ac-sources を直接変更.
-(add-to-list 'ac-sources 'ac-source-yasnippet) ;; YASnippet を補完候補に追加
-
-;; add-hook で各モードのソースを調整
-;;  (defun ac-scss-mode-setup ()
-;;    (setq-default ac-sources (append '(ac-source-css-property) my-ac-sources)))
-;;  (add-hook 'scss-mode-hook 'ac-scss-mode-setup)
-;; 
-;;  (defun ac-web-mode-setup ()
-;;    (setq-default ac-sources my-ac-sources))
-;;  (add-hook 'web-mode-hook 'ac-web-mode-setup)
-;; 
-;;  (defun ac-coffee-mode-setup ()
-;;    (setq-default ac-sources my-ac-sources))
-;;  (add-hook 'coffee-mode-hook 'ac-coffee-mode-setup)
-
-
-;;;; look コマンドで英単語を補完
-;; <http://d.hatena.ne.jp/kitokitoki/20101205/p2>
-;; (require 'auto-complete-config)
-;; 
-;; (defun my-ac-look ()
-;;   "look コマンドの出力をリストで返す"
-;;   (interactive)
-;;   (unless (executable-find "look")
-;;     (error "look コマンドがありません"))
-;;   (let ((search-word (thing-at-point 'word)))
-;;     (with-temp-buffer
-;;       (call-process-shell-command "look" nil t 0 search-word)
-;;       (split-string-and-unquote (buffer-string) "\n"))))
-;; 
-;; (defun ac-complete-look ()
-;;   (interactive)
-;;   (let ((ac-menu-height 50)
-;;         (ac-candidate-limit t))
-;;   (auto-complete '(ac-source-look))))
-;; 
-;; ;; 表示数制限を変更しない場合
-;; ;;(defun ac-complete-look ()
-;; ;;  (interactive)
-;; ;;  (auto-complete '(ac-source-look)))
-;; 
-;; (defvar ac-source-look
-;;   '((candidates . my-ac-look)
-;;     (requires . 2)))  ;; 2文字以上ある場合にのみ対応させる
-;; 
-;; ;; キーは好きなのを割り当てて下さい
-;; (global-set-key (kbd "M-h") 'ac-complete-look)
-
-
-;; いちいち M-h で明示的に呼び出すのが面倒なら、以下のように設定。
-;; 重そうなのでお勧めはしません。
-;; (setq ac-source-look
-;;   '((candidates . my-ac-look)
-;;     (requires . 4)))  ;; 4文字以上の入力のみ対象とするように変更. 2 だと候補が多すぎてうっとうしい
-;; 
-;; ;; 補完対象とするモードの ac-sources に対して追加
-;; (push 'ac-source-look ac-sources)
-
-)
 
 ;;; for minor-mode-hack
 ;; <>
@@ -2209,3 +2629,7 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;; ;; Emacs キーバインドを使いたいキーを指定
 ;; (add-to-list 'term-unbind-key-list '"C-w")
 
+;;; for syslog-mode
+;; <http://www.emacswiki.org/emacs/SyslogMode>
+(require 'syslog-mode)
+(add-to-list 'auto-mode-alist '("/var/log.*\\'" . syslog-mode))

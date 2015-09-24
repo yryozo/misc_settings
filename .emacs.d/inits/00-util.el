@@ -16,7 +16,9 @@
 	     (set-terminal-coding-system 'utf-8))
 	 (set-keyboard-coding-system 'utf-8)
 	 
-	 (setq default-buffer-file-coding-system 'utf-8)
+	 (if (>= emacs-major-version 24)
+	     (setq buffer-file-coding-system 'utf-8)
+	   (setq default-buffer-file-coding-system 'utf-8))
        ))
       )
 
@@ -40,11 +42,9 @@
 ;; 			 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))
 ;; 
 
-;;; for font settings
-(set-default-font "Ricty-13.5")
-
-;; ;;;; emacsclientからの接続時処理
-;; ;; <= server-visit-hook は使いにくいので after-make-frame-functions を使うことにした
+;;; for emacsclient settings
+;; emacsclientからの接続時処理を設定:
+;;   ;; <= server-visit-hook は使いにくいので after-make-frame-functions を使うことにした
 ;; (setq server-visit-hook 
 ;;       '(lambda ()
 ;;       (keyboard-translate ?\C-h ?\C-?)
@@ -75,12 +75,15 @@
 	     (select-frame frame)             ; 新しいフレームを対象に処理を行う.
 	     (keyboard-translate ?\C-h ?\C-?) ; 他にいい方法が思いつかないので, ここで処理.
 	     (cond ((window-system frame)     ; もしGUIのフレームなら, 
-	    ;; font 設定
+		    ;; font 設定
 		    ;;;; set-frame-font
 		    ;;(set-frame-font "DejaVu Sans Mono-10")
 		    ;; 
 		    ;; <http://d.hatena.ne.jp/kitokitoki/20110502/p2> 
+		    ;; <https://github.com/yascentur/Ricty>
 		    ;; 横幅が 1:2 になるのは、12pt, 13.5pt, 15pt, 18pt など.
+		    ;; "ピクセル値 (px) が偶数でないとき、どのフォントにおいても起こりうる問題です。
+		    ;; 一般的な 96 DPI のフォントレンダリングでは、9 pt、10.5 pt、12 pt、13.5 pt、15 pt など、1.5 の倍数を指定すると 1:2 で表示されると思います。"
 		    ;; (set-frame-font "Ricty-12")
 		    (set-frame-font "Ricty-13.5")
 
@@ -116,21 +119,11 @@
 				      'japanese-jisx0208
 				      '("Ricty" . "unicode-bmp"))   ;  <= Inconsolata + Migu 1M
 
-	    ;; ウィンドウサイズの設定
-		    ;(maximize-screen frame)))  ; ウィンドウサイズを最大化.
+		    ;; ウィンドウサイズの設定
+					;(maximize-screen frame)))  ; ウィンドウサイズを最大化.
 		    (set-frame-size frame 
-			     118 72)))  ; ウィンドウサイズを変更 (最大化するとanything等使用時にフリーズする. compizが悪い？)
-	      ))
-
-
-;;; ;;; for font-lock (<= 最近はデフォルトでオンになっている模様. まぁ当たり前か...)
-;; (if window-system
-;;     (progn
-;; ;      (setq font-lock-support-mode 'lazy-lock-mode)
-;;       (global-font-lock-mode t)
-;; ;      (setq font-lock-support-mode 'fast-lock-mode)
-;;       (setq fast-lock-cache-directories '("~/.emacs-flc"))
-;;        ))
+				    118 72)))  ; ウィンドウサイズを変更 (最大化するとanything等使用時にフリーズする. compizが悪い？)
+	     ))
 
 ;;; for goto-line
 (global-set-key "\M-g" (lambda (x) (interactive "nLine: ") (goto-line x))) ; n はミニバッファから読み取るの意
@@ -147,21 +140,30 @@
 (eval-after-load "abbrev" '(global-set-key "\M- " 'expand-abbrev))
 
 ;;; for bobcat
-(if (eq window-system 'x) ;if use X-Window, 'x
-        (progn
-          (define-key function-key-map [backspace] [8])
-          (put 'backspace 'ascii-character 8)))
-;(load "term/bobcat")
-; bobcat が効かないので 21.3 のころの bobcat の中身を張っとく
-(let ((the-table (make-string 128 0)))
-  (let ((i 0))
-    (while (< i 128)
-      (aset the-table i i)
-      (setq i (1+ i))))
-  ;; Swap ^H and DEL
-  (aset the-table ?\177 ?\^h)
-  (aset the-table ?\^h ?\177)
-  (setq keyboard-translate-table the-table))
+; <http://akisute3.hatenablog.com/entry/20120318/1332059326>
+; Emacs の C-h は初期状態では help となっているが，これを backspace として使用したいと考える人は多いと思う．
+; この方法には，以下の2通りある．
+;   * global-set-key で C-h に delete-backward-char を割り当てる
+;   * keyboard-translate を使用して C-h に backspace と同じ処理を割り当てる
+; 前者は，ミニバッファで使えなかったり，他の elisp で delete-backward-char を乗っ取ったときに BS キーとの整合が取れなくなる場合があるので，できれば後者のほうがいい．
+(keyboard-translate ?\C-h ?\C-?)
+
+;;;; obsolete?
+; (if (eq window-system 'x) ;if use X-Window, 'x
+;         (progn
+;           (define-key function-key-map [backspace] [8])
+;           (put 'backspace 'ascii-character 8)))
+; ;(load "term/bobcat")
+; ; bobcat が効かないので 21.3 のころの bobcat の中身を張っとく
+; (let ((the-table (make-string 128 0)))
+;   (let ((i 0))
+;     (while (< i 128)
+;       (aset the-table i i)
+;       (setq i (1+ i))))
+;   ;; Swap ^H and DEL
+;   (aset the-table ?\177 ?\^h)
+;   (aset the-table ?\^h ?\177)
+;   (setq keyboard-translate-table the-table))
 
 ;;; for iswitchb
 (if (and (>= emacs-major-version 20)
@@ -175,9 +177,12 @@
        '("Completions" "Messages" "Help" "Apropos" "Compile-Log")
        iswitchb-buffer-ignore))
 
-;;; for C-x 3
+;;; for C-x 3 (truncate-partial-width-windows)
 ;ウインドウ分割時に画面外に出てしまう文章を折り返す。
 (setq truncate-partial-width-windows nil)
+
+;;; for toggle-truncate-lines
+(global-set-key "\C-ct" 'toggle-truncate-lines) ; 折り返し表示ON/OFF
 
 ;;; for transient-mark-mode
 ;; <http://www.mew.org/pipermail/mew-dist/2003-September/023693.html>
@@ -387,14 +392,91 @@
         ("\\.\\(mpg\\|MPG\\|mpeg\\|avi\\|AVI\\|wmv\\|mp3\\|MP3\\|mp4\\|flv\\)\\'"
 	 (if (eq system-type 'windows-nt)
 	     ; "fiber" "smplayer * >/dev/null &"))
-	     "fiber" "gmplayer * >/dev/null &"))
+	     "fiber" "smplayer * >/dev/null &"))
         ("\\.html\\|\\.htm"
+	 (if (eq system-type 'windows-nt)
+	     "www-browser" "x-www-browser"))
+        ("\\.swf"
 	 (if (eq system-type 'windows-nt)
 	     "www-browser" "x-www-browser"))
         ("\\.pdf\\'" "evince * &")
         ("\\.iso\\'" "isoinfo -l -i")
+	("\\.\\(ppt\\|pptx\\)\\'" "loimpress * &")
 	)
       )
+
+;;;; dired-find-alternate-file
+; ;; <http://nishikawasasaki.hatenablog.com/entry/20120222/1329932699>
+; ;; dired で RET はもともと dired-find-file にマップされていて、
+; ;; ディレクトリを開くと新しいバッファが開きます。
+; ;; 一方 a で開くと dired-find-alternate-file がマップされているため
+; ;; ディレクトリを開いたバッファに開いた先のディレクトリが表示されます。
+;  
+; ;; 無効コマンドdired-find-alternate-fileを有効にする
+; ;;   (新規バッファを作成しないコマンド)
+; ;;   (初めて dired-find-alternate-file を使った際に「今後も使いますか？」と聞かれ、
+; ;;   y と答えたため, emacs が自動で init.el に書き込んでくれた設定.
+; (put 'dired-find-alternate-file 'disabled nil)
+;  
+; ;; ファイルなら別バッファで、ディレクトリなら同じバッファで開く
+; (defun dired-open-in-accordance-with-situation ()
+;   (interactive)
+;   (let ((file (dired-get-filename)))
+;     (if (file-directory-p file)
+;         (dired-find-alternate-file)
+;       (dired-find-file))))
+;  
+; ;; RET 標準の dired-find-file では dired バッファが複数作られるので
+; ;; dired-find-alternate-file を代わりに使う
+; (define-key dired-mode-map (kbd "RET") 'dired-open-in-accordance-with-situation)
+; (define-key dired-mode-map (kbd "a") 'dired-find-file)
+
+;;;; dired-dwim-target
+; ;; <http://keens.github.io/blog/2013/10/04/emacs-dired/>
+; ;; ウィンドウを分割して左右にdiredバッファを開いているとき、RやCのデフォルトの宛先がもう片方のディレクトリになります。伝わりますかね？
+; ;; 
+; ;; If non-nil, Dired tries to guess a default target directory.
+; ;; This means: if there is a Dired buffer displayed in the next
+; ;; window, use its current directory, instead of this Dired buffer's
+; ;; current directory.
+; ;;  
+; ;; The target is used in the prompt for file copy, rename etc.
+(setq dired-dwim-target t)
+
+;;;; dired-isearch-filenames
+;; diredバッファでC-sした時にファイル名だけにマッチする
+(setq dired-isearch-filenames t)
+
+
+;;; for generic-x
+;; <http://www.emacswiki.org/emacs/GenericMode>
+;; <at-aka.blogspot.jp/2011/03/emacs-etchosts-etcapache2conf.html>
+;; 設定ファイル (/etc/hosts, /etc/apache2.conf) の色付けをする 
+;; 
+;; generic-x というファイルは、NEWS.20 というファイルに説明がある。従って、少くとも Emacs 20 以降から Emacs の標準ファイルになったと推察できる。
+;; NEWS.20 によると、generic-x がサポートするファイルは以下の通り:
+;;   * Apache and NCSA httpd configuration files
+;;   * Samba configuration files
+;;   * fvwm initialization files
+;;   * X resource files
+;;   * hosts files (.rhosts, /etc/hosts, etc.)
+;;   * mailagent .rules files
+;;   * JavaScript files
+;;   * VRML files
+;;   * Java MANIFEST files
+;;   * Java property files
+;;   * .mailrc files
+;;   * Solaris/Sys V prototype files
+;;   * Solaris/Sys V pkginfo files
+;;   * C shell alias files
+;;   * MS-Windows INF files
+;;   * MS-Windows INI files
+;;   * MS-Windows Registry files
+;;   * MS-Windows BAT scripts
+;;   * MS-Windows Resource files
+;;   * InstallShield scripts
+
+(require 'generic-x)
 
 ;;; for uncomment-region
 (add-hook 'c-mode-hook
@@ -444,7 +526,7 @@
 
 ;;; for bookmark
 ;; <http://www.bookshelf.jp/texi/emacs-man/21-3/jp/emacs_12.html#SEC79>
-;; (setq bookmark-default-file "~/.emacs.d/bookmarks") ; 保存先のファイル名
+;; (setq bookmark-default-file (locate-user-emacs-file "bookmarks")) ; 保存先のファイル名
 (setq bookmark-save-flag 1) ; ブックマーク情報を変更する度に (= 1回変更する度に) ファイルに保存
 ;; (setq bookmark-search-size 16) ; ブックマーク位置の前後何文字分の内容を保存するか. ブックマークは周辺の文脈情報と一緒に保存されるので、ファイルが少し変更されていたとしても正しい位置をみつけだせる.
 
@@ -464,7 +546,8 @@
 ;;; for recentf
 ;; -> <99-miscs.el> 参照
 
-;;; for ffap
+;;; for ffap (Find File At Point)
+;; <www.emacswiki.org/emacs/FindFileAtPoint>
 ;; <http://www.gnu.org/software/emacs/manual/html_node/emacs/FFAP.html>
 ;; C-x C-f 時に, カーソル位置のファイルもしくは URL がデフォルトで設定される.
 ;; また, その他にも以下のようなキーバインドが設定される.
@@ -497,8 +580,58 @@
 ;;       ffap-at-mouse finds the file guessed from text around the position of a mouse click.
 ;;   C-S-Mouse-3
 ;;       Display a menu of files and URLs mentioned in current buffer, then find the one you select (ffap-menu). 
+;; 
+;; <www.emacswiki.org/emacs/FindFileAtPoint>
+;; <http://www.bookshelf.jp/soft/meadow_23.html#SEC231>
+;; なお, 現在のモードに応じて適切なファイルを開く機能もある.
+;; あるいは, 文字列パターンに応じて, 特殊なファイル名補完ルールを設定することもできる.
+;; 設定は ffap-alist で行える.
+;; 
+;; 例: 
+;;    lisp mode なら (require 'session) で session.el を開ける 
+;;    CcMode and FortranMode header filenames like <stdio.h>.
+;;    TeX path search (including BibTeX).
+;;    RFC documents like RFC1945.
+;; 
+;; <= C や C++ なら，インクルードするファイルのあるパスを以下のようにして設定 できます．
+;;      (setq ffap-c-path
+;;            '("/usr/include" "/usr/local/include"))
+;; <= Fortran なら
+;;      (setq ffap-fortran-path '("../include" "/usr/include"))
+;; <= TeX なら同じように「 ffap-tex-path 」を設定します． 
+
 (ffap-bindings)
 (global-set-key "\C-x\C-v" 'find-alternate-file)  ; ffap-alternate-file だけは肌に合わないので直しておく
+
+;;;; RFC2472 で ffap をすると，日本語訳の RFC を表示できる
+;; <http://www.bookshelf.jp/soft/meadow_23.html>
+;; (setq ffap-rfc-path "http://www.minokasago.org/labo/RFC/rfc%s-jp.html") ; 
+
+;;;; for avoiding wrong path detection
+;; <www.emacswiki.org/emacs/FindFileAtPoint>
+;; <http://d.hatena.ne.jp/ToMmY/20110916/1316180103>
+;; <https://gist.github.com/tomykaira/1222035>
+;; / が一部にはいっているものはなんでもファイル名だと判断するので、絶対パスや HTML の閉じタグまでパスだと判断される。
+;; このせいで、HTMLファイルをあつかっているときは C-x C-f RET でいまのディレクトリに移動するという操作が非常にリスキーになっていたのだが、修正した。
+;; 
+;; 予期せぬ判定がおこなわれる時は、だいたい /hoge/piyo のようになっていて、 hoge も piyo も当然存在しないので、 "/" までさかのぼる。
+;; "/" が結果として返されたときはだいたいミスっぽいわけで、このときは "/" を報告するのではなく、ミスでしたよ、と nil を返すことにする。
+(defadvice ffap-file-at-point (after ffap-file-at-point-after-advice ())
+  (if (string= ad-return-value "/")
+      (setq ad-return-value nil)))
+(ad-activate 'ffap-file-at-point)
+;; (ad-deactivate 'ffap-file-at-point) ; 外したい場合
+
+;;;; for my filelist (private)
+(defvar ffap-my-filelist-path '())
+
+(defun ffap-my-filelist (name)
+  (ffap-locate-file name t ffap-my-filelist-path))
+(setq ffap-alist (append ffap-alist '(("" . ffap-my-filelist))))
+
+;; ~/howm 下のファイルはすぐ開けるようにする
+;; (add-to-list 'ffap-my-filelist-path (expand-file-name "~/howm"))
+
 
 ;;; ;;; for tramp
 ;; ;; ~/.ssh/id_dsa があると, 何故か (require 'tramp) 時に何度も passphrase を聞かれる...
@@ -561,7 +694,7 @@
 
 ;;;; customize の出力先 
 ;;-- (デフォルトでは .emacs.el に出力する. custom-file という変数を設定しておくと変更できる)
-(setq custom-file "~/.emacs.d/.emacs.custom.el")
+(setq custom-file (locate-user-emacs-file ".emacs.custom.el"))
 
 ;;;; customize file があれば load する
 (if (file-exists-p (expand-file-name custom-file))
@@ -593,12 +726,12 @@
 	     (local-set-key [?\C-\S-n] 'artist-next-line*4)
 	     (local-set-key [?\C-\S-p] 'artist-previous-line*4)))
 
-;;; for semantic
+;;; for semantic (temporary commented out)
 ;; <http://www.gnu.org/software/emacs/manual/html_node/semantic/index.html#Top> : Semantic Manual
 ;; elisp で書かれたプログラミング言語のパーサー.
 ;; CEDET プロジェクトの一部??
 ;; パース結果を使って, imenu や speedbar, whichfunc, hippie-expand 等を強化できる.
-(semantic-mode 1)  ; semantic を有効にする
+; (semantic-mode 1)  ; semantic を有効にする
 
 
 ;;; for imenu
@@ -714,9 +847,9 @@
 
 
 ;;; for auto-insert
-(load "autoinsert") 
+(require 'autoinsert)
 (add-hook 'find-file-hooks 'auto-insert)
-(setq auto-insert-directory "~/emacs/template/")
+(setq auto-insert-directory (locate-user-emacs-file "template"))
 (setq auto-insert-alist
       (append '(
                 (c-mode . "c-template.c")

@@ -1,3 +1,8 @@
+;;; for C
+(require 'flymake)
+(add-hook 'c-mode-hook (lambda () (flymake-mode t)))
+
+
 ;;; for scheme
 (setq scheme-program-name "gosh -i")
 (autoload 'run-scheme "cmuscheme" "Run an inferior Scheme process." t)
@@ -81,7 +86,19 @@
 (setq auto-mode-alist
       (cons (cons "\\.py$" 'python-mode) auto-mode-alist))
 
+;;;; for flymake
+;; <https://github.com/purcell/flymake-python-pyflakes>
+;; 別途 pyflakes コマンドが必要
+(require 'flymake-python-pyflakes)
+(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
+
+;; To use flake8 instead of pyflakes, add this line:
+; (setq flymake-python-pyflakes-executable "flake8")
+
+
 ;;; for ruby-mode
+;; TODO: <http://futurismo.biz/archives/2213> : EmacsでRubyの開発環境をさらにめちゃガチャパワーアップしたまとめ
+
 (autoload 'ruby-mode "ruby-mode"
   "Mode for editing ruby source files" t)
 (setq auto-mode-alist
@@ -92,6 +109,11 @@
   "run rubydb on program file in buffer *gud-file*.
 the directory containing file becomes the initial working directory
 and source-file directory for your debugger." t) ;追加
+
+;;;; for flymake
+;; <https://github.com/purcell/flymake-ruby>
+(require 'flymake-ruby)
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
 
 ;;;; for ruby-electric
 ;; 括弧などを自動で挿入する
@@ -156,6 +178,7 @@ and source-file directory for your debugger." t) ;追加
 
 ;;;; for perl-completion
 
+
 ;;; for prolog
 (require 'prolog)
 ;(add-to-list 'auto-mode-alist '("\\.pl$" . prolog-mode))
@@ -164,12 +187,14 @@ and source-file directory for your debugger." t) ;追加
 (setq prolog-program-name "/usr/bin/gprolog")
 (setq prolog-consult-string "[user].\n")
 
+
 ;;; for javascript
 ;; TODO: Google が出している js2-mode というのが良さそうである.
 
 (add-to-list 'auto-mode-alist '("\\.js\\'" . javascript-mode))
 (autoload 'javascript-mode "javascript" nil t)
 (setq javascript-indent-level 4)
+
 
 ;;; for coq
 (setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
@@ -179,3 +204,19 @@ and source-file directory for your debugger." t) ;追加
   "Run an inferior Coq process in a new window." t)
 (autoload 'run-coq-other-frame "coq-inferior"
   "Run an inferior Coq process in a new frame." t)
+
+
+;;; for Cuda
+;; <http://www.emacswiki.org/emacs/CudaMode>
+;; (auto-install-from-emacswiki "CudaMode")
+(require 'cuda-mode)
+
+(require 'flymake)
+(push '("\\.cu$" flymake-simple-make-init) flymake-allowed-file-name-masks)
+(add-hook 'cuda-mode-hook (lambda () (flymake-mode t)))
+
+
+;;; for shell script
+;; <http://www.emacswiki.org/emacs/FlymakeShell>
+(require 'flymake-shell)
+(add-hook 'sh-set-shell-hook 'flymake-shell-load)

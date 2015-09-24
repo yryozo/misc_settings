@@ -52,20 +52,30 @@ Display a list of packages.
 
 ;;;***
 
+;;;### (autoloads (ffap-inhibit-ffap-flag ffap-bindings) "ffap-/ffap-"
+;;;;;;  "ffap-/ffap-.el" (20932 25819 3375 342000))
+;;; Generated autoloads from ffap-/ffap-.el
+
+(defvar ffap-bindings '((global-set-key [S-mouse-2] 'ffap-at-mouse) (global-set-key [C-S-mouse-2] 'ffap-menu) (global-set-key "" 'find-file-at-point) (global-set-key "4f" 'ffap-other-window) (global-set-key "5f" 'ffap-other-frame) (global-set-key "d" 'dired-at-point) (when (fboundp 'ffap-alternate-file) (global-set-key "" 'ffap-alternate-file) (global-set-key "" 'ffap-read-only) (global-set-key "4r" 'ffap-read-only-other-window) (global-set-key "5r" 'ffap-read-only-other-frame) (global-set-key "4d" 'ffap-dired-other-window) (global-set-key "5d" 'ffap-dired-other-frame) (global-set-key "" 'ffap-list-directory)) (add-hook 'gnus-summary-mode-hook 'ffap-gnus-hook) (add-hook 'gnus-article-mode-hook 'ffap-gnus-hook) (add-hook 'vm-mode-hook 'ffap-ro-mode-hook) (add-hook 'rmail-mode-hook 'ffap-ro-mode-hook)) "\
+*List of key-binding forms evaluated by function `ffap-bindings'.")
+
+(custom-autoload 'ffap-bindings "ffap-/ffap-" t)
+
+(defvar ffap-inhibit-ffap-flag nil "\
+*Non-nil means that `ffap-*' functions should do nothing special.
+For example, `ffap' then acts simply as `find-file' (or, more
+precisely, as `ffap-file-finder').")
+
+(custom-autoload 'ffap-inhibit-ffap-flag "ffap-/ffap-" t)
+
+;;;***
+
 ;;;### (autoloads nil nil ("el-get/el-get-autoloads.el" "el-get/el-get-build.el"
 ;;;;;;  "el-get/el-get-byte-compile.el" "el-get/el-get-core.el" "el-get/el-get-custom.el"
 ;;;;;;  "el-get/el-get-dependencies.el" "el-get/el-get-install.el"
 ;;;;;;  "el-get/el-get-methods.el" "el-get/el-get-notify.el" "el-get/el-get-recipes.el"
-;;;;;;  "el-get/el-get-status.el" "hideshow-org/hideshow-org.el"
-;;;;;;  "howm/action-lock.el" "howm/bcomp.el" "howm/cheat-font-lock.el"
-;;;;;;  "howm/gfunc.el" "howm/honest-report.el" "howm/howm-backend.el"
-;;;;;;  "howm/howm-cl.el" "howm/howm-common.el" "howm/howm-date.el"
-;;;;;;  "howm/howm-lang-en.el" "howm/howm-lang-ja.el" "howm/howm-menu-en.el"
-;;;;;;  "howm/howm-menu-ja.el" "howm/howm-menu.el" "howm/howm-misc.el"
-;;;;;;  "howm/howm-mkmenu.el" "howm/howm-mode.el" "howm/howm-reminder.el"
-;;;;;;  "howm/howm-vars.el" "howm/howm-version.el" "howm/howm-view.el"
-;;;;;;  "howm/howm.el" "howm/illusion.el" "howm/riffle.el") (20925
-;;;;;;  804 656562 272000))
+;;;;;;  "el-get/el-get-status.el" "hideshow-org/hideshow-org.el")
+;;;;;;  (22022 101 389477 327000))
 
 ;;;***
 

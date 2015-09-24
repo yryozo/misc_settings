@@ -1,0 +1,60 @@
+--- boxes.el	2007/10/11 22:18:29	1.1
++++ boxes.el	2007/10/11 22:35:34	1.6
+@@ -67,16 +67,16 @@
+     (python-mode . "pound-cmt") (ruby-mode . "pound-cmt")
+     (emacs-lisp-mode . "lisp-cmt") (lisp-mode . "lisp-cmt"))
+   "The default comment type based on file names.")
+-(make-variable-buffer-local 'boxes-known-modes)
+-
+-;;;###autoload
+-(defun boxes-set-default-type (mode)
+-  "Set the default box mode according to the buffer's major mode."
+-  (setq boxes-default-type (or (cdr (assoc mode boxes-known-modes)) "c-cmt2")))
+ 
+ ;;;###autoload
+ (defvar boxes-default-type nil  "The default type of comment.")
+ (make-variable-buffer-local 'boxes-default-type)
++(setq-default boxes-default-type "c-cmt2")
++
++;;;###autoload
++(defun boxes-set-default-type (mode)
++  "Set the default box mode according to the buffer's major mode."
++  (setq boxes-default-type (or (cdr (assoc mode boxes-known-modes)) boxes-default-type)))
+ 
+ ;;;###autoload
+ (defvar boxes-args ""
+@@ -86,14 +86,23 @@
+ (defun boxes-create ()
+   "Automagicly create a new box around the region based on the default type."
+   (interactive "*")
+-  (boxes-command-on-region (region-beginning) (region-end) boxes-default-type))
++  (boxes-command-on-region (region-beginning) (region-end) nil))
+ 
+ 
+ ;;;###autoload
+ (defun boxes-remove ()
+   "Automagicly remove a new box around the region based on the default type."
+   (interactive "*")
+-  (boxes-command-on-region (region-beginning) (region-end) boxes-default-type 1))
++  (boxes-command-on-region (region-beginning) (region-end) nil 1))
++
++
++;;;##autoload
++(defun boxes-mend ()
++  "Automagicly mend a new box around the region based on the default type."
++  (interactive "*")
++  (let ((boxes-args (concat " -m " boxes-args)))
++    (boxes-command-on-region (region-beginning) (region-end) nil)))
++
+ 
+ 
+ ;;;###autoload
+@@ -112,7 +121,7 @@
+     (setq boxes-default-type (boxes-set-default-type major-mode)
+           type boxes-default-type))
+   (let ((command-string
+-	 (concat boxes-command  
++	 (concat boxes-command " "
+ 		 (if remove
+ 		     (concat boxes-args " -r "))
+ 		 (if type

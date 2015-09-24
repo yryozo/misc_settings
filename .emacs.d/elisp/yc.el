@@ -1,3 +1,4 @@
+;;; -*- encoding: iso-2022-7bit -*-
 ;;; yc.el by knak 2010.10.01
 
 ;;; YC は "Yet another Canna client" の略です。
