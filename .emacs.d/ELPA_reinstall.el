@@ -1,3 +1,5 @@
+(package-refresh-contents)
+
 (mapc
  (lambda (package)
    (or (package-installed-p package)

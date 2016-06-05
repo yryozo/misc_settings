@@ -10,6 +10,9 @@
 ;;    一般的な 96 DPI のフォントレンダリングでは、9 pt、10.5 pt、12 pt、13.5 pt、15 pt など、1.5 の倍数を指定すると 1:2 で表示されると思います。"
 
 ;;; その他のフォント候補
+					; (set-frame-font "Myrica M-14" nil t)  ; ちょっと日本語が細いかな?? バランスが悪いような.
+					; 
+
 ;; 日本語部分用のfont設定を追加
 (set-fontset-font nil 'japanese-jisx0208 (font-spec :family "Ricty"))
 

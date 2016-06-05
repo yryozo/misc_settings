@@ -57,6 +57,10 @@
 ; ;; (setq url-proxy-services '(("http" . "localhost:8339")))
 
 
+;;; for powerline
+; (require 'powerline)
+; (powerline-default-theme)
+
 ;;; for color-theme
 ;;;; for solarized theme
 (if (< emacs-major-version 24)
@@ -447,38 +451,6 @@
 ;; *ソースファイル名-preprocessed*バッファにコマンドの出力結果が出ているので、ここから原因を探せるかもしれません。
 ;; 自分はcppコマンドが見つからないよ、というメッセージを見てはじめてcppが必要なことに気づきました……。
 
-;;; for migemo
-; 24.3 対応のため, ELPA 経由で以下の github 上のものを取得
-;   <https://github.com/emacs-jp/migemo>
-; (注意: 実際の検索処理はネイティブコードに丸投げなので, 
-;        別途 cmigemo または通常の migemo を apt-get しておくこと. 
-;        以下は cmigemo 用の設定)
-(require 'migemo)
-(setq migemo-command "cmigemo")
-(setq migemo-options '("-q" "--emacs"))
-
-;; Set your installed path
-;(setq migemo-dictionary "/usr/local/share/migemo/utf-8/migemo-dict")
-(setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict")
-
-(setq migemo-user-dictionary nil)
-(setq migemo-regex-dictionary nil)
-(setq migemo-coding-system 'utf-8-unix)
-(load-library "migemo")
-(migemo-init)
-
-  ;; 以下は昔の設定
-  ; (setq load-path (cons "/usr/share/emacs/site-lisp/migemo" load-path))
-  ; (load "migemo.el")
-  ; 
-  ;; for C/Migemo
-  ;; (setq migemo-command "cmigemo")
-  ;; (setq migemo-options '("-q" "--emacs" "-i" "\a"))
-  ;; (setq migemo-dictionary "somewhere/migemo/euc-jp/migemo-dict")
-  ;; (setq migemo-user-dictionary nil)
-  ;; (setq migemo-regex-dictionary nil)
-
-
 ;;; for dired
 ;;;   for bf-mode
 ;; -- diredでファイルの内容を表示
@@ -622,8 +594,8 @@
 
 ;;;   for outshine
 ;;;; 注意事項
-;; 現は, デフォルトの状態では, elisp mode だけは ";;[;]+ " がヘッドラインになるように設定されている.
-;; たし, 本文中に一つでも通常のヘッドライン (";; =+ " 等) にひっかかる物があれば特別扱いされなくなるので注意.
+;; 現状は, デフォルトの状態では, elisp mode だけは ";;[;]+ " がヘッドラインになるように設定されている.
+;; ただし, 本文中に一つでも通常のヘッドライン (";; =+ " 等) にひっかかる物があれば特別扱いされなくなるので注意.
 
 ;;;; for rd-mode with outshine
 ;(custom-set-variables
@@ -632,6 +604,7 @@
 (setq comment-padding 0)  ; RD-mode にはコメント書式はないので, padding は追加しなくていい (FIXME 他にも影響するので...)
 (custom-set-variables
  '(outshine-regexp-base-char "="))
+
 ; <https://github.com/tj64/outshine/issues/8>
 ; とりあえず, 今のバージョンでは以下の流れで outline-regexp が決定されている.
 ;   outshine-regexp-base-char -> outshine-default-outline-regexp-base -> outshine-outline-regexp-base -> outshine-normalized-outline-regexp-base
@@ -640,6 +613,13 @@
 ;;;; for outshine
 (require 'outshine)
 (add-hook  'outline-minor-mode-hook 'outshine-hook-function)
+
+  ;; 先頭で Tab を押しても global cycle にならないようにする
+(custom-set-variables
+ '(outshine-org-style-global-cycling-at-bob-p t))
+
+(custom-set-variables
+ '(outshine-org-style-global-cycling-when-argument-is-set-p t))
 
 ;;;; キーバインドの変更 (C-<arrow> を移動に)
 (define-key outline-minor-mode-map (kbd "C-<left>") 'outline-promote) 
@@ -1071,9 +1051,9 @@ by yama @ Thu Mar 29 23:37:45 2007"
   ;; 自動補完を無効
   (custom-set-variables '(helm-ff-auto-update-initial-value nil))
   ;; C-hでバックスペースと同じように文字を削除  
-  (define-key helm-c-read-file-map (kbd "C-h") 'delete-backward-char)
+  (define-key helm-read-file-map (kbd "C-h") 'delete-backward-char)
   ;; TABで任意補完。選択肢が出てきたらC-nやC-pで上下移動してから決定することも可能
-  (define-key helm-c-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
+  (define-key helm-read-file-map (kbd "TAB") 'helm-execute-persistent-action)
 
 
 ;; 結果の参照時に source 間を移動するキーをもう少し打ちやすいところに移動 (デフォルトは C-o か矢印キー)
@@ -1108,13 +1088,8 @@ by yama @ Thu Mar 29 23:37:45 2007"
   )
 (add-hook 'helm-move-selection-after-hook 'show-buffer-move-by-move-extend)
 
-
 ;;;; for helm-migemo
-(require 'helm-migemo)
-(add-to-list 'helm-c-source-recentf '(migemo))      ; migemo 対応
-;(add-to-list 'helm-c-source-buffers-list '(migemo)) ; migemo 対応
-(add-to-list 'helm-c-source-bookmarks '(migemo))
-
+; >>>*-migemo.el
 ;;;; for helm-descbinds
 ;; -- <https://github.com/emacs-helm/helm-descbinds>
 ;; -- `describe-bindings' is replaced to `helm-descbinds'. (Type `C-h b', `C-x C-h' these run `helm-descbinds')
@@ -1127,33 +1102,6 @@ by yama @ Thu Mar 29 23:37:45 2007"
 
 ;;;;; prior to emacs24
 ;  (helm-descbinds-mode 1)
-
-
-;;;   for helm-filelist
-;; <http://d.hatena.ne.jp/rubikitch/20100915/anything>
-;; <http://d.hatena.ne.jp/higepon/20120219/1329636071>
-;; <http://d.hatena.ne.jp/yuheiomori0718/20120207/1328620261>
-;; helm-source-locate のようなもの. ただし, 複数クエリでのマッチが出来る.
-;; 
-;; 辞書を作るために, 予め make-filelist.rb を回しておく必要がある.
-;; 探索範囲は ~/.make-filelist.rb でカスタマイズ可能. 
-;;   (あるいは, make-filelist.rb にコマンドライン引数を渡すと, そこだけが探索される
-;;    $ ruby make-filelist.rb ~ /etc > ~/partial.filelist   )
-;; 
-;; make-filelist.rb は cron で定期的に回しておくとよい. 以下は 11:30 に実行する設定
-;; (root でやれ, と書かれてたりするが, 自分が開けるファイルでないと意味が無いから自分でいいだろう)
-;;   30 11 * * * ruby ~/.emacs.d/bin/make-filelist.rb > /tmp/all.filelist
-;; 
-;; <http://d.hatena.ne.jp/mtym/20130322/p1>
-;; helm 版は公式にはないが, ここのページで公開されている.
-(require 'helm-filelist)
-; (setq helm-filelist-file-name "/tmp/all.filelist")  ; 使用する filelist ファイル
-; (setq helm-filelist-candidate-number-limit 200)     ; 表示する候補数
-; (setq helm-filelist-grep-command "LANG=C grep")     ; 使用する grep コマンド
-(setq helm-filelist-case-fold-search nil)           ; 大文字／小文字を無視するかどうか? t や 'smart だと無視する. nil だと無視しない (現状だと無視しないと遅すぎるな...)
-
-;; 何か, defvar ではなく defun で定義されているので, 中身を取り出しておく (defvar でいいと思うんだがなぁ...)
-(setq helm-c-source-filelist (helm-source-filelist))
 
 
 ;;;   for helm-gtags
@@ -1254,7 +1202,7 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;;;; helper-function
 (defun helm-candidates-from-my-template (fpath)
   "Create helm candidates' strings from a file splitted by empty lines"
-  (with-temp-buffer 
+  (with-temp-buffer
     (insert-file-contents fpath nil nil nil t)
     ;; process it ...
     ;; (goto-char 0) ; move to begining of file's content (in case it was open)
@@ -1321,7 +1269,7 @@ by yama @ Thu Mar 29 23:37:45 2007"
                          helm-c-source-files-in-current-dir
 			 helm-c-source-bookmarks
 			 helm-c-source-buffers-list
-			 helm-c-source-elscreen
+			 ; helm-c-source-elscreen
                          helm-c-source-buffer-not-found
 			 helm-c-source-filelist)
                        "*helm my buffers*")))
@@ -1523,7 +1471,7 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;   * yas/ido-prompt        -- minibuffer (見た目が良い)
 ;   * yas/completing-prompt -- minibuffer
 (require 'dropdown-list)
-(setq yas/prompt-functions
+(setq yas-prompt-functions
       '(yas/dropdown-prompt
         yas/ido-prompt
         yas/x-prompt
@@ -1581,11 +1529,9 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;;   (add-to-list 'yas-extra-mode-hooks 'cperl-mode-hook)
 (require 'yasnippet)
 (require 'helm-c-yasnippet)
-(setq helm-c-yas-space-match-any-greedy t) ;[default: nil]
+(setq helm-yas-space-match-any-greedy t) ;[default: nil]
 (global-set-key (kbd "C-c y") 'helm-c-yas-complete)
 (yas-global-mode 1)  ;(yas--initialize) <= 昔はこうだった
-
-(add-to-list 'helm-c-source-yasnippet '(migemo))      ; migemo 対応
 
 
 ;;;   for additional snippets

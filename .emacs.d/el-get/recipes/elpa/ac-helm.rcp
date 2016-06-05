@@ -1,4 +1,0 @@
-(:name ac-helm
-:auto-generated t
-:type elpa
-:description "Auto Complete with Helm [github]")

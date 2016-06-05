@@ -1,0 +1,13 @@
+;;; shell-toggle-autoloads.el --- automatically extracted autoloads
+;;
+;;; Code:
+
+
+(provide 'shell-toggle-autoloads)
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; no-update-autoloads: t
+;; coding: utf-8
+;; End:
+;;; shell-toggle-autoloads.el ends here

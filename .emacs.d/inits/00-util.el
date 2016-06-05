@@ -337,6 +337,99 @@
 (global-set-key [?\C-x ?\C-.] 'point-to-bottom)
 (global-set-key [?\C-x ?\C-,] 'point-to-top)
 
+;;; for forward-/backward-paragraph
+; <http://ergoemacs.org/emacs/emacs_move_by_paragraph.html> : Emacs: Move Cursor by Paragraph or Text Block
+; <http://ergoemacs.org/emacs/emacs_keybinding_design_beginning-of-line-or-block.html> : Emacs Lisp: Move Cursor to Beginning of Line or Block
+; forward-paragraph/backward-paragraph は, メジャーモードによって挙動がかなり変わるため使いにくいとのこと.
+; (例えば, html-mode で試してみればいい)
+; <= これは "paragraph" が syntax table に依存して定められているから, らしい.
+;    <http://flex.phys.tohoku.ac.jp/texi/emacs-jp/emacs-jp_117.html>
+;    "段落の区切りの正確な定義は，変数paragraph-separateと paragraph-startで決められます．
+;     paragraph-startの値は正規表現で，段落を開始したり区切ったりする行を表します．
+;     paragraph-separateの値は別の正規表現で，これは段落の区切りで，どの段落の一部にもならない行を表します．
+;     段落を開始しかつその段落に含まれる行は，どちらの正規表現にもマッチしなくてはなりません．
+;     たとえば，普通 paragraph-startの値は"^[ \t\n\f]"で， paragraph-separateは"^[ \t\f]*$"になっています． "
+; 
+; また, 特別に forward-/backward-paragraph 用のキーバインドを覚えるよりは, C-a/C-e が DWIM 的に動いてくれたほうが使いやすい, とのこと.
+; <= とはいえ, このページに書かれているコードは移動後の位置が気に食わない. 個人的には forward-/backward-paragraph と同じ位置に移動してくれたほうが自然な気がする
+; 
+; (defun xah-forward-block (&optional φn)
+;   "Move cursor forward to the beginning of next text block.
+; A text block is separated by blank lines.
+; In most major modes, this is similar to `forward-paragraph', but this command's behavior is the same regardless of syntax table."
+;   (interactive "p")
+;   (let ((φn (if (null φn) 1 φn)))
+;     (search-forward-regexp "\n[\t\n ]*\n+" nil "NOERROR" φn)))
+;  
+; (defun xah-backward-block (&optional φn)
+;   "Move cursor backward to previous text block.
+; See: `xah-forward-block'"
+;   (interactive "p")
+;   (let ((φn (if (null φn) 1 φn))
+;         (ξi 1))
+;     (while (<= ξi φn)
+;       (if (search-backward-regexp "\n[\t\n ]*\n+" nil "NOERROR")
+;           (progn (skip-chars-backward "\n\t "))
+;         (progn (goto-char (point-min))
+;                (setq ξi φn)))
+;       (setq ξi (1+ ξi)))))
+;  
+; (defun xah-beginning-of-line-or-block (&optional φn)
+;   "Move cursor to beginning of line, or beginning of current or previous text block.
+;  (a text block is separated by blank lines)"
+;   (interactive "p")
+;   (let ((φn (if (null φn) 1 φn)))
+;     (if (equal φn 1)
+;         (if (or (equal (point) (line-beginning-position))
+;                 (equal last-command this-command )
+;                 ;; (equal last-command 'xah-end-of-line-or-block )
+;                 )
+;             (xah-backward-block φn)
+;           (beginning-of-line))
+;       (xah-backward-block φn))))
+;  
+; (defun xah-end-of-line-or-block (&optional φn)
+;   "Move cursor to end of line, or end of current or next text block.
+;  (a text block is separated by blank lines)"
+;   (interactive "p")
+;   (let ((φn (if (null φn) 1 φn)))
+;     (if (equal φn 1)
+;         (if (or (equal (point) (line-end-position))
+;                 (equal last-command this-command )
+;                 ;; (equal last-command 'xah-beginning-of-line-or-block )
+;                 )
+;             (xah-forward-block)
+;           (end-of-line))
+;       (progn (xah-forward-block φn)))))
+
+(defun my-beginning-of-line-or-block (&optional φn)
+  "Move cursor to beginning of line, or beginning of current or previous text block.
+ (a text block is separated by blank lines)"
+  (interactive "p")
+  (let ((φn (if (null φn) 1 φn)))
+    (if (or (> φn 1) (equal last-command this-command ))
+	; (or (> φn 1) (equal (point) (line-beginning-position))) 
+	(let ((paragraph-start "\\|[ \t]*$") ; or "^[ \t\n\f]" ??
+	      (paragraph-separate "[ \t]*$")); or "^[ \t\f]*$" ??
+	  (backward-paragraph φn))
+      (move-beginning-of-line nil)))) ; beginning-of-line だと org-mode などで折りたたんだ状態での移動に違和感がある
+
+(defun my-end-of-line-or-block (&optional φn)
+  "Move cursor to end of line, or end of current or next text block.
+ (a text block is separated by blank lines)"
+  (interactive "p")
+  (let ((φn (if (null φn) 1 φn)))
+    (if (or (> φn 1) (equal last-command this-command ))
+	; (or (> φn 1) (equal (point) (line-end-position))) 
+	(let ((paragraph-start "\\|[ \t]*$") ; or "^[ \t\n\f]" ??
+	      (paragraph-separate "[ \t]*$")); or "^[ \t\f]*$" ??
+	  (forward-paragraph φn)
+	  (end-of-line))
+      (move-end-of-line nil)))) ; end-of-line だと org-mode などで折りたたんだ状態での移動に違和感がある
+
+(global-set-key "\C-a" 'my-beginning-of-line-or-block)
+(global-set-key "\C-e" 'my-end-of-line-or-block)
+
 
 ;;; for dired 
 ;;;; recursive-copy, delete
@@ -849,7 +942,7 @@
 ;;; for auto-insert
 (require 'autoinsert)
 (add-hook 'find-file-hooks 'auto-insert)
-(setq auto-insert-directory (locate-user-emacs-file "template"))
+(setq auto-insert-directory (locate-user-emacs-file "autoinsert-template/"))  ; 注: 最後は'/'で終わらないといけない
 (setq auto-insert-alist
       (append '(
                 (c-mode . "c-template.c")
