@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: cin_to_1digit_int_vector(iteration)
+# key: cin_to_1digit_int_vector
+# --
+std::vector<${1:long long}> ${2:vv}(${3:n});    for (int i = 0; i < $3; i++) { char c; cin >> c; $2[i] = c-'0'; }
+

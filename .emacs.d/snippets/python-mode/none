@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: none-literal (null, Nothing, Nil, unit, )
+# key: none-literal
+# --
+None
+

@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: 2dimension-vector
+# key: 2dimension-vector
+# --
+std::vector< std::vector<int> > ${1:vv}(${2:10}, std::vector<int>(${3:10}));
+for (int _vi = 0; _vi < $2; _vi++) {
+  for (int _vj = 0; _vj < $3; _vj++) {
+    $1[_vi][_vj] = $0;
+  }
+}
+

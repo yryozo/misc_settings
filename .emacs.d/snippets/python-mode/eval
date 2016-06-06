@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: eval, exec, execfile, compile (文字列/ファイルをPythonコードとして実行)
+# key: eval
+# --
+${1:x} = eval(${2:"x**42"}) # 1つの式が書かれた文字列を評価し, 評価値を返す
+# $1 = eval($2, globals=gdic) # 現在の環境以外で評価する場合は, 環境を表す辞書を渡す
+# $1 = eval($2, globals=gdic, locals=ldic) # 現在の環境以外で評価する場合は, 環境を表す辞書を渡す
+
+exec("x = 1; y = 2")    # 任意個の文が書かれた文字列を評価する(副作用を起こすために使われる. Python2ではexec自体も文, Python3でもNoneを返す関数)
+# exec("x = 1; y = 2", globals)           # 現在の環境以外で評価する場合は, 環境を表す辞書を渡す
+# exec("x = 1; y = 2", globals, locals)   # 現在の環境以外で評価する場合は, 環境を表す辞書を渡す
+# exec "x = 1; y = 2"                     # (Python 2 only)
+# exec "x = 1; y = 2" in globals          # (Python 2 only)
+# exec "x = 1; y = 2" in globals, locals  # (Python 2 only)
+
+exec(compile(open( 'myfile.py' ).read())) # ファイル('myfile.py')にかかれている内容を実行する
+# execfile('myfile.py')                   # (Python 2 only)
+
+compile('a + b', '<string>', 'eval') # [eval高速化用] 何度も同じ文字列を実行する場合は, compile() でコードオブジェクトにしてから eval/exec に渡すと少し早くなる.
+compile('a + b', '<string>', 'exec') # [exec高速化用]
+
+execfile('sample.py')                                   # (Python 2 only) 指定のファイルを読み込み Python コードとして実行
+exec(compile(open(filename).read(), filename, 'exec'))  # 上と等価

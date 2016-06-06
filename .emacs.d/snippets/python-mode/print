@@ -1,0 +1,17 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: print (出力, デバッグ出力,  printf, println)
+# key: print
+# --
+print($0)
+# print "hoge"     # (Python 2 only) 括弧は省略可能
+# print 'i is', i  # (Python 2 only) 複数の引数を指定することも可能(括弧は書かずに','でつなぐ. 出力時にはスペースを開けて出力される) (注: 括弧をつけるとタプルと認識される)
+# print i,         # (Python 2 only) 改行を出力したくない場合, 末尾にコンマを入れる
+# print >>sys.stderr, "fatal error"  # (Python 2 only) stderrに出力
+# 
+# print('i is', i) # (Python 3 only) 複数の引数を指定することも可能(出力時にはスペースを開けて出力される)
+# print('i', i, sep=" is ") # (Python 3 only) 引数間の区切り文字をスペース以外にしたい場合, sep キーワードで変更できる
+# print("hello world", end="") # (Python 3 only) 改行を出力したくない場合, end キーワードで指定できる
+# print("hello world", file=sys.stderr)    # (Python 3 only) stderrに出力
+#
+# 備考: Python 2 で Python 3 の print を使いたい場合は,  "from __future__ import print_function" を入れる
+#TODO

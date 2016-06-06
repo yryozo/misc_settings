@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-difference(差集合)
+# key: set-difference
+# --
+${1:s1} - ${2:s2}

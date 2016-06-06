@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_gcd(最大公約数, greatest common divisor)
+# key: math_gcd
+# --
+// 計算量は O(log max(a,b))
+${1:long} gcd($1 a, $1 b) {
+  while (b != 0) {
+    $1 tmp = a;  a = b;  b = tmp % b;
+  }
+  return a;
+}
+

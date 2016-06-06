@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string_append!
+# key: string_append!
+# --
+${1:s} += ${2:"aa"or'a'};

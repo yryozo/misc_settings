@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_sort_for-specified-range!
+# key: algorithm_sort_for-specified-range!
+# --
+sort( ${1:vv}.begin()+${2:n}, $1.begin()+${3:m} ); // 特定の範囲($2~$3)だけでいい場合 (注:未テスト)

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: priority-queue_pop!
+# key: priority-queue_pop!
+# --
+${1:int} ${2:v} = ${3:qq}.top();
+$3.pop();

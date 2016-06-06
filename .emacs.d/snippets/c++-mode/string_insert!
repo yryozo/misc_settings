@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string_insert!
+# key: string_insert!
+# --
+${1:str}.insert(${2:n}, ${3:ss}); // $1[$2] の直後に $3 を挿入

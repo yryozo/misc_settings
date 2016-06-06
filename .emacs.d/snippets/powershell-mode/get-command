@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: get-command (利用できるコマンドの一覧表示, コマンドレットの一覧表示)
+# key: get-command
+# --
+Get-Command
+# Get-Command -name Write-Host
+# Get-Command -CommandType Alias
+# Get-Command -Verb I*
+# Get-Command -Noun host

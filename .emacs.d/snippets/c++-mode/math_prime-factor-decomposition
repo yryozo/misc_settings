@@ -1,0 +1,17 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_prime-factor-decomposition(素因数分解)
+# key: math_prime-factor-decomposition
+# --
+// 計算量は O(sqrt(n))
+map<${1:long}, int> prime_factor($1 n) {
+  map<$1, int> res;
+  for (int i = 2; i*i <= n; i++) {
+    while (x % i == 0) {
+      ++res[i];
+      n /= i;
+    }
+  }
+  if (n != 1) res[n] = 1;
+  
+  return res;
+}

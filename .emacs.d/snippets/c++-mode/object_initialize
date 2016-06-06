@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: object_initialize
+# key: object_initialize
+# --
+// Plain Old Data (POD) 型と認識された構造体・クラスは、コンストラクタを作らなくても、初期化リストで初期化可能
+struct Object {
+  float first;
+  int second;
+};
+ 
+Object scalar = {0.43f, 10}; //One Object, with first=0.43f and second=10

@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string
+# key: string
+# --
+std::string ${1:str}; // 空文字列で初期化
+//std::string $1 = "str2";  // "str2" で初期化
+//std::string $1("str3");   // "str3" で初期化

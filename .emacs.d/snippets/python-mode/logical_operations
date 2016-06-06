@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: logical_operations (論理演算, ブール演算(boolean operations), !(not), &/&&(and), |/||(or))
+# key: logical_operations
+# --
+${1:x} and ${2:y}  # AND(論理積) (評価値はbooleanではなく最後の評価した式の値. $2は必要なければ評価されない(&&相当))
+$1 or $2           # OR(論理和)  (評価値はbooleanではなく最後の評価した式の値. $2は必要なければ評価されない(||相当))
+not $1             # NOT(論理否定)

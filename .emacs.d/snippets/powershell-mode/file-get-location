@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-get-location (pwd, カレントディレクトリを取得する)
+# key: get-location
+# --
+Get-Location
+# .Path プロパティにカレントディレクトリを示す文字列が入っている
+
+# pwd
+# Get-Loaction -PSProvider Filesystem
+# Get-Location -PSProvider regstory

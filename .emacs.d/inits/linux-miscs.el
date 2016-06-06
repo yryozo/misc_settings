@@ -25,3 +25,19 @@
 ;; 何か, defvar ではなく defun で定義されているので, 中身を取り出しておく (defvar でいいと思うんだがなぁ...)
 (setq helm-c-source-filelist (helm-source-filelist))
 
+
+;;;   for helm-my-buffers
+;;  99-miscs で定義されている helm-my-buffers を Linux 環境向けに上書き
+(defun helm-my-buffers ()
+  (interactive)
+  (let ((helm-ff-transformer-show-only-basename nil))  ; for helm-source-filelist
+    (helm-other-buffer '(helm-c-source-recentf
+					; helm-source-session  ; session.el の file list から取る. recentf と似たようなもの?
+                         helm-c-source-files-in-current-dir
+			 helm-c-source-bookmarks
+			 helm-c-source-buffers-list
+					; helm-c-source-elscreen
+                         helm-c-source-buffer-not-found
+			 helm-c-source-filelist  ; これは Linux 環境のみ
+			 )
+                       "*helm my buffers*")))

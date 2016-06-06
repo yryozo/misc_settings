@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-all? (高階関数) (all_of, every, for_all)  [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: all
+# --
+all(map(${1:func}, ${2:ll}))
+# all(target is e or target == e for e in $2)  # generator comprehension
+# 備考: all 自体は高階関数ではなく boolean の iterable しか受け取らないので, map() や内包表記と併用.

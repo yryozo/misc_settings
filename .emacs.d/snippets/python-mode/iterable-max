@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-max (最大値, maximum)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: max
+# --
+max(${1:iterable})

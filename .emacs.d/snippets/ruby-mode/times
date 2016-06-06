@@ -1,6 +1,7 @@
-# -*- mode: snippet -*-
-#name : times
+# -*- coding: utf-8; mode: snippet -*-
+# name : 8進数/10進数/16進数の変換 (hex, )
 # --
-${1:x}.times do$2
-  $0
-end
+# 10進数を16進数に変換
+  ${1:x}.to_s(16)
+# 16進数を10進数に変換 (なお16進は文字列)
+  $1.hex

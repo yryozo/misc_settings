@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-repeat (要素の繰り返し, repetition)
+# key: list-repeat
+# --
+${1:[None]} * ${2:4}
+# 備考: 中身がmutableな値(リストなど)の場合は, shallow copy は困るので以下のようにそれぞれ生成する.
+#   [[] for __ in xrange(4)]
+
+

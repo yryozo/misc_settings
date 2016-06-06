@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : シリアライズ(serialize) : JSON データへの/からの変換 (dumps, loads,  to_json, )
+# --
+# import json が必要
+${1:str} = json.dumps(${2: [1, 'simple']})  # JSON 文字列への変換
+data = json.loads($1)  # JSON 文字列からの変換
+
+# 備考: JSON では, タプル(immutable)やバイト列は表現できない。
+#       複雑なオブジェクトの場合は pickle モジュール推奨。

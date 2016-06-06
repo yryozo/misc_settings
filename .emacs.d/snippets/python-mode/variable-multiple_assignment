@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: variables-multiple_assignment (複数の変数への同時代入)
+# key: variables-multiple_assignment
+# --
+a, b = b, a+b
+# 実際には, タプルのパックとシーケンスのアンパックの組み合わせに過ぎない

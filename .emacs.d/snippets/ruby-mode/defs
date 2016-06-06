@@ -1,6 +1,11 @@
-# -*- mode: snippet -*-
-#name : Static method
+# -*- coding: utf-8; mode: snippet -*-
+# name : method definition (クラスメソッド定義, 特異メソッド定義)
 # --
-def self.${1:name}
+def ${1:class_name/object_name}.${2:method_name}(${3:arg1, arg2, ...})
   $0
 end
+# 備考: Ruby におけるクラスメソッドとはクラスの特異メソッド.
+# 備考: クラスメソッドの定義で, クラス名を後から変更した時の修正量を減らしたいなら, 
+#       クラス宣言中で以下のように書けばいい.
+#       class $1
+#         def self.$2($3)

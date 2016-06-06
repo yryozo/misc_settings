@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set_size(要素数)
+# key: set_size
+# --
+${1:set}.size()

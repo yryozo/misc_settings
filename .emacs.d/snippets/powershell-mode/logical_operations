@@ -1,0 +1,16 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: logical_operations (論理演算, !(not), &(and), |(or), ^(xor))
+# key: logical_operations
+# --
+# 論理否定
+-not $true
+!$true
+ 
+# 論理積
+$true -and $false
+ 
+# 論理和
+$true -or $false
+ 
+# 排他的論理和
+$true -xor $false

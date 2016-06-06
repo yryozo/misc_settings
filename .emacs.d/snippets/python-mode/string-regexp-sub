@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-regexp-sub (正規表現(regular expression)による置換, sub/gsub, substitute, replace)
+# --
+# import re が必要
+${1:x} = re.sub(${2:r"\d+"}, ${3:replacement_str}, ${4:target_str})  # 全て置き換え (gsub 相当)
+$1: = re.sub($2, $3, $4, 1)  # 1 回だけ置き換え (sub 相当)
+$1: = re.sub($2, $3, $4, 3)  # 3 回だけ置き換え
+
+# 置き換えた回数も知りたい場合は, subn() を使う
+#   str, n = re.subn($2, $3, $4)
+
+# 備考: 正規表現文字列は, 先頭に 'r' をつけて raw string にするのを推奨.
+#       ('\' を無駄にたくさん書かなくて良くなるため)
+
+# 備考: 置換文字列内で後方参照(マッチした部分を参照する)するには, \{N} といういつもの記法
+#       re.sub(ptn, "\1, \6", str)
+
+# 備考: 一度コンパイルして実行することもできる. 何度も使うならこちらのほうが得.
+#       (コンパイル後のパターンオブジェクトには同じ名前のメソッドが使える.
+#        match(), search(), findall(), sub() 等)
+#   num = re.compile($2)
+#   $1 = num.sub($3, $4)
+
+# オプション引数で, 挙動を微調整することも可能.
+#   x = re.sub(p, s, t,  re.IGNORECASE)
+# 
+# * MULTILINE, M 	
+#   ^ や $ に作用して、複数行にマッチング
+# * DOTALL, S 	
+#   '.' が「改行を含む任意の文字」にマッチ
+# * VERBOSE, X 	
+#   冗長な正規表現を利用できるようにする (よりきれいで理解しやすくまとめることができます)
+# * IGNORECASE, I 	
+#   大文字小文字を区別しないマッチ
+# * LOCALE, L 	
+#   ロケールに対応したマッチ
+# * UNICODE, U 	
+#   \w, \W, \b, そして \B を Unicode 文字データベースに依存させます

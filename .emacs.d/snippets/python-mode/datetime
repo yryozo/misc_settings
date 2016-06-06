@@ -1,0 +1,81 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : datetime (日付や時刻の処理)
+# --
+# import datetime
+# import time
+# import timeit
+
+# 現在の日付の取得 (dateオブジェクト=年,月,日)
+day = datetime.date.today()
+# 特定の日付の取得   (例: 2009年3月18日)
+day = datetime.date(2009, 3, 18)
+# timeオブジェクトから日付への変換
+day = datetime.date.fromtimestamp(time)
+# Unix timeへの変換
+ut = time.mktime(day.timetuple())
+# 日付からの情報取得
+y, m, d = day.year, day.month, day.day
+# 日付からの曜日の取得 (月曜日が 0, 日曜日が 6)
+wd = day.weekday()
+
+# 現在の日時の取得 (datetimeオブジェクト=年,月,日,時,分,秒,マイクロ秒 (= dateオブジェクト+timeオブジェクト))
+day = datetime.datetime.now()
+# 特定の日時の取得   (例: 2009年3月18日20時30分40秒999999マイクロ秒)
+day = datetime.datetime(2009, 3, 18, 20, 30, 40, 999999)
+# timeオブジェクトから日時への変換
+day = datetime.datetime.fromtimestamp(time)
+# timeオブジェクトへの変換
+time = day.time()
+# Unix timeへの変換
+ut = time.mktime(day.timetuple())
+# 日時からの情報取得
+y, m, d, h, m, s, us = day.year, day.month, day.day, day.hour, day.minute, day.second, day.microsecond
+# 日時からの曜日の取得 (月曜日が 0, 日曜日が 6)
+wd = day.weekday()
+
+# 現在の Unix time の取得
+ut = time.time()
+
+# 高精度な現在時刻の取得 (環境によって time.time()/time.clock()/time.perf_counter() 等から一番精度のよいものを使用. 3.3以降では time.perf_counter())
+time = timeit.default_timer()
+  # 備考: time.clock() (= C の clock() のラッパー) は環境依存が大きいため 3.3 以降ではdeprecated.
+  #       代替品は time.process_time(), time.perf_counter(), 及び timeit モジュール.
+
+
+# 日付/日時の増減
+day = today + datetime.timedelta(days=3) # 3日後
+day = today - datetime.timedelta(days=2) # 2日前
+  # days 以外に, seconds, microseconds, milliseconds, も指定可能.
+  # また, minutes, hours, weeks, という指定も可能 (それぞれ 60秒, 3600秒, 7日, に変換される)
+  # 
+  # なお, timedeltaの演算子オーバーロードにより, 
+  # 掛け算(整数倍)や timedelta 同士での足し算引き算, なども可.
+
+# 日付/日時から文字列への変換 (strftime)
+str = day.strftime(u'%Y/%m/%d %H:%M:%S')
+  # 注: そのプラットフォームの strftime() を使うため, 対応書式は環境依存.
+  #     参考までに, 以下は C標準(1989年版)が要求する書式化コード.
+  #   %a 	ロケールの短縮された曜日名を表示します 	 
+  #   %A 	ロケールの曜日名を表示します 	 
+  #   %b 	ロケールの短縮された月名を表示します 	 
+  #   %B 	ロケールの月名を表示します 	 
+  #   %c 	ロケールの日時を適切な形式で表示します 	 
+  #   %d 	月中の日にちを10進表記した文字列 [01,31] を表示します 	 
+  #   %f 	マイクロ秒を10進表記した文字列 [000000,999999] を表示します (左側から0埋めされます) 	(1)
+  #   %H 	時 (24時間表記) を10進表記した文字列 [00,23] を表示します 	 
+  #   %I 	時 (12時間表記) を10進表記した文字列 [01,12] を表示します 	 
+  #   %j 	年中の日にちを10進表記した文字列 [001,366] を表示します 	 
+  #   %m 	月を10進表記した文字列 [01,12] を表示します 	 
+  #   %M 	分を10進表記した文字列 [00,59] を表示します 	 
+  #   %p 	ロケールの AM もしくは PM を表示します 	(2)
+  #   %S 	秒を10進表記した文字列 [00,61] を表示します 	(3)
+  #   %U 	年中の週番号 (週の始まりは日曜日とする) を10進表記した文字列 [00,53] を表示します新年の最初の日曜日に先立つ日は 0週に属するとします 	(4)
+  #   %w 	曜日を10進表記した文字列 [0(日曜日),6] を表示します 	 
+  #   %W 	年中の週番号 (週の始まりは月曜日とする) を10進表記した文字列 [00,53] を表示します新年の最初の月曜日に先立つ日は 0週に属するとします 	(4)
+  #   %x 	ロケールの日付を適切な形式で表示します 	 
+  #   %X 	ロケールの時間を適切な形式で表示します 	 
+  #   %y 	世紀なしの年(下2桁)を10進表記した文字列 [00,99] を表示します 	 
+  #   %Y 	世紀ありの年を10進表記した文字列を表示します 	 
+  #   %z 	UTCオフセットを +HHMM もしくは -HHMM の形式で表示します (オブジェクトがnaiveであれば空文字列) 	(5)
+  #   %Z 	タイムゾーンの名前を表示します (オブジェクトがnaiveであれば空文字列) 	 
+  #   %% 	文字 '%' を表示します

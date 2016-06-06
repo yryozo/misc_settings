@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-copy-item (cp, ファイルやディレクトリをコピーする)
+# key: copy-item
+# --
+Copy-Item ${1:hoge.txt} ${2:fuga.txt}

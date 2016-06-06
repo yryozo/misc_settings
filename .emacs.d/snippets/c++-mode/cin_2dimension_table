@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: cin_2dimension_table
+# key: cin_2dimension_table
+# --
+// $2 行 $4 列のテーブルを読み取る
+for (int ${1:i} = 0; $1 < ${2:n}; $1++) {
+  for (int ${3:j} = 0; $3 < ${4:m}; $3++) {
+    ${5:char} ${6:c};
+    cin >> $6;
+    
+    $0 // 読み取った $6 を使う処理
+  }
+  std::cin.ignore(); // 改行文字を消費
+}

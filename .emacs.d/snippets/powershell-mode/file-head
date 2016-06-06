@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-head (ファイルの先頭N行を取得する)
+# key: file-head
+# --
+(cat ${1:hoge.txt})[0..(${2:N}-1)]
+# Get-Content $1 -head $2   # PowerShell3.0以降

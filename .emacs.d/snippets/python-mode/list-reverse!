@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-reverse!(リストの反転)   (リスト, 可変長配列(variable-length arrays))
+# key: list-reverse!
+# --
+${1:ll}.reverse()

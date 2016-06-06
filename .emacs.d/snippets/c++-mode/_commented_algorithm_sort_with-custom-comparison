@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_algorithm_sort_with-custom-comparison!
+# key: _commented_algorithm_sort_with-custom-comparison!
+# --
+sort( ${1:vv}.begin(), $1.end(), [](const remove_reference<decltype(*begin($1))>::type& ${3:x}, const remove_reference<decltype(*begin($1))>::type& ${4:y}) {
+  return $0 $3 < $4;
+});
+
+// 以下は C++98 用
+// sort( $1.begin(), $1.end(), ${2:Comp}() );
+// struct $2 { bool operator()( const ${3:std::pair<int, string>}& l, const $3& r ) { // 関数内 struct 定義
+//     $0
+//     return ${4:l.first} < ${5:r.first};
+// }};

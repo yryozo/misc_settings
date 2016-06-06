@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: multiset
+# key: multiset
+# --
+std::multiset<${1:int} > ${3:ss};  // 確保する領域量は書かなくてよい(追加時に自動で拡張)
+

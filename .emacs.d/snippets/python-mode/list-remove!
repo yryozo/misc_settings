@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-remove!(要素の消去)   (リスト, 可変長配列(variable-length arrays))
+# key: list-remove!
+# --
+${1:ll}[${2:n}:${3:m}] = []
+# $1.remove(x)    # 値xを持つ最初の要素を削除する
+# del $1[$2:$3]   # del 文を使う手もある

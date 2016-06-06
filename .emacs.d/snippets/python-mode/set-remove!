@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-remove!(削除, delete, erase, discard)   [BANG!]
+# key: set-remove!
+# --
+${1:st}.remove(${2:elem})  # set中に存在しない値の場合, KeyError 例外
+# $1.discard($2)    # 存在しない値でも, 何も起こらない

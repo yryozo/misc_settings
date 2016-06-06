@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string_size(長さ)
+# key: string_size
+# --
+${1:s}.size()

@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: lvalues_lexicographical-comparison (複数のフィールドを持つユーザ定義型の比較演算の実装, 等)
+# key: lvalues_lexicographical-comparison
+# type: command
+# --
+;; <http://en.cppreference.com/w/cpp/utility/tuple/tie>
+;; std::tie(${1:v1}, ${2:v2}, ${3:v3}, ...) < std::tie(${n:v1}, ${n+1:v2}, ${n+2:v3}, ...)
+(let ((tuple-width (read-number "Value Number?" 3))
+      (snippet-text "")
+      (snippet-text1 "std::tie(")
+      (snippet-text2 "std::tie("))
+  (dotimes (i tuple-width)
+    (setq snippet-text1 (format "%s${%d:x.v%d}%s"
+                                snippet-text1
+                                (1+ i)
+                                (1+ i)
+                                (if (< i (1- tuple-width))
+				   ", "
+                                   "")))
+    (setq snippet-text2 (format "%s${%d:y.v%d}%s"
+                                snippet-text2
+                                (+ tuple-width (+ 2 i))
+                                (1+ i)
+                                (if (< i (1- tuple-width))
+				   ", "
+                                   "")))
+				)
+  (setq snippet-text (format "%s) ${%d:%s} %s)" snippet-text1 (1+ tuple-width) "<" snippet-text2))
+  (yas/expand-snippet snippet-text))

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set_intersection(共通部分, 積集合)
+# key: set_intersection
+# --
+set< remove_reference<decltype(*begin($2))>::type > ${1:ss3}; // 結果
+std::set_intersection(${2:vv1}.begin(), $2.end(), ${3:vv2}.begin(), $3.end(), inserter($1, $1.end()));

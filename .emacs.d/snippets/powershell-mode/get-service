@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: get-service (サービスの一覧表示)
+# key: get-service
+# --
+Get-Service

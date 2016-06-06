@@ -1,0 +1,10 @@
+# -*-*- coding: utf-8; mode: snippet -*-*-
+# name: shell glob にマッチするファイルの一斉処理 (mapcar 版)
+# key: eshell-extended-glob
+# --
+(require 'em-glob)
+(mapcar (lambda (x)
+	  ;;(expand-file-name x)
+	  $0
+	  )
+	(eshell-extended-glob "${1:~/howm/**/*}"))

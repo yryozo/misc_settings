@@ -1,6 +1,11 @@
-# -*- mode: snippet -*-
-#name : method
+# -*- coding: utf-8; mode: snippet -*-
+# name : method definition (インスタンス・メソッド定義, 関数定義)
+# key : def
 # --
-def ${1:name}
+def ${1:method_name}(${2:arg1, arg2, ...})
   $0
 end
+# 備考: 引数を囲む括弧は省略可能 (つまり,以下のように書いてもいい)
+#       def $1 $2
+# 備考: クラス定義中に置けばメソッド定義になる.
+#       トップレベルに置けば関数チックなものになる (レシーバーを書かずに関数チックに呼び出すメソッド)

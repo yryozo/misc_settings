@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: map_clear!(全消去)
+# key: map_clear!
+# --
+${1:mm}.clear()  // 要素の全消去

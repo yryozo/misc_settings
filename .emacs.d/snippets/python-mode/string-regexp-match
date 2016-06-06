@@ -1,0 +1,49 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-regexp-match (正規表現(regular expression)によるマッチング, match, search)
+# --
+# import re が必要
+${1:mm} = re.search(${2:r"\d+"}, ${3:"ab0123ef"})  # 見つからなければ None
+if $1:  # マッチした場合
+    print $1.group()   # 正規表現にマッチした文字列全体
+    print $1.group(0)  # 同上
+      print $1.start()   # マッチの開始位置
+      print $1.end()     # マッチの終了位置
+      print $1.span()    # マッチの位置(start, end) を含むタプル
+    print $1.group(1)  # 1番目のグループの文字列全体
+      print $1.start(1)  # 1番目のグループの開始位置
+      print $1.end(1)    # 1番目のグループの終了位置
+      print $1.span(1)   # 1番目のグループの位置(start, end) を含むタプル
+    print $1.group(2)  # 2番目のグループの文字列全体
+    print $1.groups()  # グループ全てからなる文字列リスト
+else:   # マッチしなかった場合
+    pass
+
+# マッチする箇所全部を処理したい場合は finditer()
+# itr = re.finditer($2, $3)
+# for $1 in iterator:
+#     print $1.span()
+
+# 備考: 正規表現文字列は, 先頭に 'r' をつけて raw string にするのを推奨.
+#       ('\' を無駄にたくさん書かなくて良くなるため)
+
+# 備考: 一度コンパイルして実行することもできる. 何度も使うならこちらのほうが得.
+#       (コンパイル後のパターンオブジェクトには同じ名前のメソッドが使える.
+#        match(), search(), findall(), sub() 等)
+#   num = re.compile($2)
+#   $1 = num.search($3)
+
+# オプション引数で, 挙動を微調整することも可能.
+#   x = re.search(p, s,  re.IGNORECASE)
+# 
+# * MULTILINE, M 	
+#   ^ や $ に作用して、複数行にマッチング
+# * DOTALL, S 	
+#   '.' が「改行を含む任意の文字」にマッチ
+# * VERBOSE, X 	
+#   冗長な正規表現を利用できるようにする (よりきれいで理解しやすくまとめることができます)
+# * IGNORECASE, I 	
+#   大文字小文字を区別しないマッチ
+# * LOCALE, L 	
+#   ロケールに対応したマッチ
+# * UNICODE, U 	
+#   \w, \W, \b, そして \B を Unicode 文字データベースに依存させます

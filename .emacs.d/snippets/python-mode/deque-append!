@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: deque-append! (push!)
+# key: deque-append
+# --
+${1:deq}.append(${2:x})

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: multiset_count(指定した要素の個数)
+# key: multiset_count
+# --
+auto num = ${1:ss}.count(${2:val});  // $1 内の $2 の個数

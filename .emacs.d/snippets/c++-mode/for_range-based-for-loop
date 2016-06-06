@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: for_range-based-for-loop
+# key: forr
+# --
+for (auto ${1:i} : ${2:vv}) {
+  $0
+}

@@ -1,0 +1,20 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: tuple_pattern-match
+# key: tuple_pattern-match
+# type: command
+# --
+;; auto v0 = std::get<0>(t);
+;; auto v1 = std::get<1>(t);
+;; ...
+(let ((tuple-width (read-number "Tuple width?" 3))
+      (snippet-text ""))
+  (dotimes (i tuple-width)
+    (setq snippet-text (format "%sauto ${%d:v%d} = std::get<%d>(%s);\n"
+                                snippet-text
+                                (1+ i)
+				i
+				i
+                                (if (= i 0)
+				   "${1:tpl}"
+                                   "$1"))))
+  (yas/expand-snippet snippet-text))

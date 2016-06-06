@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*-*- coding: utf-8; mode: snippet -*-*-
 # name: orgtbl(org table) for GFM(GitHub Flavored Markdown)
 # key: orgtblgfm
 # type: command
@@ -10,7 +10,7 @@
 <!-- END RECEIVE ORGTBL $1 -->
 
 <!-- 
-#+ORGTBL: SEND $1 orgtbl-to-gfm
+#+ORGTBL: SEND $1 orgtbl-to-gfm :no-escape t
 | $0 | 
 -->
 "

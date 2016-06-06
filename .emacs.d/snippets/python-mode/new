@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: new (インスタンス生成, コンストラクタ呼び出し, allocation, bless) 
+# key: new
+# --
+${1:x = }${2:ClassName}(${3:arg1, arg2})

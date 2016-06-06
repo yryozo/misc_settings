@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: cin_to_vector(iteration)
+# key: cin_to_vector
+# --
+std::vector<${1:long long}> ${2:vv}(${3:n});    for (int i = 0; i < $3; i++) { cin >> $2[i]; }

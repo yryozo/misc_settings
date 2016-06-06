@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: pair_get-set(pair_first, pair_second, car, cdr)
+# key: pair_get-set
+# --
+${1:p}.first
+$1.second
+
+$1.first = ${2:val};
+$1.second = $2;

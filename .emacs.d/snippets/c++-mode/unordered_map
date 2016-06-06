@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: unordered_map(hash)
+# key: unordered_map
+# --
+// キーの順序ではなく, キーのハッシュ値で格納
+std::unordered_map<${1:int}, ${2:int} > ${3:mm};  // 確保する領域量は書かなくてよい(アクセス時に自動で拡張)

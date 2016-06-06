@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: boolean-literal (真偽値リテラル, true, false)
+# key: boolean-literal
+# --
+$true
+$false
+

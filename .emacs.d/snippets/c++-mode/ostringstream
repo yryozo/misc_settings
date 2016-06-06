@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: ostringstream(like sprintf, to_string)
+# key: ostringstream(like sprintf, to_string)
+# --
+std::ostringstream os;
+os << ${1:42};
+string result = os.str();

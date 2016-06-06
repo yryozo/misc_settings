@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : shell command (シェルコマンドの実行)
+# --
+# いくつか方法がある
+
+# バッククオートを使う方法 : 評価値としてコマンドの出力内容が文字列として返される
+#   内部で #{...} 形式の式展開も使えるのでなかなか便利. 
+#   bash の拡張記法を使いたいなら bash -c "" とすればいい
+    result = `ls -lt`
+    result = `bash -c "..."`
+
+# system 関数 : 評価値としてコマンドの終了ステータスを表す真偽値を返す (終了ステータスが 0 なら true, それ以外なら false. 終了ステータス自体は $? で参照できる)
+    result = system("ls -lh") 
+
+# exec 関数 : 呼び出した後は二度と戻ってこない
+    exec("ls -la")
+
+# open 関数 : 出力を一行(一文字)ずつ処理できる
+    result = open("| ls -lh")
+    while !result.eof
+      print result.gets
+    end
+    result.close

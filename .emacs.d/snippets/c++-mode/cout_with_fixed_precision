@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: cout_with_fixed_precision
+# key: cout_with_fixed_precision
+# --
+// need #include <iomanip>
+std::cout << std::fixed << std::setprecision(${1:5}) << ${2:val} << std::endl;  // 少数点以下 $1 桁で表示
+

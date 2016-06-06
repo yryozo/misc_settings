@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string_constant(literal)
+# key: string_constant
+# --
+u8${1:"I'm a UTF-8 string. This is a Unicode Character: \u2018."}      // UTF-8.  型は const char *
+u${1:"This is a UTF-16 string. This is a Unicode Character: \u2018."}  // UTF-16. 型は const char16_t*
+U${1:"This is a UTF-32 string. This is a Unicode Character: \u2018."}  // UTF-32. 型は const char32_t*
+R"(${1:The String Data \ Stuff " })"                      // raw文字列リテラル ('"'や'\'のエスケープ不要)
+R"delimiter(${1:The String Data \ Stuff " })delimiter"    // raw文字列リテラル (delimiter( から )delimiter まで. "delimiter" は任意の文字列でよい. これにより ')' を利用可能になる)

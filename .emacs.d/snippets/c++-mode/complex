@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: complex
+# key: complex
+# --
+std::complex<${1:double}> ${2:cc}( ${3:1.0}, ${4:2.0} );  // $3+$4i
+// std::complex<$1> $2 = std::polar( r, M_PI/2.0 );  // 絶対値r、偏角π/2の複素数

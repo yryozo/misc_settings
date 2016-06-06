@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set_exists?(set::find)
+# key: set_exists?
+# --
+if (${1:ss}.find(${2:val}) != $1.end()) {
+  // 存在する場合
+  $0
+}

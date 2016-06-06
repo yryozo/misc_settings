@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-exists? (contains?, member?, includes?, in)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: exists
+# --
+${1:val} in ${2:ll}
+# $1 not in $2

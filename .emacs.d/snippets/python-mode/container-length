@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: container-length (長さ, size)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map)]
+# key: len
+# --
+len(${1:seq})

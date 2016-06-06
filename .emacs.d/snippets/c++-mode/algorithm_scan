@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_scan(scanl, partial_sum-with-custom-function)
+# key: algorithm_scan
+# --
+// reduce と違って初期値を指定できないから型を変えられないのか. いまいちつまらないな...
+${1:vector}<remove_reference<decltype(*begin($3))>::type > ${2:vv2}; // 結果
+std::partial_sum(${3:vv}.begin(), $3.end(), std::back_inserter($2), [](decltype(*begin($3))& ${4:x}, decltype(*begin($3))& ${5:y}){
+  return $0; $4+$5;
+});

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: vector_pop!
+# key: vector_pop!
+# --
+auto v = ${1:vv}.pop();
+$1.pop_back();

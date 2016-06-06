@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: gets_loop-until-eof(iteration)
+# key: gets_loop-until-eof
+# --
+while (${1:line} = gets)
+  puts $1$0
+end
+# 備考: 変数名を考えるのが面倒なら, 以下のように書くこともできる
+# while gets
+#   puts \$_
+# end

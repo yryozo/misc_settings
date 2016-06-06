@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-rename-item (mv, ファイルやディレクトリをリネームする(名前を変更する))
+# key: rename-item
+# --
+Rename-Item ${1:hoge.txt} ${2:fuga.txt}

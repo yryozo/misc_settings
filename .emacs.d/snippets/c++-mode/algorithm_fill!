@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_fill!(memset, initialize)
+# key: algorithm_fill!
+# --
+std::fill(${2:vv}.begin(), $2.end(), ${3:initval} );

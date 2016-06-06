@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-symmetric_difference(対称差(=片方にしか含まれない要素). 排他的論理和)
+# key: set-symmetric_difference
+# --
+${1:s1} ^ ${2:s2}

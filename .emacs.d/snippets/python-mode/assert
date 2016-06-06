@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: assert (assertion(表明, アサーション), デバッグ)
+# key: assert
+# --
+assert ${1:x == 42}
+# assert ${1:x == 42}, "Invalid value"    # エラーメッセージをつけることもできる
+# 注意: コマンドラインオプション -O が指定された場合(= __debug__ 変数が False の場合)は, 実行されない

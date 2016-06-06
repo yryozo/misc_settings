@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_equal_range(指定した要素の個数)
+# key: algorithm_equal_range
+# --
+// WARNING: this collection must be sorted!
+auto range = equal_range( ${2:vv}.begin(), $2.end(), ${3:42} ); // 最初に見つかった $3 "以上"の要素 と $3 "より大きい"要素 の位置
+// int num = (int)distance( range.first, range.second ) // $3 の個数
+// auto val1 = *range.first;  // 最初に見つかった $3 "以上"の要素
+// auto val2 = *range.second; // 最初に見つかった $3 "より大きい"要素

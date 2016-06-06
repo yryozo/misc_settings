@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: hash-remove! (辞書の要素削除, ハッシュの要素削除, delete, erase)   (hash, map, associative array, alist, table, dict)
+# key: hash-remove!
+# --
+del ${1:hash}[${2:key}]

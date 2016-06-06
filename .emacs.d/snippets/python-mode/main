@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: main() (メイン関数の定義)
+# key: main
+# --
+def main():
+    $0

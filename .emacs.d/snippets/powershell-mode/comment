@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: comment (コメント)
+# key: comment
+# --
+# $0
+
+<# 
+  multi-line comment
+#>

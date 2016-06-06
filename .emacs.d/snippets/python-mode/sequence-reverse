@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: sequence-reverse (反転順に値を取り出すイテレータの取得)   [string, list, tuple, bytearray, buffer, xrange]
+# key: reverse
+# --
+reversed(${1:ll})

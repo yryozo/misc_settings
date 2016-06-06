@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_take
+# key: algorithm_take
+# --
+// take
+${1:vector}<remove_reference<decltype(*begin($3))>::type > ${2:vv2}(${3:vv1}.begin(), $3.begin()+${4:N});

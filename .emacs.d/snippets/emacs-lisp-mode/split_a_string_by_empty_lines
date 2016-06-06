@@ -1,0 +1,4 @@
+# -*-*- coding: utf-8; mode: snippet -*-*-
+# name: split a string by empty lines
+# --
+(split-string ${1:str} "\n\n")

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: break (ループの中断)
+# key: break
+# --
+break
+# 注意: ラベル付きbreakはない

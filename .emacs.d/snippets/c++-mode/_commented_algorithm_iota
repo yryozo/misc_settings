@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_algorithm_iota(initialize)
+# key: _commented_algorithm_iota
+# --
+${1:vector}<decltype($5)> ${3:iot}(${4:N}); iota($3.begin(), $3.end(), ${5:'a'});  // $5 から ++ でサイズ分を埋める.
+

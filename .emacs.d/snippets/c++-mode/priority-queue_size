@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: priority-queue_size(要素数)
+# key: priority-queue_size
+# --
+${3:qq}.size()  // ゼロかどうかが知りたければ ${3:qq}.empty() も利用可

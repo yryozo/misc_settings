@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_zip_with_iota (zip with iota)
+# key: algorithm_zip_with_iota
+# --
+${1:vector}<pair<remove_reference<decltype(*begin($3))>::type, decltype($4)> > ${2:vv3}; // 結果
+{ 
+  vector<decltype($4)> iot($3.size()); iota($3.begin(), $3.end(), ${4:0});  // $3=[$4, ... ]
+  std::transform( ${3:vv}.begin(), $3.end(), iot.begin(), std::back_inserter($2), [](decltype(*begin($3)) x, decltype(*begin(iot)) i) { return make_pair(i, v); });
+}

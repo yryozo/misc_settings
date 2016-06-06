@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: else
+# key: else
+# group : control structure
+# --
+else:
+    $0

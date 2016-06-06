@@ -1,0 +1,18 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: Ndimension-vector
+# key: Ndimension-vector
+# --
+(let ((tuple-width (read-number "dimension?" 3))
+      (snippet-text "make_tuple("))
+  (dotimes (i tuple-width)
+    (setq snippet-text (format "%s${%d:v%d}%s"
+                                snippet-text
+                                (1+ i)
+                                (1+ i)
+                                (if (< i (1- tuple-width))
+				   ", "
+                                   ""))))
+  (setq snippet-text (format "%s)" snippet-text))
+  (yas/expand-snippet snippet-text))
+
+std::vector< std::vector<int> > ${1:vv}(${2:10}, std::vector<int>(${3:10}));

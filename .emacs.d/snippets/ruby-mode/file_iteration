@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : file/directory 処理: 指定ディレクトリ下のファイル／ディレクトリに対する繰り返し
+# --
+# $1ディレクトリ下のファイルに対する繰り返し
+${2:d} = Dir.open "${1:.}"
+$2.collect {|${3:f}| 
+  puts $3$0
+}

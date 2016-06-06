@@ -1,0 +1,37 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: brute_force_dfs_search
+# key: brute_force_dfs_search
+# --
+// 注:これは行きがけ順での処理
+stack<${1:int}> ${2:_s};
+$2.push(${3:init}); // 初期値をセット
+
+while (!$2.empty()) {
+  $1 ${4:x} = $2.top(); $2.pop(); // 次の要素を取得
+  
+  // 要素を処理
+
+  // for (...) { // 子要素全てを push()
+  //   $2.push(y);
+  // }
+}
+
+ // 帰りがけ順での処理 (注:未テスト!)
+ // stack<${1:int}, bool> ${2:_s};
+ // $2.push(make_pair(${3:init}, false)); // 初期値をセット
+ //  
+ // while (!$2.empty()) {
+ //   pair<$1, bool> ${4:_x} = $2.top(); $2.pop(); // 次の要素を取得
+ //   $1 ${5:v} = $4.first;
+ // 
+ //   if (!$4.second) { // 行きがけ順の処理
+ //     $2.push(make_pair($5, true)); // true にすることで未処理の要素と区別
+ // 
+ //     // for (...) { // 子要素全てを push()
+ //     //   $2.push(make_pair(y, false));
+ //     // }
+ //     
+ //   } else { // 帰りがけ順の処理
+ //     // 要素を処理
+ //   }
+ // }

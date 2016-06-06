@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_remove_duplicate!(sort&unique)
+# key: algorithm_remove_duplicate!(sort&unique)
+# --
+sort( ${1:vv}.begin(), $1.end() );
+$1.erase( unique($1.begin(), $1.end()), $1.end() );

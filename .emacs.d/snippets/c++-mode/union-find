@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: union-find
+# key: union-find
+# --
+class UF {
+	public:
+	static const int ufmax=100002;
+	int ufpar[ufmax],ufrank[ufmax];
+
+	UF() { init();}
+	void init(){int i; FOR(i,ufmax) { ufpar[i]=i; ufrank[i]=0; } }
+
+	int find(int x) {	return (ufpar[x]==x)?(x):(ufpar[x] = find(ufpar[x]));}
+	int operator[](int x) {return find(x);}
+
+	void unite(int x,int y) {
+		x = find(x); y = find(y);
+		if(x==y) return;
+		if(ufrank[x]<ufrank[y]) ufpar[x]=y;
+		else {ufpar[y]=x; if(ufrank[x]==ufrank[y]) ufrank[x]++;}
+	}
+};
+
+// UF uf;
+// uf.init();
+// uf[i]
+// uf.unite(i, j)

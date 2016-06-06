@@ -1,0 +1,4 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : array literal (配列リテラル, vector)
+# --
+[${1:"a"}, ${2:"b"}]

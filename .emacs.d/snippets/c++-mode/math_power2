@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_power2 (2のべき乗)
+# key: math_power2
+# --
+auto x = (1 << ${2:n});  // 2の$2乗

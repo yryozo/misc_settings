@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_count(条件を満たす要素数, filter&size)
+# key: algorithm_count
+# --
+std::count_if( ${2:vv}.begin(), $2.end(), [${3:=}](decltype(*begin($2)) ${4:x}) -> bool {
+  return ;$0 $4 > 42;
+})

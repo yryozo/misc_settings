@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: bitset_flip!
+# key: bitset_flip!
+# --
+${1:bs}.flip(); // 全てのビットを反転
+

@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: arithmetic_operations (四則演算, binary operations)
+# key: arithmetic_operations
+# --
+$aaa + $bbb
+$aaa - $bbb
+$aaa * $bbb
+$aaa / $bbb
+$aaa % $bbb  # mod
+[Math]::Pow($aaa, $bbb)   # power

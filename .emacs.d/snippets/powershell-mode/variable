@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: variable declaration/variable definition (変数宣言, 変数定義)
+# key: variables
+# --
+$aaa = 42
+
+# [int]$aaa = 10		# explicitly typed
+# [string]$bbb = "hogehoge"	# explicitly typed
+#  
+# $global:aaa = 12              # read/written from any scopes
+# $private:bbb = "秘密です"     # read/written only in current scope
+# $script:ccc = 1.5             # read/written only in current script file

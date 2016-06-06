@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-copy (iterableの遅延コピー)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+${2:new_itr1}, ${3:new_itr2} = itertools.tee(${1:itr})   # コピーを2個生成 (それぞれ, 独立して元のイテレータの内容を返す)
+# itertools.tee($1, 5)   # 2個で足りなければ, 個数を指定することもできる

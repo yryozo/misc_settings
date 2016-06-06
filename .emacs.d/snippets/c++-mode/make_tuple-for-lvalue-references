@@ -1,0 +1,18 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: make_tuple-for-lvalue-references(std::tie)
+# key: make_tuple-for-lvalue-references
+# type: command
+# --
+;; std::tie(${1:v1}, ${2:v2}, ${3:v3}, ...)
+(let ((tuple-width (read-number "Tuple width?" 3))
+      (snippet-text "std::tie("))
+  (dotimes (i tuple-width)
+    (setq snippet-text (format "%s${%d:v%d}%s"
+                                snippet-text
+                                (1+ i)
+                                (1+ i)
+                                (if (< i (1- tuple-width))
+				   ", "
+                                   ""))))
+  (setq snippet-text (format "%s)" snippet-text))
+  (yas/expand-snippet snippet-text))

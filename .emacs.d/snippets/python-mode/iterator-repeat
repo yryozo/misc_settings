@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterator-repeat ([a, a, ...] , [a, b, a, b, ...], 指定シーケンスの無限繰り返し, repetition/cycle)    (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.repeat(${1:42})      # $1の無限繰り返し
+itertools.cycle(${2:[1, 2]})   # $2の無限繰り返し

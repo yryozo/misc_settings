@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-remove-item (rm, rmdir, ファイルやディレクトリを削除する)
+# key: remove-item
+# --
+Remove-Item ${1:hoge.txt}

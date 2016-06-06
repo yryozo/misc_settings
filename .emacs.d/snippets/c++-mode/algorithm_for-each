@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_for-each
+# key: algorithm_for-each
+# --
+std::for_each( ${2:vv}.begin(), $2.end(), [${3:=}](decltype(*begin($2)) ${4:x}) {
+  cout << $4; $0
+});

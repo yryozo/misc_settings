@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-sum (数値の合計)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: sum
+# --
+sum(${1:ll})

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-literal (リストリテラル)   (リスト, 可変長配列(variable-length arrays))
+# key: list-literal
+# --
+[1, 4, 9]
+

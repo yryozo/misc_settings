@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-repeat (文字列の繰り返し, repetition)
+# key: string-repeat
+# --
+${1:n} * ${2:"hoge"}

@@ -1,0 +1,13 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: sort-object [PIPELINE] (sort, sort|uniq, )
+# key: sort-object
+# --
+| Sort-Object ${1:Name}   # Nameフィールドの値でソートする
+# | Sort-Object ${1:Name} -Desc                # 逆順(大きい順)に並べる
+# (... | Sort-Object ${1:Name})[0]  # 一番小さい要素だけ欲しい場合
+# ... | Sort-Object ${1:Name}  | Select-Object -First 1  # 一番小さい要素だけ欲しい場合
+# ... | Sort-Object ${1:Name}  | Select-Object -Last 1   # 一番大きい要素だけ欲しい場合
+# ... | Sort-Object ${1:Name}  | Select-Object -First 2  # 小さい方から2要素だけ欲しい場合
+
+# sortしてさらに重複を排除する場合 (sort | uniq)
+# | Sort-Object | Get-Unique

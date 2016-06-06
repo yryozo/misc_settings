@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : struct ((擬似的な)構造体, record)
+# key : struct
+# --
+# struct代わりの空クラス
+class ${1:StructA}:
+    pass
+
+# Create an empty struct
+${2:x} = $1()
+# Fill the fields of the struct
+$2.${3:name} = ${4:"hoge"}
+
+# 備考: collections.namedtuple を使うほうが素直かもしれない.

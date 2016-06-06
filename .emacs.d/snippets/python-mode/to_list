@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: to_list (型変換)
+# key: to_list
+# --
+list(${1:iterable})

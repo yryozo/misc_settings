@@ -1,0 +1,15 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-redirect (指定されたファイルに出力する/追記する, output, write, リダイレクト)
+# key: redirect
+# --
+> ${1:.\foo.txt}
+# 文字コードに注意! UTF16 で書き出される。
+
+# | Set-Content $1   # Set-Content でもいい
+# | Set-Content -Encoding UTF8 $1   # utf-8 で書き出す
+# | Out-File $1      # Out-File でもいい
+# | Out-File -Encoding default sjis.txt  # こちらも文字コードを指定可
+
+# >> ${1:.\foo.txt}  # 追記も可能
+# | Add-Content $1   # こちらも Add-Content でもいい
+# | Out-File -append $1    # Out-File でもいい

@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: hash-literal (辞書リテラル, dictionary, ハッシュマップリテラル, 連想配列リテラル)   (hash, map, associative array, alist, table, dict)
+# key: hash-literal
+# --
+{'jack': 4098, 'sape': 4139}
+# {}                                        # 空のハッシュの生成
+# dict([('sape', 4139), ('guido', 4127)])   # キーと値のペアのタプルを含むリストから辞書を生成
+
+# 備考: まだセットされてないキーに対するデフォルト値を設定したい場合, defaultdict を使う.
+#         import collections
+#         word_count = collections.defaultdict(int)   # デフォルト値を返す thunk(0引数関数) を渡す. ここでは int() (= 0 を返す)

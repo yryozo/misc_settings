@@ -1,0 +1,21 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: switch...case (Python にはない! if か hash を使うこと)
+# key: switch
+# group : control structure
+# --
+# Python にはない! (See: PEP 275)
+
+# if の場合
+if ${1:x} == 'a':
+    ...
+elif $1 == 'b':
+    ...
+else:
+    ...
+
+# hash の場合
+functions = {'a': func1,
+             'b': func2,
+             'c': func3,
+	      ...}
+functions[value]()

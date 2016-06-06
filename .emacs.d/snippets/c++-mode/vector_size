@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: vector_size(要素数)
+# key: vector_size
+# --
+${1:vv}.size()

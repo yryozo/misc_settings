@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*-*- coding: utf-8; mode: snippet -*-*-
 # name: orgtbl(org table) for HTML
 # key: orgtblhtml
 # type: command

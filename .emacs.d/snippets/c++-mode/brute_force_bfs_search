@@ -1,0 +1,17 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: brute_force_bfs_search
+# key: brute_force_bfs_search
+# --
+queue<${1:int}> ${2:_q};
+$2.push(${3:init}); // 初期値をセット
+
+while (!$2.empty()) {
+  $1 ${4:x} = $2.front(); // 次の要素を取得
+  $2.pop();
+  
+  // 要素を処理
+
+  // for (...) { // 子要素全てを push()
+  //   $2.push(y);
+  // }
+}

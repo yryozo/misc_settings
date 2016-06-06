@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: map_remove!(delete, erase)
+# key: map_remove!
+# --
+${1:mm}.erase(${2:key});

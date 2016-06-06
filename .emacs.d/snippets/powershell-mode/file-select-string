@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-select-string (grep, ファイルの中から条件に合う行を取得する)
+# key: select-string
+# --
+Select-String -Path ${1:.\foo.txt} -Pattern ${2:"^bar"}
+
+# Select-String -Path "*.txt" -Pattern "hello"  # 複数ファイルまとめて行うことも可能
+# dir -Recurse -Filter "*.txt" | Select-String "hello"  # 再帰的に行いたいなら ls と組み合わせ

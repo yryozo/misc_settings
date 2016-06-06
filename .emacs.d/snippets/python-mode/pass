@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: pass (空文, 何もしない, noop, nop, unit)
+# key: pass
+# --
+pass

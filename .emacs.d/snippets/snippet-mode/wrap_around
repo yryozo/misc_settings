@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*-*- coding: utf-8; mode: snippet -*-*-
 # name: Wrap around the selected region
 # key: wrap_around
 # --

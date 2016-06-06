@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-comprehension (リストの内包表記(listcomp), map & filter)   (リスト, 可変長配列(variable-length arrays))
+# key: list-comprehension
+# --
+[${3:x**2} for ${1:x} in ${2:ll} if ${4:x % 2 != 0}]
+# [(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]  # 例2: 2本を条件付きでzipする例

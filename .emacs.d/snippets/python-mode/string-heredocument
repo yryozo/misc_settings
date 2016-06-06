@@ -1,0 +1,18 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-heredocument (ヒアドキュメント, triple-quoted string(三重クォート文字列))
+# key: string-heredocument
+# --
+"""\
+hogehoge
+fugafuga\
+"""
+# ヒアドキュメントは三連引用符 ("""...""" や '''...''').
+# 
+# 行末はデフォルトだと文字列に含まれるが、\ を付けることで含めないようにすることもできる. 
+# (上記の例では 最初と最後の改行文字は含まれない)
+# <= <http://qiita.com/hoxo_m/items/23e45f5fe480bcb9a29c>
+#    改行を削りたいなら slicingを使う手もあるが.
+#    """
+#    Humpty Dumpty sat on a wall,
+#    Humpty Dumpty had a great fall.
+#    """[1:-1]

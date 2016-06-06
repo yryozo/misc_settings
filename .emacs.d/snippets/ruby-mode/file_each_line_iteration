@@ -1,0 +1,20 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : file/directory 処理: ファイル中の各行に対する繰り返し
+# --
+File.open(${1:ARGV[0]}) {|${2:f}}
+  $2.each_line {|${3:line}|
+    print $3
+  }
+}
+# 備考: このブロックを使った形を使うと, 自動で閉じてくれるので close 忘れが出ない.
+# 備考: 明示的に close するなら, 例えば以下のようにしてもいい.
+#       (行取得の箇所は, gets ではなく, 上と同様に each_line を使ってもいい)
+#       $2 = open($1")
+#       while $3 = $2.gets
+#         print $3
+#       end
+#       $2.close
+# 備考: 一気に全部読みたい場合は以下のようにすればいい
+#       text = $2.read
+# 備考: 行毎に分割された形式で一気に全部読みたい場合は, 以下のようにすればいい
+#       lines = $2.readlines

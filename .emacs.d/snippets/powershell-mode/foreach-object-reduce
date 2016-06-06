@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: foreach-object-reduce [PIPELINE] (パイプから渡されたオブジェクトを畳み込む, reduce関数)
+# key: foreach-object-reduce
+# --
+| % -Begin { ${1:$acc=0} } { ${2:$acc=$_.length+$acc} } -End { ${3:echo $acc} } 
+# | % { $result = 0 } { $result += $_ } { $result }
+# | ForEach-Object -Begin { $1 } { $2 } -End{ $3 } 
+

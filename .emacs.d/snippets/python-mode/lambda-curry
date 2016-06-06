@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: lambda-curry (関数のカリー化, 部分適用)   (無名関数, function, クロージャー(closure))
+# key: lambda-curry
+# --
+# import functools
+${1:serverlog = }functools.partial(${2:log}, ${3:subsystem='server'})  # 引数名と束縛したい値を指定

@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-location (cd, カレントディレクトリを変更する)
+# key: set-location
+# --
+Set-Location C:\
+# Set-Location $PSHOME
+# Set-Location -LiteralPath C:\[TEST]

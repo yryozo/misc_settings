@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: elif (else if, elseif, elsif)
+# key: elif
+# group : control structure
+# --
+elif ${1:condition}:
+    $0

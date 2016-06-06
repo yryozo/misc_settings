@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: to_float (型変換)
+# key: to_float
+# --
+float(${1:x})  # number or string

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: char_to_int_map (文字の集合を 0...N の整数にマッピング)
+# key: char_to_int_map
+# --
+string l = "${1:RGBYW}";
+int n = l.find(${2:c});  // なお, なかった場合は string::npos が返される.

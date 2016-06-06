@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_algorithm_reduce(accumurate, foldl)
+# key: _commented_algorithm_reduce
+# --
+${1:int} var = std::accumulate( ${2:vv}.begin(), $2.end(), ${3:0},
+                                []($1 ${4:acc}, decltype(*begin($2)) ${5:x}){
+  return $0;
+})
+
+// 以下は C++98 用
+// ${4:int} var = std::accumulate( ${1:vv}.begin(), $1.end(), ${2:0}, ${3:Func}() )  // $2 を初期値として $3 でたたみ込む
+// struct $3 { // 関数内 struct 定義
+//   $4 operator()($4 x, $4 y) {return $0;}
+// };

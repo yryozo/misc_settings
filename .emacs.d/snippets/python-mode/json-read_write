@@ -1,0 +1,13 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : file/directory: JSON ファイルへの書き出し/からの読み込み (シリアライズ(serialize), read, write)
+# --
+# import json が必要
+with open(${1:"dumpfile.json"}, 'w', encoding='utf-8') as ${2:file}:
+    json.dump(${3: [1, 'simple']}, $2)  # JSON データに変換してファイル書き出し
+    # json.dump($3, $2, indent=2)  # インデント幅を2スペースとして書き出し
+
+with open($1, 'r', encoding='utf-8') as $2:
+    obj = json.load($2)  # JSON データが書かれたファイルからデータを読み込み
+
+# 備考: JSON では, タプル(immutable)やバイト列は表現できない。
+#       複雑なオブジェクトの場合は pickle モジュール推奨。

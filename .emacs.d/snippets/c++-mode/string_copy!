@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string_copy!(strcpy)
+# key: string_copy!
+# --
+${1:s} = ${2:t};   // $2 を $1 にコピー. $1は必要に応じて領域を拡張
+

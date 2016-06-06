@@ -1,0 +1,31 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterator creation (generator(ジェネレータ)によるイテレータ生成, yield, delayed/lazy, 遅延リスト(stream), coroutine(コルーチン))
+# --
+def ${1:make_gen}(${2:arg1, arg2=default_value, *varargs}): # generator factory function
+    $0
+    while True:
+        yield 42
+        # val = (yield 42)
+        # if val is not None:  # If value provided
+        #     ...
+        # else:                # If value not provided
+        #     ...
+# 
+# gen = $1()
+# for x in gen:
+#     print x
+
+# 注意: def 内に yield 式があると (関数定義ではなく) generator 定義になる.
+# 注意: generator 内での return は StopIteration の送出になる
+# 備考: generator を単に再開させるだけでなく, 新しい値を渡して再開させることもできる. (Python 2.5 以降)
+#       この場合, "val = (yield ...)"  のように記述する.
+#       呼び出し側では, 値を渡したいなら send() を使う.  例: "iter.send(43)"
+#       逆に, 昔通りの __next__() を呼んだ場合は, yield 式からは None が返される.
+# 備考: また, 単に再開させるだけでなく, yield 式の箇所から例外を上げて再開させることもできる. (Python 2.5 以降)
+#       throw() を使う (iter.throw(SomeError))
+# 備考: また, 再開させるのではなく, iterator を終了させることもできる. (Python 2.5 以降)
+#       close() を使う (iter.close())   (<= GC される際にもこれが呼ばれる)
+#       generator 内では, yield 式の箇所から GeneratorExit が発生する. 
+#       (generatorは, これを補足してはならず, GeneratorExit か StopIteration を投げなければいけない。
+#       ほかのことをしようとするのは規則違反であり、 RuntimeError を引き起こす。 
+#       クリーンアップ作業をしたいなら try: ... finaly: を使うこと.)

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_sort!
+# key: algorithm_sort!
+# --
+sort( ${1:vv}.begin(), $1.end() );  // 昇順(最小の要素が先頭)

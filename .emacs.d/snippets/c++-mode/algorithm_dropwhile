@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_drop-while!(dropWhile)
+# key: algorithm_drop-while!
+# --
+// drop-while
+$2.erase( $2.begin(), 
+	  std::find_if_not( ${2:vv}.begin(), $2.end(), [${3:=}](decltype(*begin($2)) ${4:x}) -> bool {
+  return ;$0 $4 > 42;
+}));

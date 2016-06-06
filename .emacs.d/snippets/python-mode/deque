@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: deque (デキュー, キュー, FIFO)
+# key: deque
+# --
+from collections import deque
+deque(${1:["hoge", "fuga""]})

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: const(定数宣言) (Python にはない!)
+# key: const
+# --
+# 備考: 全て大文字の変数名/フィールド名は, 慣習的に定数扱い (See: PEP 8)

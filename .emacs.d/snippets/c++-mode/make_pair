@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: make_pair
+# key: make_pair
+# --
+make_pair(${1:v1}, ${2:v2})

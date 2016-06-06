@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-constant(literal, 文字列リテラル,  Unicode文字列, raw文字列)
+# key: string-constant
+# --
+# 注: 文字列中に同種の引用符を入れたい場合はエスケープ(\'または\")
+'${1:This is a string}' 
+"$1"                    # 注: shell等と異なり 'と"の機能的な違いはない. (例えば \n はどちらでも改行文字. どちらの文字がエスケープ必須になるかだけの違い)
+r'C:\some\name'		# 'r'を先頭につけると raw string. \がエスケープにならずそのまま埋め込まれる(正規表現などに便利).
+u'こんにちは'		# 'u'を先頭につけると Unicode 文字列.
+ur'Hello\\u0020World !'	# 'ur'を先頭につけると Unicode raw string.
+
+# 備考: Python 2 で Python 3 互換('u'の有無によらず全てUnicode文字列)にする場合は  "from __future__ import unicode_literals"

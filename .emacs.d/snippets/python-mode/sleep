@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : sleep (スリープ, 待機)
+# --
+# import time
+time.sleep(${1:3.2})  # $1秒だけスリープ

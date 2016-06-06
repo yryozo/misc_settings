@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: int-binary/octal/hexadecimal-constant(literal, 2進数リテラル, 8進数リテラル, 16進数リテラル)
+# --
+0b10  # "0b"or"0B" : binary literal (2.6 以降)
+0o10  # "0o"or"0O" : octal literal (2.6 以降)
+010   # "0"        : octal literal の古い書き方 (Python 2 only)
+0xff  # "0x"or"0X" : hexadecimal literal

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: apply (関数適用を行う高階関数)
+# key: apply
+# --
+${1:func}(**${2:args})  # '**' という書式で値を多値に展開して渡せる

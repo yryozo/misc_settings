@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: map_size(要素数)
+# key: map_size
+# --
+${1:mm}.size()

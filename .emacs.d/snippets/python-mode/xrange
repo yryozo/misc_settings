@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: xrange (iterator(遅延ストリーム), iota, 範囲, 連番)
+# key: xrange
+# --
+xrange(${1:n})           # (Python 2 only) 0から $1-1 までの数列
+# xrange(5, 10)     # (Python 2 only) 5から9までの数列
+# xrange(5, 10, 2)  # (Python 2 only) 5から9まで 2ずつ増加する数列

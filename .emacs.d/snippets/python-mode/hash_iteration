@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: hash_iteration (辞書の要素に対するループ)   (hash, map, associative array, alist, table, dict)
+# key: hash_iteration
+# --
+for ${1:key} in ${2:hash}:
+    $2[$1]$0
+# for $1 in $2.keys():        # 明示的に keys() を呼んでも同じ
+#     $2[$1]
+# 
+# for $1, val in $2.items():  # キーと値のペアをまとめて取得したい場合:
+#     $2[$1] == val
+# 
+# for val in $2.values():     # 値だけ取得したい場合
+#     val
+#
+# for $1 in $2.iterkeys():    # (Python 2 only) キーを iterator で受け取る
+#     $2[$1]
+# for $1, val in $2.items():  # (Python 2 only) キーと値のペアを iterator で受け取る
+#     $2[$1] == val
+# for val in $2.itervalues(): # (Python 2 only) 値だけを iterator で受け取る
+#     val
+
+# 備考: Python 2 で Python 3 互換のメソッドを使う場合は, "from builtins import dict" をつける

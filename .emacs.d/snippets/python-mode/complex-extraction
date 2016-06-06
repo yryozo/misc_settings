@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: complex_extraction (複素数からの実数部/虚数部の取り出し)
+# key: complex_extraction
+# --
+${1:z}.real
+$1.imag

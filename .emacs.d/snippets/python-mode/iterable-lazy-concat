@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-concat (複数iterableの遅延結合)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.count(${1:iter1, iter2, iter3, ...})   # 引数内の全要素を前から順にアクセスしていくiterator

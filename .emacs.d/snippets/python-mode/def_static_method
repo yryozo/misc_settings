@@ -1,0 +1,13 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: static (スタティックメソッド定義, static method definition)
+# key: static
+# --
+@staticmethod
+def ${1:method_name}(${2:arg1, arg2=default_value, *varargs}):
+    """${3:This is a docstring.}"""
+    $0
+# 注意: クラス定義中に置くこと.
+# 備考: スタティックメソッド = 動的ディスパッチ機能のみがついた関数.
+#       引数としてクラスオブジェクトは受け取らないので, もし必要ならクラスメソッドにすること.
+# 備考: return で明示的に返り値を返さない限り, None が返り値になる
+# 備考: PEP8 での関数名/メソッド名の命名規則は 'lowercase_with_underscores'

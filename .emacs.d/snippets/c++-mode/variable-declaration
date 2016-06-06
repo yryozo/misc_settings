@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: variable-declaration
+# key: variable-declaration
+# --
+${1:int} ${2:N};

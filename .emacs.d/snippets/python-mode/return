@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: return (返り値のリターン, 関数の終了)
+# key: return
+# --
+return $0
+# return   # None でいい場合は返り値は省略可能

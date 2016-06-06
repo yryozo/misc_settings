@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-dropwhile   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.dropwhile(${1:pred}, ${2:itr})   # $1が最初にFalseを返すまでの要素を無視(するiterator)

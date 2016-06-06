@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: to_int, to_long (型変換)
+# key: to_int
+# --
+int(${1:x})  # number or string
+# 備考: int($1, base)  # 文字列の場合は何進数かも指定可能 (2, 8, 10, or 16)
+# 備考: int() が適切に long 値も作るので, long() は使う必要はない

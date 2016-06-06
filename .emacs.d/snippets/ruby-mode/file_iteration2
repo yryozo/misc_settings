@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : file/directory 処理: 指定globに当てはまるファイル／ディレクトリに対する繰り返し
+# --
+${2:files} = Dir.glob(${1:"wallpapers/**/*.jpg"})
+$2.each {|${3:f}|
+  puts $3$0
+}
+# 備考: 中間変数を使わずに行うことも出来る (ブロックを受け取る Dir.glob メソッドを使用)
+# 	Dir.glob($1) {|$3| ... }

@@ -1,0 +1,79 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_combination!
+# key: algorithm_combination!
+# --
+// 指定した要素の中から「$1 個を選ぶ組み合わせ」を全て生成.
+// 辞書式で小さいものから順に辿る(??). 大きい順で辿りたい場合は prev_combination().
+// (計算量には注意. とはいえ順列と違ってそこまで爆発はしないが...)
+// (なお, 同じ値の要素が複数入っていると(= 値が重複していると), それらは同一と見なされて生成される数が少なくなる.
+//  これが嫌な場合は, 下のように indexの配列を作ってその combination を取る方がいい)
+
+// vector<T> ${1:vv};  // 処理対象のコンテナ. 予め要素を入れておくこと
+int ${2:_N} = ${3:42}; // 選ぶ個数
+vector<int> ${4:perm}($1.size()); // インデックスの配列
+for (int _i = 0; _i < $1.size(); _i++) vi[_i] = _i;
+
+do{
+  $0   // $1 を使った処理. なお 各combinationのi番目の要素には $1[$4[i]] でアクセス可 (0<=i<=$2).
+} while (next_combination($4.begin(), $4.begin()+$2, $4.end());
+
+
+////////////////////
+// この定義をどこかにコピーすること (ここから)
+////////////////////
+template < class BidirectionalIterator >
+bool next_combination ( BidirectionalIterator first1 ,
+  BidirectionalIterator last1 ,
+  BidirectionalIterator first2 ,
+  BidirectionalIterator last2 )
+{
+  if (( first1 == last1 ) || ( first2 == last2 )) {
+    return false ;
+  }
+  BidirectionalIterator m1 = last1 ;
+  BidirectionalIterator m2 = last2 ; --m2;
+  while (--m1 != first1 && !(* m1 < *m2 )){
+  }
+  bool result = (m1 == first1 ) && !(* first1 < *m2 );
+  if (! result ) {
+    while ( first2 != m2 && !(* m1 < * first2 )) {
+      ++ first2 ;
+    }
+    first1 = m1;
+    std :: iter_swap (first1 , first2 );
+    ++ first1 ;
+    ++ first2 ;
+  }
+  if (( first1 != last1 ) && ( first2 != last2 )) {
+    m1 = last1 ; m2 = first2 ;
+    while (( m1 != first1 ) && (m2 != last2 )) {
+      std :: iter_swap (--m1 , m2 );
+      ++ m2;
+    }
+    std :: reverse (first1 , m1 );
+    std :: reverse (first1 , last1 );
+    std :: reverse (m2 , last2 );
+    std :: reverse (first2 , last2 );
+  }
+  return ! result ;
+}
+ 
+template < class BidirectionalIterator >
+bool next_combination ( BidirectionalIterator first ,
+  BidirectionalIterator middle ,
+  BidirectionalIterator last )
+{
+  return next_combination (first , middle , middle , last );
+}
+
+template < class BidirectionalIterator >
+inline
+bool prev_combination ( BidirectionalIterator first ,
+  BidirectionalIterator middle ,
+  BidirectionalIterator last )
+{
+  return next_combination (middle , last , first , middle );
+}
+////////////////////
+// この定義をどこかにコピーすること (ここまで)
+////////////////////

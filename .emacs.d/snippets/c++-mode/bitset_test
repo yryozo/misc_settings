@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: bitset_test(all/none/any)
+# key: bitset_test
+# --
+${1:bs}.any()  // 1つでもビットが立っていれば true
+${1:bs}.none() // 1つもビットが立っていなければ true
+${1:bs}.all()  // 全てのビットが立っていれば true

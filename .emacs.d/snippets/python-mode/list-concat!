@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-concat! (リストの結合, concatenatation)   (リスト, 可変長配列(variable-length arrays))
+# key: list-concat!
+# --
+${1:ll}.extend(${2:ll2})
+# $1 += $2

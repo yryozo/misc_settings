@@ -1,0 +1,17 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: decimal(10進浮動小数点数)
+# --
+from decimal import *
+
+# 計算精度(precision)の指定 (デフォルトは 28桁)
+getcontext().prec = 28
+
+# decimal値は, Decimal()関数によって生成
+d1 = Decimal('3.14')
+d2 = Decimal((0, (1, 4, 1, 4), -3))  # => 1.414  (タプルによる指定. それぞれ, 符号(正なら 0 、負なら 1)、仮数部を表す数字のタプル、指数を表す整数)
+d3 = Decimal('NaN')
+d4 = Decimal('-Infinity')
+
+# 計算は, 普通に四則演算が使える (sum() や sorted() なども対応)
+d1 + d2
+d1 / d2

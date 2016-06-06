@@ -1,0 +1,38 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: codeforces-contest-template
+# key: codeforces-contest-template
+# --
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <list>
+#include <stack>
+#include <queue>
+#include <set>
+#include <map>
+#include <bitset>
+#include <algorithm>
+#include <iterator>
+#include <utility>
+#include <iomanip>
+#include <cmath>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+
+using namespace std;
+
+void solve() {
+  int $0;
+  cin >> ;
+  
+
+  std::cout <<  << std::endl;
+}
+
+int main(int argc, char *argv[])
+{
+  solve();
+  return 0;
+}

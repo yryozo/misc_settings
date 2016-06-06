@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: should_not_reach_here
+# key: should_not_reach_here
+# --
+std::cerr << "should not reach here!" << std::endl;

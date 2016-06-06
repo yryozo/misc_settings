@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: long-long_constant(literal)
+# key: long-long_constant
+# --
+0ll

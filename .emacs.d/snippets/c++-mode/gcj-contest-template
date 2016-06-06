@@ -1,0 +1,40 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: gcj-contest-template
+# key: gcj-contest-template
+# --
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <list>
+#include <stack>
+#include <queue>
+#include <set>
+#include <map>
+#include <bitset>
+#include <algorithm>
+#include <iterator>
+#include <utility>
+#include <iomanip>
+#include <cmath>
+#include <climits>
+#include <stdio.h>
+#include <string.h>
+
+using namespace std;
+
+void solve() {
+  int T;
+  cin >> T;
+  for (int t = 0; t < T; t++) {
+    $0      
+
+    std::cout << "Case #" << (t+1) << ": " << ${2:"YES"} << std::endl;
+  }
+}
+
+int main(int argc, char *argv[])
+{
+  solve();
+  return 0;
+}

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string_reverse!
+# key: string_reverse!
+# --
+reverse(${1:s}.begin(), $1.end());
+

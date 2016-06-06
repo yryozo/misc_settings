@@ -1,0 +1,15 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_power-set_iteration (べき集合, 部分集合, subset, combination)
+# key: algorithm_power-set_iteration
+# --
+// 指定したコンテナの全ての部分集合を処理
+// (unsigned long long にしてはいるが, 2^32 を超えたら時間的に無理だろうな...)
+// (vector 以外にも使えるように, 予め index と zip しておいてから iterate した方がいい? #TODO)
+for (unsigned long long ${2:i} = 0; $2 < 1ull<<${3:S}.size(); $2++) {
+  for (int ${4:j} = 0; $4 < $3.size(); $4++) { // 部分集合の各要素を処理するループ
+    if ($2 & (1ull<<$4)) { // 今回の部分集合に要素 $3[$4] は含まれている
+      auto ${5:val} = $3[$4];
+      $0
+    }
+  }
+}

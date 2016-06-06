@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_reduce(accumurate, foldl)
+# key: algorithm_reduce
+# --
+auto ${1:var} = std::accumulate( ${2:vv}.begin(), $2.end(), ${3:std::string()},
+                                [${4:=}](decltype($3)& ${5:acc}, decltype(*begin($2)) ${6:x}) -> decltype($3) {
+  return ;$0  acc += (x > 5) ? "s" : "b";
+});

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: exit (スクリプトの終了)
+# key: exit
+# --
+exit
+# exit 1  # エラーコードを返す場合

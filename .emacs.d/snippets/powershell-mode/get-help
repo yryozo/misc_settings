@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: get-help (ヘルプの表示)
+# key: get-help
+# --
+Get-Help
+# Get-Help Get-Command
+# Get-Help Get-Command -detailed
+# Get-Help about_*
+# Get-Help about_wildcard
+# man Get-Command
+# help Get-Command
+# Get-Help -Name Get-Process

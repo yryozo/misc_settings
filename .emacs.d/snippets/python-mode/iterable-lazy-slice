@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-slice (iterableの遅延スライシング(slicing))   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.islice(${1:iter1}, ${2:num})   # 最初の$2個分(のiterator)
+# itertools.islice($1, start, $2)        # startから$2まで
+# itertools.islice($1, start, $2, step)  # startから$2までをstep刻みで
+# 注意: 文字列やリストのスライスとは違って、マイナスの値は start, stop, step に使えません。

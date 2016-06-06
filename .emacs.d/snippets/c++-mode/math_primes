@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_primes(素数の一覧/素数の個数, エラトステネスのふるい(Sieve of Eratosthenes))
+# key: math_primes
+# --
+// n 以下の素数の一覧を返す
+// 計算量は O(n log log n)  (= 約 O(n))
+// 
+// なお, 素数定理より, だいたい x/log(x) (logは自然対数) くらいの数になるはず (<= 素数定理にはもっといい近似式もあるが).
+// log(x)は 10000 で 10 くらい. 1000000(1M) で 16 くらい
+//
+// また, 素因数だけなら sqrt(n) までのループでいいが, 個数を出す必要があるので n に比例する.
+// もし調べる範囲が [1, n] ではなくもっと短い区間 [a, n] であれば, 
+// sqrt(n) までのループで倍数を [a, n] 中から除去していけばいいので, n が大きくても対応できることがある.
+vector<$1> primes(${1:long} n) {
+  vector<$1> prime;           // 素数の一覧を格納
+
+  vector<bool> is_prime(n+1, true); // i が素数かどうかを示す
+  is_prime[0] = is_prime[1] = false;
+  
+  for (int i = 2; i <= n; i++) {
+    if (is_prime[i]) {
+      prime.push_back(i);
+      for (int j = 2*i; j <= n; j+=i) is_prime[j] = false;
+    }
+  }
+
+  return prime;
+}
+

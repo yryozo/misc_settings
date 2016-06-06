@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: hash-comprehension (辞書/ハッシュの内包表記, map & filter)   (hash, map, associative array, alist, table, dict)
+# key: hash-comprehension
+# --
+{${3:x: x**2} for ${1:x} in ${2:ll} if ${4:x % 2 != 0}}

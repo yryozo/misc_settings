@@ -1,0 +1,184 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: selenium (Webページ処理の自動化,テスト自動化)
+# --
+#注: sudo pip install selenium が必要.
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoAlertPresentException
+# import unittest, time, re   # 必要なら
+
+## 定数定義/変数定義
+base_url = "http://auction.yahoo.co.jp/"
+
+## Webブラウザの準備
+driver = webdriver.Firefox()
+driver.implicitly_wait(30)
+
+  ## proxy 設定が必要な場合:
+  # from selenium.webdriver.common.proxy import *
+  #  
+  # myProxy = "host:8080"
+  #  
+  # proxy = Proxy({
+  #     'proxyType': ProxyType.MANUAL,
+  #     'httpProxy': myProxy,
+  #     'ftpProxy': myProxy,
+  #     'sslProxy': myProxy,
+  #     'noProxy': '' # set this value as desired
+  #     })
+  #  
+  # driver = webdriver.Firefox(proxy=proxy)
+
+  ## Chrome を使う場合
+  ## (注: ChromeDriver が必要)
+  ## (注: proxy は明示的には指定不可(システム設定を暗黙的に流用))
+  # driver = webdriver.Chrome(executable_path="/path/to/chromedriver")
+
+## Webページを開き, 作業を行う
+driver.get(base_url + "/")
+
+driver.find_element_by_link_text(u"マイ・オークション").click()
+driver.find_element_by_link_text(u"ヘルプ").click()
+driver.find_element_by_link_text(u"「IDまたはパスワードが違います」と表示される").click()
+
+# print driver.title   # for debug
+# print driver.current_url   # for debug
+
+
+## 終了
+driver.quit()
+# driver.close()  # 原財のウィンドウをとじる
+
+
+  ################################################################################
+  ## その他の, DOM 要素の取得用メソッド
+  ##   (備考: element"s" と複数形のメソッドは全てのリストを返す. 
+  ##    逆に単数形のメソッドは, 最初に見つかった要素だけを返す)
+  ##   (備考: XPath はブラウザが処理させるので, 対応状況はブラウザ依存)
+  ##   (備考: 探索範囲をある要素の中のものに限定したい場合, elem の同名のメソッドを使えばいい)
+  ##   (備考: <SELECT><OPTION> の扱いは面倒なので, 専用のサポートクラス(Select)も用意されている(後述))
+  ################################################################################
+  # elem = driver.find_element_by_name("passwd")
+  # elem = driver.find_element_by_css_selector('p.content')  # CSS selector 記法で指定
+  # elem = driver.find_element_by_xpath("//input[@id='passwd-id']") # XPath 記法で指定
+  # elem = driver.find_element_by_id("passwd-id")
+  # elem = driver.find_element_by_class_name('content')
+  # elem = driver.find_element_by_link_text('Continue')      # リンクテキスト要素をそのテキスト(の exact match)で指定
+  # elem = driver.find_element_by_partial_link_text('Continue')      # 
+  # elem = driver.find_element_by_tag_name('h1')             # HTMLタグで指定
+
+  # elems = driver.find_elements_by_name("passwd")
+  # elems = driver.find_elements_by_xpath("//input[@id='passwd-id']")
+  # ...
+  # (備考: 普通のリストなので elems[0], elems[1], ... などでアクセス)
+
+  ################################################################################
+  ## その他の, DOM 要素へのイベント送信メソッド
+  ##   (備考: より複雑な操作は ActionChains クラスなどで実行可 (例: drag & drop, ...))
+  ################################################################################
+  # elem.send_keys("pycon")      # キーボードからの入力の模倣
+  # elem.send_keys(Keys.RETURN)  # キーボードからの入力 (リターンキー)
+  # elem.clear()                 # 入力内容の消去(クリア)
+  # 
+  # elem.click()                 # マウスクリックの模倣
+  # 
+  # elem.send_keys(os.path.abspath("path/to/file"))    # ファイルアップロード要素への入力
+  # 
+  # elem.submit()                # その要素を含んでいるフォームのsubmit (<- "submit" 要素を探して .click() を呼んでもいいが)
+
+  ################################################################################
+  ## その他の, DOM 要素からの情報取得メソッド
+  ################################################################################
+  # x = elem.text
+  # x = elem.size
+  # ...
+
+  ################################################################################
+  ## SELECT, OPTION 用のサポートクラス (Select)
+  ################################################################################
+  ## インポート
+  # from selenium.webdriver.support.ui import Select
+  # 
+  ## 取得
+  # select = Select(driver.find_element_by_name('name'))  # 取得
+  # 
+  ## 選択
+  # select.select_by_index(index)
+  # select.select_by_visible_text("text")
+  # select.select_by_value(value)
+  # 
+  ## 選択の全解除
+  # select.deselect_all()
+  #
+  ## 選択されている要素一覧の取得
+  # all_selected_options = select.all_selected_options
+  ## 選択可能な値の一覧取得
+  # options = select.options
+
+
+  ################################################################################
+  ## 別ウインドウに処理対象を移す場合 (例: ポップアップウィンドウが出た場合, など)
+  ##   (備考: driver.window_handles は, 開いているウィンドウの一覧を格納したリスト)
+  ##   (備考: ウィンドウ名は, javascript や link を見ると, 以下のように書いてある.
+  ##    <a href="somewhere.html" target="windowName">Click here to open a new window</a>)
+  ################################################################################
+  # driver.switch_to_window(driver.window_handles[-1])  # 最後に生成されたウィンドウに処理を移す. (最終要素(-1) が latest window)
+  # driver.switch_to_window("windowName")    # あるいは, ウィンドウ名で指定することも可能
+  
+  ################################################################################
+  ## ウインドウ内の別フレームに移動する場合
+  ################################################################################
+  # driver.switch_to_frame("hoge")    # フレーム名で指定
+  # driver.switch_to.frame(driver.find_element_by_css_selector("frame[name='content']"))  # CSS selector で指定
+  # driver.switch_to_frame("frameName.0.child")   # 一度に複数段を移動することも可能 ('.'でつないで記述. また'0'のようなフレームのindexによる指定も可)
+  ################################################################################
+  ## トップフレームに戻る場合
+  ################################################################################
+  # driver.switch_to_default_content()
+
+  ################################################################################
+  ## ポップアップダイアログ(popup dialog)に移動する場合
+  ################################################################################
+  # alert = driver.switch_to_alert()
+
+
+  ################################################################################
+  ## 必要に応じて待機(スリープ)したい場合
+  ################################################################################
+  ## 単純なスリープ
+  # time.sleep(3)   
+  # 
+  ## 複雑なスリープ1 : (条件が整うまで明示的に待機)
+  ## 例: id=myDynamicElement な要素が現れるまで, 最大10秒待機し, その要素を返す.
+  # from selenium.webdriver.support.ui import WebDriverWait
+  # from selenium.webdriver.support import expected_conditions as EC
+  # 
+  # try:
+  #     elem = WebDriverWait(driver, 10).until(
+  #         EC.presence_of_element_located((By.ID, "myDynamicElement"))
+  #     )
+  # finally:
+  #     driver.quit()
+  #
+  ## 複雑なスリープ2 : (条件が整うまで暗黙的に待機)
+  ## 例: id=myDynamicElement な要素が現れるまで, 最大10秒待機し, その要素を返す.
+  # driver.implicitly_wait(10) # seconds
+  # ...
+  # myDynamicElement = driver.find_element_by_id("myDynamicElement")
+
+
+  ################################################################################
+  ## Web ページ内で任意の JavaScript コードを実行したい場合 (非常に複雑な処理をしたい場合)
+  ################################################################################
+  # driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")  # ページの一番下までスクロール
+
+  ################################################################################
+  ## 対象ウィンドウのスクリーンショットを取りたい場合
+  ################################################################################
+  # driver.save_screenshot("a.jpg")

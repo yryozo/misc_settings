@@ -1,0 +1,21 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: comparison_operations (比較演算, binary operations, ==, !=, <, <=, >, >=, is, is not,  none/null check)
+# key: comparison_operations
+# --
+${1:x} == ${2:y}          # $1は$2と等しい
+$1 != $2          # $1は$2と等しくない
+$1 <> $2          # (Python 2 only) != と等価. 古い書き方
+$1 < $2           # $1は$2より小さい
+$1 > $2           # $1は$2より大きい
+$1 <= $2          # $1は$2以下
+$1 >= $2          # $1は$2以上
+$1 is $2          # $1は$2と同じオブジェクト(値が同じというだけでなくポインタの刺し先が同じ. Javaの==相当(逆に==がJavaのequals相当))
+$1 is not $2      # $1は$2と異なるオブジェクト
+$1 is None        # $1はNone
+$1 is not None    # $1はNoneではない
+$1 in $2          # $1は$2に含まれている (注: $2はiterable)
+$1 not in $2      # $1は$2に含まれている (注: $2はiterable)
+
+# 備考: Python の比較演算子は chaining (can be chained arbitrarily).
+#       X op1 Y op2 Z は,  (X op1 Y) and (Y op2 Z)  の意味になる.
+#       例: 1 < x 42,  a is b is c is None,  x < y > z (!!), ...

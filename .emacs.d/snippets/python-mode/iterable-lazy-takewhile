@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-takewhile   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.takewhile(${1:pred}, ${2:itr})   # 先頭から$1がFalseを返すまでの要素を取得(するiterator)

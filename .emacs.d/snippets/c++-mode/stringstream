@@ -1,0 +1,19 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: stringstream(like StringBuffer, StringBuilder, to_string, sprintf)
+# key: stringstream
+# --
+stringstream ${1:ss};
+$1 << "hoge";
+string ${2:str} = $1.str();
+
+// <http://99blues.dyndns.org/blog/2010/02/std_stringstream/>
+// 誤解その１: stringstreamはstringより高速
+//   javaの時は「文字列を連結するときは、StringよりStringBufferの方が高速」と習った人もいると思いますが、C++の stringとstringstreamにはその関係は成立しません。
+//   stringstreamは、stringにストリームのインターフェース(<<, >>演算子)を提供するためのクラスなのです。
+//   なので、単に文字列を連結しているだけならstringを使った方が良いです。
+// 誤解その２: str()メソッドで返ってくるのは内部バッファへの参照
+//   内部バッファへの参照ではなく、文字列のコピーが返ってきます。
+//   GCCのstringは参照ポインタ方式なので、値渡しでもオーバーヘッドはそれほど大きくありませんが、”参照でなくコピーが返る"というは注意しましょう。
+// 誤解その３: str("")メソッド呼び出しで初期状態に戻る
+//   内部に各種フラグの状態を保持しているので、これも初期化する必要があります。
+//   フラグを初期状態に戻すには、clear()メソッドを呼び出します。

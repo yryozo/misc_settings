@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: long-long_max
+# key: long-long_max
+# --
+LLONG_MAX

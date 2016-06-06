@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-move-item (mv, ファイルやディレクトリを指定した場所へ移動する)
+# key: move-item
+# --
+Move-Item ${1:hoge.txt} ${2:fuga.txt}

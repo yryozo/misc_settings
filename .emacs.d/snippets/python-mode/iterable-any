@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-any? (高階関数) (any_of, exist)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: any
+# --
+any(map(${1:func}, ${2:ll}))
+# any(target is e or target == e for e in $2)  # generator comprehension
+# 備考: any 自体は高階関数ではなく boolean の iterable しか受け取らないので, map() や内包表記と併用.

@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: __repr__ (オブジェクトの文字列化メソッド(str()/repr())定義, to_string) [演算子のオーバロード(operator overloading)]
+# key: __repr__
+# group: overloading
+# --
+def __repr__(self):
+    return $0
+# 備考: __str__() を定義しない場合, __repr__() が定義されていれば __repr__() が使われる
+def __str__(self):
+    return ...
+# 備考: str()関数は, 人間が読みやすい文字列("printable string")を返す. 
+#       evalで使える文字列(有効なPython式の文字列)が欲しければ, repr() を使う.

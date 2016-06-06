@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_for_range-based-for-loop
+# key: _commented_for_range-based-for-loop
+# --
+for (auto ${1:i} : ${2:vv}) {  // auto& $1 にすると変更も可能
+  $0
+}

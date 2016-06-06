@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: multiset_size(要素数)
+# key: multiset_size
+# --
+${1:ss}.size()

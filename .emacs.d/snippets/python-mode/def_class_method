@@ -1,0 +1,11 @@
+# name: class method (クラスメソッド定義, class method definition) (static method)
+# --
+@classmethod
+def ${1:method_name}(cls${2:, arg1, arg2=default_value, *varargs}):
+    """${3:This is a docstring.}"""
+    $0
+# 注意: クラス定義中に置くこと.
+# 備考: クラスメソッド = クラスオブジェクト用のメソッド.
+#       引数としてクラスオブジェクトが不要なら(= 動的ディスパッチ機能だけでいいなら) スタティックメソッドにすること.
+# 備考: return で明示的に返り値を返さない限り, None が返り値になる
+# 備考: PEP8 での関数名/メソッド名の命名規則は 'lowercase_with_underscores'

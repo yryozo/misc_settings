@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: bitset_decimal-to-binary-string
+# key: bitset_decimal-to-binary-string
+# --
+std::bitset<${1:128} >(${2:num}).to_string()
+

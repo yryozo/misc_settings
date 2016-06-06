@@ -1,0 +1,4 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : string interpolation (文字列リテラル中での式評価値の展開(変数展開/変数の値の埋め込み), variable interpolation, variable substitution, variable expansion)
+# --
+"value is #{${1:value}}"

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: cin_skip_char(ignore)
+# key: cin_skip_char
+# --
+std::cin.ignore(); // デフォルトでは1文字スキップ. 引数でスキップする文字数を指定可能
+

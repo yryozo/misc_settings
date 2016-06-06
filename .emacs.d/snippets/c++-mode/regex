@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: regex(regexp)
+# key: regex
+# --
+std::regex ${1:re}(${2:"[aA].*z"});
+// std::wregex $1(L"あ.*ん");; // 多バイト文字用
+// std::regexp $1($2, ); // 第二引数は省略可能な文法オプション. std::regex_constants::ECMAScript, basic, extended, awk, grep, egrep のいずれかが指定可能（デフォルトはECMAScript）

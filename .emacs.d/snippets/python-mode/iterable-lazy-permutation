@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-permutation (N個を選ぶ順列)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.permutations(${1:itr}, ${2:2})   # $1から$2個取り出す全ての順列(をたどるiterator. 値は$2-タプル)
+# itertools.permutations($1)   # 個数を省略した場合 $1の長さが使われる (= 全ての並び替えパターンを生成)
+# 
+# itertools.combinations_with_replacement($1, $2)  # 重複順列(同じものを複数回選ぶことを許す順列)
+# 
+# 備考: 同じ値が複数入っていた場合も(= 値が重複していた場合も), 生成される数が減ることはない.
+# 注意: 計算量には注意.

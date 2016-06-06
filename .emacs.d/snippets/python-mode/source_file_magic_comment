@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : source file magic comment (header(ヘッダー), shebang, プラグマ(pragma), 文字コードエンコーディング指定(character encoding), unicode,utf-8)
+# group : general
+# --
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+$0

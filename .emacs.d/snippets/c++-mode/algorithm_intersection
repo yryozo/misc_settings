@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_intersection
+# key: algorithm_intersection
+# --
+// WARNING: 2 containers must be sorted!
+${1:vector}< remove_reference<decltype(*begin($3))>::type > ${2:vv3}; // 結果
+std::set_intersection(${3:vv1}.begin(), $3.end(), ${4:vv2}.begin(), $4.end(), back_inserter($2));

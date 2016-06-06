@@ -1,0 +1,15 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: regexp (文字列の正規表現マッチング, regular expression, sub, replace)
+# key: regexp
+# --
+${1:"hoge"} -match ${2:"[A-Fa-f0-9]"}
+
+# <http://winscript.jp/powershell/197>
+# ちなみに、一度-match演算子を使うと$matchesというHashtable型のシェル変数に、マッチ情報が入ります。
+# この場合、$matches[0]にGUIDが入ります。サブ式を定義してある場合、$matches[1],$matches[2]...にそれらの値が入ります。
+# 
+# ただし$matchesには最初のマッチ情報しか入らないので複数のマッチがある場合はあまり使えないです。
+# 素直に
+#   $regex=[regex]"a"
+#   $regex.Matches("aaa")|ForEach{$_.value}
+# とかしたほうがいいです。

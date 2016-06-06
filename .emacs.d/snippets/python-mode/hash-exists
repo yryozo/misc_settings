@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: hash-exists? (contains?, member?, includes?, in)   (hash, map, associative array, alist, table, dict)
+# key: hash-exists?
+# --
+${1:key} in ${2:hash}

@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_exists?(binary search)
+# key: algorithm_exists?
+# --
+if (std::binary_search( ${2:vv}.begin(), $2.end(), ${3:val})) {
+  // 存在した場合:
+  $0
+}

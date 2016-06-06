@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : アクセス制限/カプセル化(encapsulation) (private, protected)
+# --
+# 備考: フィールドへのアクセス制限機構はないが, '_'から始まるフィールドは慣習的に private 扱い. 
+#       また '__' から始まるフィールドはより private に近い (クラス外からは'__'が'_classname__'に変換され, 意図せぬオーバーライドが避けられる)

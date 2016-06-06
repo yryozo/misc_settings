@@ -1,0 +1,17 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: binary search
+# key: binary search
+# --
+${1:long long} high = ${2:N};
+$1 low = ${3:0};
+$1 mid;
+
+while (low <= high) {
+  mid = (high+low)/2;
+  bool b = $0; // midを使った判定処理  f(mid) <= target
+  if (b) {
+    low = mid;
+  } else {
+    high = mid;
+  }
+}

@@ -1,0 +1,20 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_algorithm_upper_bound(binary search)
+# key: _commented_algorithm_upper_bound
+# --
+// 条件をカスタマイズしたい場合はλ式を渡す.
+// 「最初に predicate が false を返す要素の位置」が返される. (λを渡す場合の使い勝手は lower_bound とほぼ同じ)
+// auto it = upper_bound( $2.begin(), $2.end(), $3, [${4:=}](decltype($3) ${5:val}, const remove_reference<decltype(*begin($1))>::type& ${6:x}){
+//   return $5 < $6;
+// }); 
+// if (it == $2.end()) {
+//   // 見つからなかった場合
+// }
+// auto val = *it;
+
+auto it = upper_bound( ${2:vv}.begin(), $2.end(), ${3:42} ); // 最初に見つかった $3 "より大きい" 要素の位置
+if (it == $2.end()) {
+  // 見つからなかった場合
+}
+auto val = *it;
+$0

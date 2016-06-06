@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string_compare
+# key: string_compare
+# --
+${1:s} == ${2:t}
+

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: bitset_get/set
+# key: bitset_get/set
+# --
+${1:bs}[${2:num}]           // get (取得される値は 0 or 1)
+${1:bs}[${2:num}] = ${3:1}; // set (セットできる値は 0 or 1)

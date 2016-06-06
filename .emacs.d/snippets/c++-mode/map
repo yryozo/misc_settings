@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: map
+# key: map
+# --
+std::map<${1:int}, ${2:int} > ${3:mm};  // 確保する領域量は書かなくてよい(アクセス時に自動で拡張)
+// std::map<string, int> mm = {{"Akira", 22}, {"Johnny", 38}, {"Millia", 16}};  // 初期化リストを使うならこう書く

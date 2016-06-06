@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: raise (例外の送出, throw)
+# key: raise
+# group : control structure
+# --
+raise ${1:ExceptionType}
+# raise $1(arg1, arg2)  # 例外種別によっては引数を渡すことも可能
+# raise $1, arg1        # (Python 2 only) 同上
+# raise $1, instance    # 既に作成済みのインスタンスを投げることも可能
+# raise instance        # 既に作成済みのインスタンスを投げる場合, クラスは省略可 (raise instance.__class__, instance と等価)

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: if 式 (条件演算(Conditional Expressions), 三項演算子)
+# key: if
+# group : control structure
+# --
+${1:then_val} if ${2:condition} else ${3:else_val}

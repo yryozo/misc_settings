@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: max(可変長引数) (最大値, maximum)
+# key: max
+# --
+max(${1:arg1}, ${2:arg2})

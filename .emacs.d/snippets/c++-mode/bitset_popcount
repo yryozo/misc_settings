@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: bitset_popcount(population counting, popcnt, 1であるビット数)
+# key: bitset_popcount
+# --
+${1:bs1}.count()

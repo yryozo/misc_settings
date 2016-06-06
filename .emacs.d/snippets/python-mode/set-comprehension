@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-comprehension (セット(集合)の内包表記, map & filter)
+# key: set-comprehension
+# --
+{${3:x**2} for ${1:x} in ${2:ll} if ${4:x % 2 != 0}}

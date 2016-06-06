@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: vector_compare
+# key: vector_compare
+# --
+// 全ての要素が等しければ true
+${1:vv1} == ${2:vv2}
+

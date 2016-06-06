@@ -1,0 +1,13 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : def (メソッド定義, method definition)
+# group : definitions
+# --
+def ${1:method_name}(self, ${2:arg1, arg2=default_value, *varargs}):
+    """${3:This is a docstring.}"""
+    $0
+# 注意: クラス定義中に置くこと.
+# 備考: メソッドオブジェクト = 関数オブジェクト + クラスオブジェクト (+ インスタンスオブジェクト)
+# 備考: なお, 第一引数がインスタンスな関数を後から代入してもいい(自動でメソッドオブジェクトに変換される)
+#       C.methodA = funcA
+# 備考: return で明示的に返り値を返さない限り, None が返り値になる
+# 備考: PEP8 での関数名/メソッド名の命名規則は 'lowercase_with_underscores'

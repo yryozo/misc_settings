@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-append!(push)   (リスト, 可変長配列(variable-length arrays))
+# key: list-append!
+# --
+${1:ll}.append(${2:x})

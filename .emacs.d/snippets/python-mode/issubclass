@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: issubclass (クラスの継承関係調査, type check(型チェック))
+# key: issubclass
+# --
+issubclass(${1:bool}, ${2:int}) # $1 が $2 のサブクラスならば True

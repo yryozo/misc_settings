@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-substring (1文字だけの取り出し, 部分文字列の取り出し(スライシング, slicing), )
+# key: string-substring
+# --
+${1:str}[${2:0}]  # character in position $2  # なお文字型はない(文字は単なる長さ1の文字列)
+$1[-1]  # 符号はマイナスも可能 (last character)
+$1[-2]  # 符号はマイナスも可能 (second last character)
+
+$1[0:2] # 0文字目から1文字目まで(つまり0番目と1番目)からなる文字列 (2番目は含まれない)
+$1[:2]  # 同上
+$1[4:]  # 4文字目以降
+$1[-2:] # 最後の2文字

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : hash (ハッシュマップ, 連想配列, map, dictionary(辞書))
+# key : hash
+# --
+${2:h} = Hash.new(${1:0})  # 全てのキーに対して初期値が$1となっているハッシュを生成

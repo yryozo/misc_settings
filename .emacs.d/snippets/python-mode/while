@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: while
+# key: while
+# --
+while ${1:True}:
+    $0
+# 備考: python 2.3 までブール型がなかったため while 1: としている古いコードも多いが、現在は while True: 推奨.

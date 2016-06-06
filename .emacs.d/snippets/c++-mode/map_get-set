@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: map_get/set
+# key: map_get/set
+# --
+${1:mm}[${2:key}]        // get
+${1:mm}[${2:key}] = val; // set
+// 注: 未セットの箇所をgetするとデフォルトコンストラクタで値が自動生成される. 嫌なら find() を使う. 又は at() でもよい(この場合はキーがなければ "std::out_of_range" 例外が発生)

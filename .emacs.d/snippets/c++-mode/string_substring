@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string_substring
+# key: string_substring
+# --
+std::string ${1:str}(${2:src}, ${3:n}, ${4:m}); // $2[$3] から $4 文字分 (第三引数の $4 を省略すると最後まで)
+// 変数に束縛しないなら $2.substr($3, $4) でもいい

@@ -1,0 +1,19 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : file/directory: ファイル/ディレクトリの名前(パス)を表す文字列の処理 (basename,dirname,join,etc)  (string)
+# --
+# import os.path
+
+filename = os.path.basename('path')        # 末尾のファイル名部分を返す (注: Unix の basename コマンドと異なり, ファイル名がない場合(pathがディレクトリ名の場合)は, 末尾のディレクトリ名ではなく空文字列を返す)
+dirname = os.path.dirname('path')          # 末尾のファイル名を削ったディレクトリ名を返す
+filename, dirname = os.path.split('path')  # basename と dirname の両方を返す
+
+root, ext = os.path.splitext('path')       # 拡張子とそれ以前の文字列に分ける
+
+path = os.path.abspath('path')     # pathの絶対パス表記を返す (たいていは normpath(join(os.getcwd(), path)) と同じ)
+path = os.path.relpath('path')     # pathの(カレントディレクトリを起点とした)相対パス表記を返す
+path = os.path.expanduser('path')  # '~' や '~user' を展開したパスを返す
+path = os.path.normpath('path')    # 正規化した文字列を返す ('../C' や 'A//B' や 'A/./B' などを綺麗にする)
+
+path = os.path.join('path1', 'path2', ...)   # その環境のパス区切り文字('/'等)でつないだ文字列を返す
+
+# 備考: 3.4 以降では pathlib も用意されている (os, os.path, glob等のパス操作・ファイル操作を集約したモジュール)

@@ -1,0 +1,90 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: lambda (ラムダ, 無名関数, function, クロージャー(closure))
+# key: lambda
+# --
+lambda ${1:x, y}: $0
+# 備考: returnは書かない. body部の「式の評価値」がreturnされる
+# 注意: body部分には単一の式しか入れられない.
+# 注意: (Python 3では)引数部分を括弧でくくって (x,y) としないように (PEP 3113 で削除された)
+# 
+# 備考: 引数内の要素を取り出すだけ, あるいは引数のメソッドを呼び出すだけ, という関数なら,
+#       operator モジュールにも用意されている. (attrgetter, itemgetter, methodcaller)
+#   from operator import attrgetter, itemgetter, methodcaller
+#   attrgetter('age')  # 引数の'age'フィールドを取り出す関数
+#   attrgetter('age', 'grade')  # 引数の'age'と'grade'フィールドを取り出す関数
+#   itemgetter(2))  # 引数のタプルの第3要素を取り出す関数
+#   itemgetter(2, 3))  # 引数のタプルの第3要素と第4要素を取り出す関数
+#   methodcaller('name')  # 引数のname()メソッドの返り値を返す関数
+# 
+# 備考: 組み込みの関数や演算子を呼ぶだけ, という関数なら,
+#       operator モジュールにも用意されている.
+#   * 加算
+#     a + b 	operator.add(a, b)
+#   * 結合
+#     seq1 + seq2 	operator.concat(seq1, seq2)
+#   * 包含判定
+#     obj in seq 	operator.contains(seq, obj)
+#   * 除算
+#     a / b 	operator.truediv(a, b)
+#   * 除算
+#     a // b 	operator.floordiv(a, b)
+#   * ビット単位論理積
+#     a & b 	operator.and_(a, b)
+#   * ビット単位排他的論理和
+#     a ^ b 	operator.xor(a, b)
+#   * ビット単位反転
+#     ~ a 	operator.invert(a)
+#   * ビット単位論理和
+#     a | b 	operator.or_(a, b)
+#   * 冪乗
+#     a ** b 	operator.pow(a, b)
+#   * 同一性
+#     a is b 	operator.is_(a, b)
+#   * 同一性
+#     a is not b 	operator.is_not(a, b)
+#   * インデクス指定の代入
+#     obj[k] = v 	operator.setitem(obj, k, v)
+#   * インデクス指定の削除
+#     del obj[k] 	operator.delitem(obj, k)
+#   * インデクス指定
+#     obj[k] 	operator.getitem(obj, k)
+#   * 左シフト
+#     a << b 	operator.lshift(a, b)
+#   * 剰余
+#     a % b 	operator.mod(a, b)
+#   * 乗算
+#     a * b 	operator.mul(a, b)
+#   * 行列の乗算  (Python 3.5 以降)
+#     a @ b 	operator.matmul(a, b)
+#   * (算術) 負
+#     - a 	operator.neg(a)
+#   * (論理) 否
+#     not a 	operator.not_(a)
+#   * 正
+#     + a 	operator.pos(a)
+#   * 右シフト
+#     a >> b 	operator.rshift(a, b)
+#   * スライス指定の代入
+#     seq[i:j] = values 	operator.setitem(seq, slice(i, j), values)
+#   * スライス指定の削除
+#     del seq[i:j] 	operator.delitem(seq, slice(i, j))
+#   * スライス指定
+#     seq[i:j] 	operator.getitem(seq, slice(i, j))
+#   * 文字列書式化
+#     s % obj 	operator.mod(s, obj)
+#   * 減算
+#     a - b 	operator.sub(a, b)
+#   * 真理値判定
+#     obj 	operator.truth(obj)
+#   * 順序付け
+#     a < b 	operator.lt(a, b)
+#   * 順序付け
+#     a <= b 	operator.le(a, b)
+#   * 等価性
+#     a == b 	operator.eq(a, b)
+#   * 不等性
+#     a != b 	operator.ne(a, b)
+#   * 順序付け
+#     a >= b 	operator.ge(a, b)
+#   * 順序付け
+#     a > b 	operator.gt(a, b)

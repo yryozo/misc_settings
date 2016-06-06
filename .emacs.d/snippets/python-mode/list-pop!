@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-pop! (appendの逆操作)   (リスト, 可変長配列(variable-length arrays))
+# key: list-pop!
+# --
+${1:ll}.pop()
+# $1.pop(i)   # 引数を渡せば, 末尾ではなく, 指定位置の要素をポップすることも可能。

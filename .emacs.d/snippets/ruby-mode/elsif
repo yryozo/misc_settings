@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : elsif (= else if)
+# key: elsif
+# --
+elsif ${1:condition}
+  $0

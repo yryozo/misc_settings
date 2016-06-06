@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: priority-queue_push!
+# key: priority-queue_push!
+# --
+${1:qq}.push(${2:v})

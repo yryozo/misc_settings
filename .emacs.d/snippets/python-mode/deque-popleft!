@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: deque-popleft! (pop!)
+# key: deque-popleft!
+# --
+${1:deq}.popleft()

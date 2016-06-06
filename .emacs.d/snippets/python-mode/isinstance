@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: isinstance (type check(型チェック), instanceof, is_a?/kind_of?/instance_of?)
+# key: isinstance
+# --
+isinstance(${1:x}, ${2:int}) # $2 または $2の派生クラスならば True
+# isinstance(1, (int, long))  # クラスを複数指定することもできる(どれかのサブクラスであればTrue)

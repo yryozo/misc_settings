@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterator creation (generator expression(ジェネレータ式/genexp)によるイテレータ生成, 遅延リスト(stream/generator)の内包表記(comprehension), delayed(lazy) map & filter)
+# --
+(${3:x**2} for ${1:x} in ${2:ll} if ${4:x % 2 != 0})
+# 備考: リスト内包表記は角括弧 “[]” で囲まれ、ジェネレータ式は丸括弧 “()” で囲まれます。
+# 備考: ジェネレータ式は常に括弧の中に書かなければなりませんが、関数コールの目印になっている括弧でも大丈夫です。
+#       sum(obj.count for obj in list_all_objects())

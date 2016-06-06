@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_lowest-bit (最も右の1だけを取り出す = 最右の1だけを残して他を0にする)
+# key: math_lowest-bit
+# --
+auto y = ${1:x} & (-$1);

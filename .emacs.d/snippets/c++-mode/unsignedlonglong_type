@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: unsignedlonglong_type
+# key: ull
+# --
+unsigned long long 

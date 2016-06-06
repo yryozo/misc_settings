@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: continue (ループの次のイテレーションを実行)
+# key: continue
+# --
+continue

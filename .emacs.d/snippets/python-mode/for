@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : foreach (range_based_for)
+# key: foreach
+# --
+for ${1:element} in ${2:collection}:
+    $1$0

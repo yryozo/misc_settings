@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: abs (絶対値)
+# key: abs
+# --
+abs(${1:aaa})

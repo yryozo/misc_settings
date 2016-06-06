@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: vector_copy!(memcpy)
+# key: vector_copy!
+# --
+${1:vv1} = ${2:vv2};   // $2 を $1 にコピー. $1は必要に応じて領域を拡張
+

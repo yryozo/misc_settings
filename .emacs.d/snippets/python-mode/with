@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: with (RAII, using, try-with-resources, クリーンアップ処理, 自動的な後始末/後片付け)
+# key: with
+# group : control structure
+# --
+with ${1:expr}${2: as ${3:varname}}:
+    ${3:varname}$0

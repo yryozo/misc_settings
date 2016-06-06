@@ -1,0 +1,13 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: map_exists?(map::find)
+# key: map_exists?
+# --
+if (${1:mm}.find(${2:"key"}) != $1.end()) {
+    // 要素がある場合
+    // map<string, string>::iterator iter = $1.find($2)
+    // auto key = $2; // (== iter->first)
+    // auto val = iter->second;
+  $0
+} else {
+    // 要素がない場合
+}

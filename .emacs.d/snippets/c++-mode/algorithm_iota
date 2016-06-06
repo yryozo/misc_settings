@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_iota(initialize)
+# key: algorithm_iota
+# --
+${1:vector}<decltype($5)> ${3:iot}(${4:N}); iota($3.begin(), $3.end(), ${5:'a'});  // $3=[$5, ..., $5+$4-1]
+

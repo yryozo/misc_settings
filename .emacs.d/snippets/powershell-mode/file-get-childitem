@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-get-childitem (ls, ファイル/フォルダ一覧を取得する)
+# key: get-childitem
+# --
+Get-ChildItem
+# Get-ChildItem C:\ -Name
+# Get-ChildItem c:\test -Name -Recurse
+# Get-ChildItem -Recurse -Include *.txt
+# Get-ChildItem -Recurse -exclude *.txt
+# Get-ChildItem | format-list *
+

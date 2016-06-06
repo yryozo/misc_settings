@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: 2dimension-vector-processing
+# key: 2dimension-vector-processing
+# --
+for (int _vi = 0; _vi < ${2:10}; _vi++) {
+  for (int _vj = 0; _vj < ${3:10}; _vj++) {
+    vv[_vi][_vj];
+  }
+}
+

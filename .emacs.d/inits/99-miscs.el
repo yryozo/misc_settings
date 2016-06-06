@@ -1201,18 +1201,18 @@ by yama @ Thu Mar 29 23:37:45 2007"
 ;;;   for helm-from-my-template (private)
 ;;;; helper-function
 (defun helm-candidates-from-my-template (fpath)
-  "Create helm candidates' strings from a file splitted by empty lines"
-  (with-temp-buffer
+  "Create helm candidates' strings from a file splitted by form feed"
+  (with-temp-buffer 
     (insert-file-contents fpath nil nil nil t)
     ;; process it ...
     ;; (goto-char 0) ; move to begining of file's content (in case it was open)
     ;; ... do something here
     ;; (write-file fpath) ;; write back to the file
     
-    ;; split the buffer by empty lines
+    ;; split the buffer by form feed
     (split-string 
      (buffer-string) ; return the buffer's contents as a string
-     "\n\n")
+     "\f\n")
     )
   )
 
@@ -1271,7 +1271,8 @@ by yama @ Thu Mar 29 23:37:45 2007"
 			 helm-c-source-buffers-list
 			 ; helm-c-source-elscreen
                          helm-c-source-buffer-not-found
-			 helm-c-source-filelist)
+			 ; helm-c-source-filelist  ; これは Linux 環境のみ
+			 )
                        "*helm my buffers*")))
 (global-set-key (kbd "C-c h")   'helm-my-buffers)
 

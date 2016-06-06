@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: 複数の文を1行に入れる (multiple statements in one line)
+# --
+# ';' でつなげばいい.
+#   x = 2; y = 3; z = 4

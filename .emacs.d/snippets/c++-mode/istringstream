@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: istringstream(like sscanf)
+# key: istringstream(like sscanf)
+# --
+std::istringstream is(${1:str});
+// "10+42" をパースする場合
+// int N, M; char c;
+// is >> N >> c >> M;

@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : _commented_if (1行に書く方法, etc)
+# key: _commented_if
+# --
+# false と nil のみが偽. その他(0等も含む)は真.
+
+# 条件部分とそれ以降を then か ';' で区切れば 1行に書くことも可能
+if ${1:condition};     ... else ... end
+if ${1:condition} then ... else ... end
+
+# また, if を後ろに付けることも可能
+... if ${1:condition}

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: format-list (fl, オブジェクトのプロパティとメソッドの確認)
+# key: format-list
+# --
+| Format-List

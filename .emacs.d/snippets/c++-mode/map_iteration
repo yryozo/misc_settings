@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: map_iteration
+# key: map_iteration
+# --
+for (map<${1:int}, ${2:int}>::iterator iter = ${3:mm}.begin(); iter != $3.end(); iter++) {
+  // キーの昇順で得られる(map のコンストラクタ引数で調整可)
+  $1 key = iter->first;
+  $2 val = iter->second;
+
+  $0
+}

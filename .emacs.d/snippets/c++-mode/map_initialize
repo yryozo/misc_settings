@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: map_initialize
+# key: map_initialize
+# --
+std::map<${1:string}, ${2:int} > ${3:mm} = {${4:{"Akira", 22}, {"Johnny", 38}, {"Millia", 16}}};

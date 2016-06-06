@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: long-long_min
+# key: long-long_min
+# --
+LLONG_MIN

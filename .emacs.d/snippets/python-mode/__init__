@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: __init__ (コンストラクタ(constructor)定義, イニシャライザ(initializer), 初期化子)
+# key: __init__
+# group : definitions
+# --
+# 'class'も参照
+def __init__(self${1:, arg1, arg2}):
+    ${2:"${3:docstring}"
+    }
+    self.${field} = ${val}$0

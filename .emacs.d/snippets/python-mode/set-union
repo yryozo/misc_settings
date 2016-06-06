@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-union(和集合)
+# key: set-union
+# --
+${1:s1} | ${2:s2}

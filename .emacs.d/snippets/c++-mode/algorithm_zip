@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_zip
+# key: algorithm_zip
+# --
+${1:vector}<pair<remove_reference<decltype(*begin($3))>::type, remove_reference<decltype(*begin($4))>::type> > ${2:vv3}; // 結果
+std::transform( ${3:vv}.begin(), $3.end(), ${4:vv2}.begin(), std::back_inserter($2), [](decltype(*begin($3)) x, decltype(*begin($4)) y) { return make_pair(x, y); });

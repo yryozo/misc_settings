@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_min_element
+# key: algorithm_min_element
+# --
+auto val = *(std::min_element(${1:vv}.begin(), $1.end()));

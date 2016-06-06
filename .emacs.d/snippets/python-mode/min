@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: min(可変長引数) (最小値, minimum)
+# key: min
+# --
+min(${1:arg1}, ${2:arg2})

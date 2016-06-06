@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : for (intによる開始値から終端値までの繰り返し)
+# key: for
+# --
+for ${1:i} in range(${2:0}, ${3:len(${4:seq})}):
+    $1$0
+# for $1 in xrange($2, $3):   # (Python 2 only)
+#     $1$0
+# 
+# あるいは, enumerate() を使って index と要素を同時に取ることも可
+# for $1, $x in enumerate($4):  
+#     $x==$4[$1]$0
+
+# 備考: Python 2 で Python 3 互換の range() を使う場合は "from builtins import range" をつける.

@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_permutation!
+# key: algorithm_permutation!
+# --
+// vector<T> ${1:vv}; // 処理対象のコンテナ. 予め要素を入れておくこと
+vector<int> ${2:perm}($1.size());  iota($2.begin(), $2.end(), 0);  // $2=[0, ..., $1.size()]
+do {
+  $0   // $1 を使った処理. なお permutation後のi番目の要素には $1[$2[i]] でアクセス可.
+} while (next_permutation ($2.begin(), $2.end()));

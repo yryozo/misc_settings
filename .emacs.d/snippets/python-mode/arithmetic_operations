@@ -1,0 +1,17 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: arithmetic_operations (四則演算, binary operations)
+# key: arithmetic_operations
+# --
+${1:aaa} + ${2:bbb}
+$1 - $2
+$1 * $2
+$1 / $2         # Python 2 では, 型(int/float)ごとに決められた除算(Cと同じ)。 Python 3 では, 常に浮動少数としての除算。
+$1 // $2	# 整数としての除算(floor division, 浮動少数でも整数の範囲で切り下げ)
+$1 ** $2	# 冪乗(power) ($1の$2乗)
+pow($1, $2)	# 冪乗(power) ($1の$2乗)
+$1 % $2		# 剰余(mod)
+divmod($1, $2)	# 除算と剰余 ($1 // $2, $1 % $2) からなるペア
+-$1             # 符号反転
+
+# 備考: Python 2 で Python 3 の '/' を使いたければ, "from __future__ import division" を追加する.
+# 備考: その他の数学関数は math モジュールに存在 (sin,cos,tan,sqrt,log,exp,ceil,floor,...)

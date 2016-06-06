@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterator-iota ([0,1,...], 連番, seq, range, )    (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.count(${1:42})   # $1から1ずつ増加するiterator
+# itertools.count()     # 引数を省略すると, 0からスタート

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-iterate (指定のディレクトリ内の全ファイルを辿って処理する。file-each)
+# key: file-iterate
+# --
+ls | % { $0 $_ }

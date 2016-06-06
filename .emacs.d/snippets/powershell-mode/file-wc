@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-wc (wc -l, ファイルの行数を取得する)
+# key: file-wc
+# --
+$(cat ${1:.\test.txt}).Length

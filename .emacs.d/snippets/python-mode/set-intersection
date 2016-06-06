@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-intersection(共通部分, 積集合)
+# key: set-intersection
+# --
+${1:s1} & ${2:s2}

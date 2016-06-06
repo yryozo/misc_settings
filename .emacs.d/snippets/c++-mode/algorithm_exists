@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_exists?(sequential search, find)
+# key: algorithm_exists?
+# --
+if (std::find( ${2:vv}.begin(), $2.end(), ${3:val}) != $2.end()) {
+  // 存在した場合:
+  $0
+}

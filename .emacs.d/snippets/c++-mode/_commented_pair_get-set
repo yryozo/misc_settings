@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_pair_get-set(pair_first, pair_second, car, cdr)
+# key: _commented_pair_get-set
+# --
+// std::get<0>($1) や std::get<1>($1) でもアクセス可
+${1:p}.first
+${1:p}.second
+
+${1:p}.first = ${2:val};
+${1:p}.second = ${2:val};

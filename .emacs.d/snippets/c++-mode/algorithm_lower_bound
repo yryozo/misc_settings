@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_lower_bound(binary search)
+# key: algorithm_lower_bound
+# --
+auto ${4:it} = lower_bound( ${2:vv}.begin(), $2.end(), ${3:42} ); // 最初に見つかった $3 "以上"の要素の位置
+
+int i = (int)std::distance($2.begin(), $4);  // 要素のindex (vv[i]でアクセス可能)  <= end の場合は size() の値になる(= 最後の値を一つオーバー). 
+if ($4 == $2.end()) {
+  // 見つからなかった場合
+}
+auto val = *$4;
+$0

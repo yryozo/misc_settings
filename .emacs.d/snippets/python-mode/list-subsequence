@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-subsequence (1要素だけの取り出し(indexing, extraction), 部分リストの取得(スライシング, slicing, take, drop))   (リスト, 可変長配列(variable-length arrays))
+# key: list-subsequence
+# --
+${1:list}[${2:0}]
+# 符号はマイナスも可能(末尾からアクセス)
+$1[-1]  # last element
+# 備考: 内部は可変長配列(variable-length arrays)なのでアクセスは高速(See: "Design and History FAQ")
+
+# 部分リスト(スライシング,slicing)は以下のように書く
+$1[0:2] # 0要素目から1要素目まで(つまり0番目と1番目) (2要素目は含まれない)
+$1[:2]  # 同上
+$1[4:]  # 4要素目以降
+$1[-2:] # 最後の2要素

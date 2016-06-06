@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: hash_get/set!  (ハッシュ(辞書)の参照/更新, assignment)   (hash, map, associative array, alist, table, dict)
+# --
+${1:hash}[${2:key}]
+$1[$2] = ${3:val}
+# $1.get($2, default_val)  # 未セットの箇所をgetするとKeyError. 嫌なら get() を使う (ない場合, 指定のdefault-valueが返される)

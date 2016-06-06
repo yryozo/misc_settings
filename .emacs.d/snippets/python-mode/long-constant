@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: long_constant(literal, long値リテラル) [Obsolete!]
+# key: long_constant
+# --
+# 備考: Python2.4以降では 32/64 bit を超えていれば自動的 "l"suffix がついたものとして扱われるため, 不要
+# 注意: Python3以降では "l"suffix は廃止されたため syntax error
+42l

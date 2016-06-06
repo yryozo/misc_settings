@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : def (関数定義, function definition)
+# key : def
+# group : definitions
+# --
+def ${1:func_name}(${2:arg1, arg2=default_value, *varargs}):
+    """${3:This is a docstring.}"""
+    $0
+# 備考: return で明示的に返り値を返さない限り, None が返り値になる
+# 備考: PEP8 での関数名/メソッド名の命名規則は 'lowercase_with_underscores'

@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-variable-expansion (文字列中での変数展開, variable substitution, variable interpolation,  sprintf)
+# key: string-variable-expansion
+# --
+"...${hoge}..."
+# "{0}" -f $hoge    # こっちでもいい
+# "{0:00}_{1}" -f $num, $nextDateStr  # 書式を指定したり複数用いる例
+# "...$(...)..."    # 複雑な式の場合は、こうすればいい

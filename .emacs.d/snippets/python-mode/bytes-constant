@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: bytes-constant(literal, バイト列/バイト文字列リテラル)
+# key: bytes-constant
+# --
+b'${1:This is a byte string}' 
+# '$1' # (Python 2 only)  Python 2 では string と bytes の違いはない

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: vector
+# key: vector
+# --
+std::vector<${1:int} > ${2:vv}${3:(${4:10}, $1($5))};

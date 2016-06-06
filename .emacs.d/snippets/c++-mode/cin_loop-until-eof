@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: cin_loop-until-eof(iteration)
+# key: cin_loop-until-eof
+# --
+// 改行文字は読み飛ばされる (char 型で読んでいる場合でも).
+// 注: cin.eof() は使わないこと. 最後まで読み取ってしまった(= fail() した)後でもう一度呼び出したときに false を返すので, 最後の要素が重複してしまう.
+${1:char} ${2:c};
+while (cin >> $2) {
+  $0
+}

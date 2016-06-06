@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : abort (die, exit)
+# key : abort
+# --
+abort(${1:"Dying Message"})

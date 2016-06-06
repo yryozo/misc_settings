@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: multiprocessing (並列処理(parallel),  マルチスレッド, map/reduce)
+# --
+# import multiprocessing
+pool = multiprocessing.Pool(${1:8})  # $1並列で処理
+${4:result} = pool.map(${2:func}, ${3:range(8)})
+# 引数は通常の map と同様. 返り値はlist.

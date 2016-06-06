@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-get-content (cat, ファイルの中身を取得する)
+# key: get-content
+# --
+Get-Content ${1:.\foo.txt}
+# Get-Content a.txt , b.txt | Set-Content  c.txt   # 複数ファイルを開くことも可

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-length (文字列の長さ, size)
+# key: string-length
+# --
+${1:"hoge"}.Length

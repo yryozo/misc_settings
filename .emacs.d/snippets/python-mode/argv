@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : sys.argv (コマンドライン引数, args, argc)
+# key: argv
+# --
+# import sys が必要
+sys.argv[${1:0}]$0
+# 備考: スクリプト名も引数も指定しなければ sys.argv[0] は空文字列。
+#     : スクリプト名の代わりに '-' (標準入力の意) を指定すると、 sys.argv[0] は '-' 。
+#     : -c command を使うと、 sys.argv[0] は '-c'。
+#     : -m module を使った場合、 sys.argv[0] はモジュールのフルパス。
+#     : -c command や -m module の後ろにオプションを指定した場合、 sys.argv に格納される。
+# 備考: argc 相当の値(オプションの数)は, len(sys.argv) で取得可能

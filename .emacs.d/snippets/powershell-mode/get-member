@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: get-member (オブジェクトのプロパティとメソッドの確認)
+# key: get-member
+# --
+| Get-Member
+# | Get-Member -MemberType property

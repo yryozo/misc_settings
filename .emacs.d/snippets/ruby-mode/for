@@ -1,5 +1,6 @@
-# -*- mode: snippet -*-
-#name : for
+# -*- coding: utf-8; mode: snippet -*-
+# name : for (foreach 相当)
+# key : for
 # --
 for ${1:element} in ${2:collection}
   $0

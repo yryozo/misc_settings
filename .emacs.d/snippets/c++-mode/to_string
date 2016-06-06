@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: to_string(like sprintf)
+# key: to_string(like sprintf)
+# --
+// auto str = 
+std::to_string(${1:42});

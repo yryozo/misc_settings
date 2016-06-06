@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_take-while!(takeWhile)
+# key: algorithm_take-while!
+# --
+// take-while
+$2.erase( std::find_if_not( ${2:vv}.begin(), $2.end(), [${3:=}](decltype(*begin($2)) ${4:x}) -> bool {
+  return ;$0 $4 > 42;
+}), $2.end() );

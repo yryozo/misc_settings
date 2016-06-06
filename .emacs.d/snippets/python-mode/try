@@ -1,0 +1,19 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: try...except...finally (例外の捕捉(キャッチ), exception handling)
+# key: try
+# group : control structure
+# --
+try:
+    $0
+except ${1:RuntimeError}:  # キャッチする例外の型を指定
+    ...
+    # raise                # キャッチした例外を再送出する場合は, 引数なしで raise 文を実行
+except (${2:TypeError}, ${3:IOError}):  # 複数書くことも可能
+    ...
+except ${4:NameError} as ${5:e}:  # 局所変数に束縛することも可能
+    # x, y, z = inst.args      # 例外の引数の取得
+    ...
+except:  # 最後のexceptは, 例外の型を省略するとワイルドカード(全て捕捉)になる.
+    ...
+finally:
+    ...

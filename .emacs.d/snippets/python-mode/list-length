@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-length (リストの長さ, size)   (リスト, 可変長配列(variable-length arrays))
+# key: list-length
+# --
+len(${1:ll})

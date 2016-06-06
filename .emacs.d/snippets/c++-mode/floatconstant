@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: float_constant(literal)
+# key: float_constant
+# --
+0.0f

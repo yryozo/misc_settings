@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: -is (type check, 型チェック)
+# key: -is
+# --
+${1:val} -is ${2:[System.Int32]}
+
+# -isnot 演算子もある
+# $1 -isnot $2
+

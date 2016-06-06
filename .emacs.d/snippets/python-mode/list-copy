@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-copy (リストのコピー)   (リスト, 可変長配列(variable-length arrays))
+# key: list-copy
+# --
+${1:elems}[:]   # shallow copy
+

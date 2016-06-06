@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set
+# key: set
+# --
+std::set<${1:int} > ${3:ss};  // 確保する領域量は書かなくてよい(追加時に自動で拡張)
+// std::set<$1, greater<$1> > $3;  // iteration 時に大きい順で取得したい場合 (rbegin() と rend() で辿ってもいいが...)

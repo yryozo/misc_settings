@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-extraction (リストからの要素の取り出し, パターンマッチ(pattern match),  car/cdr)   (リスト, 可変長配列(variable-length arrays))
+# key: list-extraction
+# --
+${2:x}, *${3:y} = ${1:list}  # Python 3 only  (See PEP3132)
+# $2, $3 = $1[0], $1[1:]  # for Python 2
+# 
+# 備考: 任意の要素に $1[i] でアクセス可(indexing/slicing). 内部は可変長配列(variable-length arrays)なのでアクセスも高速(See: "Design and History FAQ")

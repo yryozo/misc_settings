@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_power (べき乗)
+# key: math_power
+# --
+auto x = pow(${1:2}, ${2:n});  // $1の$2乗

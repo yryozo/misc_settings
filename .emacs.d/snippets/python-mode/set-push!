@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-push!(追加, add)   [BANG!]
+# key: set-push!
+# --
+${1:st}.add(${2:elem})

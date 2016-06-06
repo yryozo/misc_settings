@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: bitset(bit vector)
+# key: bitset
+# --
+std::bitset<${1:128} > ${2:bs}; // $1ビット長のbitset
+// std::bitset<$1 > $2(${3:42}); // $1ビット長のbitset. 初期値は 10進数の $3 を 2進数にした値.
+// $2.set();   // 全部のビットを立てる
+// $2.reset(); // 全部のビットをクリアする

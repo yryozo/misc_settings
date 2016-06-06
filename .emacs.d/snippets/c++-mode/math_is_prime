@@ -1,0 +1,13 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_is_prime?
+# key: math_is_prime?
+# --
+// 計算量は O(sqrt(n))
+bool is_prime(${1:long} n) {
+  if (n == 1) return false;
+  for ($1 i = 2; i*i <= n; i++) {
+    if (n % i == 0) return false;
+  }
+  return true;
+}
+

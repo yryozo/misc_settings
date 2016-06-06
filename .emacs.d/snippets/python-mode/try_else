@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : try...else (例外が出なかった場合の処理を記述したtry)
+# key: try_else
+# --
+try:
+    ...
+except ${1:IOError}:
+    ...
+else:
+    $0

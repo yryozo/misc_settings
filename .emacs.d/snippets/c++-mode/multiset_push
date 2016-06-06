@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: multiset_push!(insert!)
+# key: multiset_push!
+# --
+${1:ss}.insert(${2:v});

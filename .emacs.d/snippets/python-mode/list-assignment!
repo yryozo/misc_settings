@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-hash_get/set! (要素の参照/変更, replace, assignment)   (リスト, 可変長配列(variable-length arrays))
+# --
+${1:ll}[${2:n}]
+$1[$2] = ${3:x}
+# $1[2:5] = [1]  # スライシングも利用可. [2~4]の3要素を消去し, 代わりに1つだけ値を挿入

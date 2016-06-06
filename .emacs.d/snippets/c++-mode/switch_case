@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: switch_case
+# key: switch_case
+# --
+switch (${1:cond}) {
+  case ${2:val}:
+    $0
+    break;
+  default:
+    break;
+}

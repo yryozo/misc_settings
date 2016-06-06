@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: multiset_remove_all!(delete_all, erase)
+# key: multiset_remove_all!
+# --
+${1:ss}.erase(${2:val});  // 値が val のものを全て削除

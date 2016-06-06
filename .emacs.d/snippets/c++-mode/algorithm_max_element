@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_max_element
+# key: algorithm_max_element
+# --
+auto val = *(std::max_element(${1:vv}.begin(), $1.end()));

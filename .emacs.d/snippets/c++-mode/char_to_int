@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: char_to_int (数字の ASCII 文字を整数に変換)
+# key: char_to_int
+# --
+${1:c} - '${2:0}'

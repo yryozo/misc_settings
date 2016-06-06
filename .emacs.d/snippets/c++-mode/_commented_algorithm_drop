@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_algorithm_drop
+# key: _commented_algorithm_drop
+# --
+// drop!
+${2:vv}.erase( $2.begin(), $2.begin()+${3:N} );

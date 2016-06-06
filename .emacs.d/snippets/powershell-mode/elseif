@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: elseif (else if, elif, elsif)
+# key: elseif
+# --
+elseif (${1:$a -lt 3}) {
+  $0
+}

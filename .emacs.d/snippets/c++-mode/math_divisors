@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_divisors(約数の列挙)
+# key: math_divisors
+# --
+// 計算量は O(sqrt(n))
+vector<${1:long}> divisors($1 n) {
+  vector<$1> res;
+  for ($1 i = 1; i*i <= n; i++) {
+    res.push_back(i);
+    if (i != n/i) res.push_back(n/i);
+  }
+  return res;
+}
+

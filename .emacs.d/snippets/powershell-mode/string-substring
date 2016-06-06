@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-substring (部分文字列)
+# key: string-substring
+# --
+${1:"hoge"}.SubString(${2:0},${3:2})

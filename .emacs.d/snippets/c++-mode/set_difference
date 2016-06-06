@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set_difference(差集合)
+# key: set_difference
+# --
+set< remove_reference<decltype(*begin($2))>::type > ${1:ss3}; // 結果
+std::set_difference(${2:vv1}.begin(), $2.end(), ${3:vv2}.begin(), $3.end(), inserter($1, $1.end()));

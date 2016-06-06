@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-product (複数iterableの直積(デカルト積, Cartesian product))   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.product(${1:iter1, iter2, ...})   # 返り値はタプルからなる遅延リスト
+# itertools.product(itr, repeat=3)   # 自分自身との直積は, 短い記法が用意されている (product(itr, itr, itr) と等価)
+# 
+# 備考: ジェネレータ式の入れ子forループと等価。
+#       (product(A, B) は ((x,y) for x in A for y in B) と同じ)

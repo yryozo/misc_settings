@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-combinations (N個を選ぶ組み合わせ)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.combinations(${1:itr}, ${2:2})   # $1から$2個取り出す全ての組み合わせ(をたどるiterator. 値は$2-タプル)
+# 備考: 同じ値が複数入っていた場合も(= 値が重複していた場合も), 生成される数が減ることはない.
+# 注意: 計算量には注意. とはいえ順列と違ってそこまで爆発はしないが...

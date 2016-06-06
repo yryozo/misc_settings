@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_upper_bound
+# key: algorithm_upper_bound
+# --
+auto it = upper_bound( ${2:vv}.begin(), $2.end(), ${3:42} ); // 最初に見つかった $3 "より大きい" 要素の位置
+
+int i = (int)std::distance($2.begin(), $4);  // 要素のindex (vv[i]でアクセス可能)  <= end の場合は size() の値になる(= 最後の値を一つオーバー). 
+if ($4 == $2.end()) {
+  // 見つからなかった場合
+}
+auto val = *$4;
+$0

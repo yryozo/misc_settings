@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-push!(insert!)
+# key: set-push!
+# --
+${1:ss}.insert(${2:v});

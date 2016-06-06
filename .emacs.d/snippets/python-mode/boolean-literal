@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: boolean-literal (真偽値リテラル, true, false)
+# key: boolean-literal
+# --
+True
+False
+#備考: 偽(false)と解釈されるのは,  False, None, すべての型における数値のゼロ, 空の文字列, 空のコンテナ (Python 2 and 3) 
+

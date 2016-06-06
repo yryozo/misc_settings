@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_map2(transform, zipWith)
+# key: algorithm_map2
+# --
+${1:vector}< ${2:remove_reference<decltype(*begin($4))>::type} > ${3:vv3};
+std::transform( ${4:vv}.begin(), $4.end(), ${5:vv2}.begin(), std::back_inserter($3), [${6:=}](decltype(*begin($4)) ${7:x}, decltype(*begin($5)) ${8:y}) -> $2 {
+  return ;$0 $7+$8;
+});

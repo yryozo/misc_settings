@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: __del__ (デストラクタ(destructor)定義, ファイナライザ(finalizer))
+# key: __del__
+# group : definitions
+# --
+def __del__(self): # destructor
+    $0
+# 注意: 必ず、中で基底クラスの __del__() メソッドを呼ぶこと
+#TODO

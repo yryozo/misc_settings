@@ -1,0 +1,21 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-sort (ソート)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: sorted
+# --
+${1:${2:sorted_ll} = }sorted(${3:ll})              # 昇順(小さい値ほど前)にソート
+# $2 = sorted($3, reverse=True)  # 降順にソート
+#
+# 比較方法のカスタマイズは key 引数. 比較基準値を返す1引数関数を指定する.
+# (なお, 複数条件で辞書式ソートしたい場合はタプルを返せばいい)
+#   sorted(words, key=str.lower)  # 大文字小文字の区別なし比較(小文字化して比較) 
+#   sorted(student_objects, key=lambda student: student.age)   # ageで比較
+#   sorted(student_objects, key=attrgetter('age')) # (上と同様)ageで比較 ("from operator import attrgetter" が必要)
+#   sorted(student_objects, key=attrgetter('age', 'grade')) # ageで比較し, 同じならgradeで比較 ("from operator import attrgetter" が必要)
+#   sorted(tuples, key=itemgetter(2))  # 対象のタプルの第3要素で比較 ("from operator import itemgetter" が必要)
+#   sorted(tuples, key=itemgetter(2, 3))  # 対象のタプルの第3要素で比較し, 同じなら第4要素で比較 ("from operator import itemgetter" が必要)
+#   sorted(objects, key=methodcaller('name'))  # 対象のname()メソッドの返り値で比較 ("from operator import methodcaller" が必要)
+# なお, 直接2値を比較する(-1/0/1を返す)関数を比較に使いたければ,  functools.cmp_to_key() を使えばいい.
+#   sorted([5, 2, 4, 1, 3], key=cmp_to_key(numeric_cmp))
+# 
+# 備考: Python 2.2 以降, ソートは stable (同じキー同士の順序は保たれる)
+# 備考: 比較は __lt__() で行われるため, __lt__() のオーバーライドにより独自クラスにも対応できる.

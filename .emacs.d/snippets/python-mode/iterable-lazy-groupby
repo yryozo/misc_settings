@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-lazy-groupby (キーに応じたグルーピング)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]   (無限リスト, 遅延リスト(stream/generator)/delayed/lazy)
+# --
+# import itertools
+itertools.groupby(${1:itr}, key_func=${2:func})  # $2の返り値(キー)に応じてグルーピング(した結果を返すiterator)
+# 注意: 元のイテラブル自体が「キー値でソートされている」ことが前提！
+# 備考: 返り値は  [(キー1, キー1の対応要素をたどるiterator), (キー2, キー2の〃), ...] といった形 (タプルの遅延リスト)
+# 注意: 返り値として返されるiterator間で元のiterableを共有しているため, 
+#       各iteratorは順に出力しきっていくこと(キー1用→キー2用→...).

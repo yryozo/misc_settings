@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: return (関数の終了)
+# key: return
+# --
+return
+# return $true  # 返り値を返す場合

@@ -1,0 +1,18 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_algorithm_filter!(copy_if)
+# key: _commented_algorithm_filter!
+# --
+
+// 破壊的に行いたくない場合は以下のようにする.
+// ${4:vector}< remove_reference<decltype(*begin($2))>::type > ${6:vv2};
+// std::copy_if( ${2:vv}.begin(), $2.end(), std::back_inserter($6), [](decltype(*begin($2)) ${3:x}) {
+//   return $0; $3 > 42;
+// });
+// なお, set や map にしたい場合は, push_back() がないので, 代わりに std::inserter() を使うこと.
+// set< remove_reference<decltype(*begin($2))>::type > $6;
+// std::copy_if( ${2:vv}.begin(), $2.end(), std::inserter($6, $6.begin()), [](decltype(*begin($2)) ${3:x}) {
+//   return $0; $3 > 42;
+// });
+$2.erase( std::copy_if( ${2:vv}.begin(), $2.end(), $2.begin(), [](decltype(*begin($2)) ${3:x}) {
+  return $0; $3 > 42;
+}), $2.end() );

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : array (配列, vector)
+# key : array
+# --
+${1:a} = Array.new

@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-padding (文字列の桁あわせ. 0埋め(zero filling))
+# key: string-padding
+# --
+${1:$str}.rjust(${2:3})  # 指定された桁に右詰めで入るよう、左に空白を追加
+$1.ljust($2)  # 〃            左詰めで入るよう、右に空白を追加
+$1.center($2) # 〃            中央揃えで入るよう、左右に空白を追加
+$1.zfill($2)  # 〃            右詰めで入るよう、左に0を追加(zero filling)
+
+# 備考: format() を使ってもいい.
+#   "{:>$2}".format($1)  (rjust相当)
+#   "{:<$2}".format($1)  (ljust相当)
+#   "{:^$2}".format($1)  (center相当)
+#   "{:>0$2}".format($1) (zfill相当)

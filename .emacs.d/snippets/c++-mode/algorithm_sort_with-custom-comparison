@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_sort_with-custom-comparison!
+# key: algorithm_sort_with-custom-comparison!
+# --
+sort( ${1:vv}.begin(), $1.end(), [${2:=}](const remove_reference<decltype(*begin($1))>::type& ${3:x}, const remove_reference<decltype(*begin($1))>::type& ${4:y}) -> bool {
+  return ;$0 $3 < $4;
+});

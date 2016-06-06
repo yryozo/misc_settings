@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: ++ (increment)  [BANG!]
+# key: ++
+# --
+${1:x} += 1

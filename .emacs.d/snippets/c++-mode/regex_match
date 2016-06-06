@@ -1,0 +1,18 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: regex_match(regexp_match)
+# key: regex_match
+# --
+if ( std::regex_match(${1:str}, ${2:regexp}) ) {
+  // マッチした場合:
+  $0;
+}
+
+// wcmatch ${3:match};  // match_results<const wchar_t*>
+// if ( std::regex_match($1, $3, $2) ) {
+//   // マッチした場合:
+//   for (const auto& submatch : match) {
+//     auto substr = submatch.str();
+//     auto len    = submatch.length();
+//     $0;
+//   }
+// }

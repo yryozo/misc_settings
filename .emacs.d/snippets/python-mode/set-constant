@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set-literal (集合リテラル, セット)
+# key: set-literal
+# --
+{1, 42}
+# set([1, 42])  # set()関数にiterableを渡して作ることもできる
+# set()         # 空集合はset()関数で作る ('{}' だと辞書になってしまう)

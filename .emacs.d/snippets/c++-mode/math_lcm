@@ -1,0 +1,14 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_lcm(最小公倍数, least common multiple)
+# key: math_lcm
+# --
+${1:long} gcd($1 a, $1 b) {
+  while (b != 0) {
+    $1 tmp = a;  a = b;  b = tmp % b;
+  }
+  return a;
+}
+
+$1 lcm($1 a, $1 b) {
+  return ((a/gcd(a,b)) * b);
+}

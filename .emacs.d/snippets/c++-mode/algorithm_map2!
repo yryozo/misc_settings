@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_map2!(transform, zipWith)
+# key: algorithm_map2!
+# --
+std::transform( ${1:vv}.begin(), $1.end(), ${2:vv2}.begin(), $1.begin(), [${3:=}](decltype(*begin($1)) ${4:x}, decltype(*begin($2)) ${5:y}) {
+  return $4+$5;$0
+});

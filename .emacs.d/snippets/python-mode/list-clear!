@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-clear!(要素の全消去, removal)   (リスト, 可変長配列(variable-length arrays))
+# key: list-clear!
+# --
+${1:ll}[:] = []

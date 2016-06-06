@@ -1,0 +1,18 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_math_gcd(最大公約数, greatest common divisor)
+# key: _commented_math_gcd
+# --
+${1:long} gcd($1 a, $1 b) {
+  while (b != 0) {
+    $1 tmp = a;  a = b;  b = tmp % b;
+  }
+  return a;
+}
+
+// 3 要素以上の gcd の場合は, 
+// まず全て素因数分解し, 
+// 各素因数について最も少ない数を選んで掛け合わせればいい
+// 
+// あるいは (ちょっと効率は悪いが)
+// 2引数の gcd をたたみこんでもいい. (初期値は $2 の要素のどれか (vv[0] とか))
+$1 var = std::accumulate(${2:vv}.begin(), $2.end(), vv[0], gcd);

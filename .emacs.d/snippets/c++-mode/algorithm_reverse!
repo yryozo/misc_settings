@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_reverse!
+# key: algorithm_reverse!
+# --
+reverse( ${1:vv}.begin(), $1.end() );

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : exit (die, abort)
+# key : exit
+# --
+sys.exit(${1:"Dying Message"})  # 注: 引数として整数以外を指定すると, それが表示され, exit status は 1 になる.
+# sys.exit() # 引数を省略すると成功(0)が返される

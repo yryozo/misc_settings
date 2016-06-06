@@ -1,0 +1,13 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : file/directory: Pickle ファイルへの書き出し/からの読み込み (シリアライズ(serialize), read, write,  cpickle)
+# --
+# import pickle が必要 (なお Python 2 の場合は  import cPickle as pickle  のほうが高速)
+with open(${1:"dumpfile.pickle"}, 'wb') as ${2:file}:
+    pickle.dump(${3: [1, 'simple']}, $2)  # Pickle データに変換してファイル書き出し
+
+with open($1, 'rb') as $2:
+    obj = pickle.load($2)                 # Pickle データが書かれたファイルからデータを読み込み
+
+# 備考: シリアライズ処理モジュールとしては marshal もあるが, 一般的には pickle が推奨。
+#       (marshal は主に .pyc ファイルをサポートするために存在)
+# 備考: 簡単なオブジェクトなら json モジュールも使える.

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: gcj-result-cout
+# key: gcj-result-cout
+# --
+std::cout << "Case #" << ${1:(t+1)} << ": " << ${2:"YES"} << std::endl;

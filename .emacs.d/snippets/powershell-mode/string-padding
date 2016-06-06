@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-padding (文字列の桁あわせ(0埋め), zero filling)
+# key: string-padding
+# --
+${1:$str}.PadLeft(${2:2}, "0")
+
+# 数値オブジェクトの ToString() を使ってもいい
+# (37.222378).ToString("00000.00")
+
+# 文字列フォーマット演算子を使ってもいい
+# "{0:000}" -F 2    # ※3桁0パディング

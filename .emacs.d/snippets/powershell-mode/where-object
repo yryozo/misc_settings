@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: where [PIPELINE] (?, フィルター, filter)
+# key: ?
+# --
+| Where-Object { ${1:$_.Status -eq "Stopped"} }
+# | ? { $1 }

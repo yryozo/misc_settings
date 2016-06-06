@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list_append!(insert, splice)
+# key: list_append!
+# --
+${1:ll}.insert($1.end(), ${2:ll2}.begin(), $2.end());
+// ${1:ll}.splice($1.end(), ${2:ll2});  // $2 を壊してもよい場合

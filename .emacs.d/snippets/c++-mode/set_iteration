@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set_iteration
+# key: set_iteration
+# --
+for (auto iter = ${2:ss}.begin(); iter != $2.end(); iter++) {
+  // 値が小さい順で得られる(set のコンストラクタ引数で調整可)
+  $1 val = *iter;
+
+  $0
+}

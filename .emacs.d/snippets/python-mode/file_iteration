@@ -1,0 +1,19 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : file/directory 処理: ファイル／ディレクトリに対する繰り返し (指定ディレクトリ下のファイル, 指定globに当てはまるファイル, etc)
+# --
+# import os
+# import glob
+
+# 指定ディレクトリ下の再帰的なファイル一覧に対する繰り返し
+for (root, dirs, files) in os.walk(${1:'path'}):
+    # 各サブディレクトリを再帰的にたどり, 以下を generate する.
+    # root = サブディレクトリのパス, 
+    # dirs = そのサブディレクトリ直下のディレクトリ一覧リスト
+    # files = そのサブディレクトリ直下のファイル一覧リスト
+    for file in files:
+        filepath = os.path.join(root,file)
+	$0
+
+# 指定globに当てはまるファイル／ディレクトリに対する繰り返し
+for file = glob.glob(${1:"*.csv"})
+    ...

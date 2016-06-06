@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-reduce (高階関数)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: reduce
+# --
+reduce(${1:func}, ${2:ll}, ${3:init})
+# import functools
+# functools.reduce($1, $2, $3)   # Python 3
+
+# 備考: 初期値が不要な場合(シーケンスの要素だけで畳み込む場合)は, 3引数目は省略可

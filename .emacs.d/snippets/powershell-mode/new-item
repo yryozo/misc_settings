@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: new-item (ni, mkdir, touch, 新規のファイル／フォルダーを作成)
+# key: new-item
+# --
+New-Item ${1:c:\tmp\windows_tips} -itemType ${2:Directory}
+# New-Item c:\scripts\new_file.txt -type file  # 空ファイルの場合

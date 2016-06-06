@@ -1,0 +1,11 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-heredocument (ヒアドキュメント)
+# key: string-heredocument
+# --
+$a = @'
+$0
+'@
+
+# $a = @"
+# ...  変数展開する場合はこちらを使う
+# "@

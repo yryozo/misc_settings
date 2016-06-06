@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: comment (コメント)
+# key: comment
+# --
+# $0   '#' 以降が1行コメント
+
+# 備考: 複数行のコメントを書く場合は, triple-quoted string("""...""") を式文にして(= 何もないところにおいて)使っている人が多い模様.

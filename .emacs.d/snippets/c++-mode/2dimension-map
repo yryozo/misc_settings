@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: 2dimension-map
+# key: 2dimension-map
+# --
+std::map<${1:int}, std::map<${2:int}, ${3:int}> > ${4:mm};  // 確保する領域量は書かなくてよい(アクセス時に自動で拡張)
+

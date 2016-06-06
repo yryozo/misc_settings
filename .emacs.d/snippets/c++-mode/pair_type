@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: pair_type
+# key: pair
+# --
+pair<${1:int}, ${2:int}>

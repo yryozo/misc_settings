@@ -1,0 +1,39 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: graph_prim(最小木)
+# key: graph_prim
+# --
+int cost[1000][1000];
+int V;
+int mincost[1000];
+bool used[1000];
+
+// 最小木の大きさ(コストの総和)をリターン.
+// (cost 大域変数および V 大域変数に値をセットしてから呼び出すこと)
+// 計算量は O(V^2)
+int prim() {
+  for (int i = 0; i < V; i++) {
+    mincost[i] = INT_MAX;
+    used[i] = false;
+  }
+  mincost[0] = 0;  // 最初の点は(既に到達済みなので)コスト0  (このコードではノード0からスタート)
+  
+  int res = 0;
+  
+  while (true) {
+    int v = -1;
+    for (int u = 0; u < V; u++) { // 最もコストが低いノードを取得
+      if (!used[u] && (v == -1 || mincost[u] < mincost[v])) v = u;
+    }
+    
+    if (v == -1) break; // 見つからなければ終了
+
+    used[v] = true;     // 最小木に追加
+    res += mincost[v];
+    
+    for (int u = 0; u < V; u++) {  // 全ノードの最小コスト情報を更新
+      mincost[u] = min(mincost[u], cost[v][u]);
+    }
+  }
+
+  return res;
+}

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: get-eventlog (イベントログの一覧表示)
+# key: get-eventlog
+# --
+Get-EventLog
+# Get-EventLog -logName Application -newest 15  # アプリケーション イベントログの最新15個のエントリを表示

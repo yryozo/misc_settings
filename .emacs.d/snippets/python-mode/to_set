@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: to_set (型変換)
+# key: to_set
+# --
+set(${1:iterable})

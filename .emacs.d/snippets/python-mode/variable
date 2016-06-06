@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: variable declaration/variable definition (変数宣言, 変数定義)
+# key: variables
+# --
+aa = 42

@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_map!(transform)
+# key: algorithm_map!
+# --
+std::transform( ${1:vv}.begin(), $1.end(), $1.begin(), [${3:=}](decltype(*begin($1)) ${4:x}) {
+  return $4; $0
+});

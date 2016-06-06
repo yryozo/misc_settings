@@ -86,6 +86,10 @@
 (setq auto-mode-alist
       (cons (cons "\\.py$" 'python-mode) auto-mode-alist))
 
+;; forward-sexp を普通の挙動にしておく
+(add-hook 'python-mode-hook
+	  (lambda () (setq forward-sexp-function nil)))
+
 ;;;; for flymake
 ;; <https://github.com/purcell/flymake-python-pyflakes>
 ;; 別途 pyflakes コマンドが必要

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: int_max
+# key: int_max
+# --
+INT_MAX

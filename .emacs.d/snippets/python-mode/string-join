@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-join (区切り文字をはさみながらの文字列の結合, intercalate, concat)
+# key: string-join
+# --
+${1:"/"}.join(${2:["dev", "sda"]})

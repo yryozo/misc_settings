@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: array-literal (配列リテラル)
+# key: array-literal
+# --
+@(1,3,5,7,9)
+
+# 以下のようにも記述できる
+# 1,3,5,7,9
+

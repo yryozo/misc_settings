@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: select [PIPELINE] (特定のフィールド(列)だけを抽出, フィルター, select)
+# key: select
+# --
+| Select-Object ${1:Status, DisplayName}
+

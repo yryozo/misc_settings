@@ -1,0 +1,18 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: tuple_pattern-match_for-already-defined-variables
+# key: tuple_pattern-match_for-already-defined-variables
+# type: command
+# --
+;; std::tie(v0, v1, ...) = t;
+(let ((tuple-width (read-number "Tuple width?" 3))
+      (snippet-text "std::tie("))
+  (dotimes (i tuple-width)
+    (setq snippet-text (format "%s${%d:v%d}%s"
+                                snippet-text
+                                (1+ i)
+                                (1+ i)
+                                (if (< i (1- tuple-width))
+				   ", "
+                                   ""))))
+  (setq snippet-text (format "%s) = ${%d:tpl};" snippet-text (1+ tuple-width)))
+  (yas/expand-snippet snippet-text))

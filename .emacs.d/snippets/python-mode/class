@@ -1,0 +1,23 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : class (クラス定義, class definition)
+# key : class
+# group : definitions
+# --
+class ${ClassName}${(object${, SuperClass2})}:
+    """${Docstring}"""
+
+    # constructor
+    def __init__(self${, arg1, arg2}):
+        self.${field} = ${val}	  
+
+    # class attributes (クラス変数)
+    ${x = 42}    
+    
+    # methods
+    $0
+# 備考: データ属性(data attribute)(別言語でいうと, インスタンス変数/インスタンスフィールド, データメンバ) は宣言不要. コンストラクタで代入すれば作られる.
+# 備考: スーパークラスを省略すると, Python 2 では旧スタイルクラス. Python 3 では object のサブクラス.
+# 備考: フィールドへのアクセス制限機構(private/protected)はないが, '_'から始まるフィールドは慣習的に private 扱い. 
+#       また '__' から始まるフィールドはより private に近い (クラス外からは'__'が'_classname__'に変換され, 意図せぬオーバーライドが避けられる)
+# 備考: PEP8 でのクラス名の命名規則は 'CapitalizedWords'
+# 備考: PEP8 での属性名/メソッド名の命名規則は 'lower_case_with_underscores'

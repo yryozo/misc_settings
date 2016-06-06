@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: comparison_operations (比較演算, binary operations, ==, !=, <, <=, >, >=)
+# key: comparison_operations
+# --
+$num1 -eq $num2   # $num1は$num2と等しい
+$num1 -ne $num2   # $num1は$num2は等しくない
+$num1 -lt $num2   # $num1は$num2より小さい
+$num1 -gt $num2   # $num1は$num2より大きい
+$num1 -le $num2   # $num1は$num2以下
+$num1 -ge $num2   # $num1は$num2以上

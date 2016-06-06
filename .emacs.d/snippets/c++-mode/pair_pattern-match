@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: pair_pattern-match
+# key: pair_pattern-match
+# --
+auto ${2:car} = ${1:p}.first;
+auto ${3:cdr} = $1.second;

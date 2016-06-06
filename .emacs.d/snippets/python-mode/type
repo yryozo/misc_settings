@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: type (オブジェクトの型情報(クラス情報)の取得, __class__, type-of, typeid, getClass)
+# key: type
+# --
+type(${1:x})
+# $1.__class__
+# 
+# 注意: __class__ フィールドはオーバーライドされる可能性もあるので type($1) とは違うこともある
+# 備考: int の場合は浮動少数と間違えられないよう (42).__class__ や空白を入れて 42 .__class__ 等とする.

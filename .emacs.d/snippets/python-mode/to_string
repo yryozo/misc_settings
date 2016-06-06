@@ -1,0 +1,12 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: to_string (型変換)  (str()/repr())
+# key: to_string
+# --
+str(${1:x})
+# 備考: str()関数は, 人間が読みやすい文字列("printable string")を返す. 
+#       evalで使える文字列(有効なPython式の文字列)が欲しければ, repr() を使う.
+#   repr($1)
+#   `$1`          # (Python 2 only) repr() と等価の古い書き方
+# 
+# 備考: 文字列のリストから, 中の文字列を結合した文字列を作りたい場合は, join() でよい.
+#   "".join(["s", "p", "a", "m"])

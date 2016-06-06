@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: foreach-object [PIPELINE] (パイプから渡されたオブジェクトを 1つ1つ処理する, map関数, %, each)
+# key: %
+# --
+| ForEach-Object { ${1:Write-Host $_.FullName} }
+# | % { $1 }
+
+# 例: 
+# Get-ChildItem -Recurse | % { $_.FullName }  # カレントフォルダ以下のファイル名一覧

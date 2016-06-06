@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: to_tuple (型変換)
+# key: to_tuple
+# --
+tuple(${1:iterable})

@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_map(transform)
+# key: algorithm_map
+# --
+${1:vector}< ${2:remove_reference<decltype(*begin($4))>::type} > ${3:vv2};
+std::transform( ${4:vv}.begin(), $4.end(), std::back_inserter($3), [${5:=}](decltype(*begin($4)) ${6:x}) -> $2 {
+  return ;$0 $6;
+});

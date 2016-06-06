@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-zip (複数シーケンスの一本化/マージ(merge))   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: zip
+# --
+zip(${1:iter1}, ${2:iter2})
+# itertools.izip($1, $2)     # (Python 2 only) iterator を返したい場合.
+# 
+# 備考: 返り値は, Python 3 では iterator. Python 2 ではリスト.

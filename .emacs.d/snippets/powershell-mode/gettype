@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: gettype (オブジェクトの型情報の取得)
+# key: gettype
+# --
+.GetType()
+

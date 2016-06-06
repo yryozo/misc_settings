@@ -1,0 +1,26 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : iterator/iterable creation(イテレータ) (独自イテレータクラスによるイテレータ生成, __iter__, next, __next__)  [演算子のオーバロード(operator overloading)]
+# group : definitions
+# --
+class ${MyIterator}(object):
+    def __init__(self${, arg1, arg2}):
+        self.${_i} = ${arg1}
+
+    def __iter__(self):
+        return self  # iterator の __iter__() は自分自身を返す
+
+    def next(self):                # (Python 2 only) Python 3 では __next__()
+        if ${self._i == N}:
+            raise StopIteration()  # 終端に達したら StopIteration
+        return $0
+
+    def __next__(self):            # (Python 3 only)
+        if ${self._i == N}:
+            raise StopIteration()  # 終端に達したら StopIteration
+        return $0
+# 
+# [Usage]
+# for x in MyIterator():
+#     ...
+
+# 備考: iterable/iterator は, for 文, in 演算子, ..., に対応可能.

@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: numeric_algorithm_sum(accumurate, reduce)
+# key: numeric_algorithm_sum
+# --
+// auto var = 
+std::accumulate( ${1:vv}.begin(), $1.end(), ${2:0} ) // $2 を初期値として'+'でたたみ込む(合計の取得に使える. 文字の連結にも使える)

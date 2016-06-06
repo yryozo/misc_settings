@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: _commented_algorithm_take
+# key: _commented_algorithm_take
+# --
+// take!
+${2:vv}.erase( $2.begin()+${3:N}, $2.end() );

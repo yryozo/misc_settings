@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : シリアライズ(serialize) : Pickle データへの/からの変換 (dumps, loads,  to_pickle, cpickle)
+# --
+# import pickle が必要 (なお Python 2 の場合は  import cPickle as pickle  のほうが高速)
+${1:str} = pickle.dumps(${2: [1, 'simple']})  # Pickle データへの変換
+data = pickle.loads($1)  # Pickle データからの変換
+
+# 備考: シリアライズ処理モジュールとしては marshal もあるが, 一般的には pickle が推奨。
+#       (marshal は主に .pyc ファイルをサポートするために存在)
+# 備考: 簡単なオブジェクトなら json モジュールも使える.

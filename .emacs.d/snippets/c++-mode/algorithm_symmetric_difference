@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_symmetric_difference
+# key: algorithm_symmetric_difference
+# --
+// WARNING: 2 containers must be sorted!
+${1:vector}< remove_reference<decltype(*begin($3))>::type > ${2:vv3}; // 結果
+std::set_symmetric_difference(${3:vv1}.begin(), $3.end(), ${4:vv2}.begin(), $4.end(), back_inserter($2));

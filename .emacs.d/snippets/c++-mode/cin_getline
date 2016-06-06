@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: cin_getline
+# key: cin_getline
+# --
+// string に cin する場合と異なり, 途中に空白文字などがあっても1行分読み取る. 
+// なお, 最後の改行文字は捨てられるので, chomp 処理は不要.
+string ${1:str};
+std::getline(std::cin, $1);
+

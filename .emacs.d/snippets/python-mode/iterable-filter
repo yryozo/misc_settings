@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: iterable-filter (高階関数)   [string, list, tuple, bytearray, buffer, xrange, set, dict(hash/map), file, iterator/generator, ]
+# key: filter
+# --
+filter(${1:func}, ${2:ll})
+# itertools.ifilter($1, $2)     # (Python 2 only) iterator を返したい場合.
+# 
+# 備考: 返り値は, Python 3 では iterator.
+#       Python 2 では, str か unicode か tuple の場合は同じ型。 そうでなければ list。

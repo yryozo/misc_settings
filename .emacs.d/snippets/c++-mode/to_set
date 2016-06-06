@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: to_set
+# key: to_set
+# --
+std::set< remove_reference<decltype(*begin($3))>::type > ${2:ss}(${3:vv}.begin(), $3.end());
+// std::set< remove_reference<decltype(*begin($3))>::type, greater<remove_reference<decltype(*begin($3))>::type> > $2($3.begin(), $3.end());  // iteration 時に大きい順で取得したい場合 (rbegin() と rend() で辿ってもいいが...)

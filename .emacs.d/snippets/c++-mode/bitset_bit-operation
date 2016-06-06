@@ -1,0 +1,10 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: bitset_bit-operation!(and/or/xor/not/lshift/rshift)
+# key: bitset_bit-operation
+# --
+${1:bs1} &= ${2:bs2}; // and
+${1:bs1} |= ${2:bs2}; // or
+${1:bs1} ^= ${2:bs2}; // xor
+${1:bs1} = ~$1; // not
+${1:bs1} <<= ${2:n}; // lshift.  $1 = $1 << $2 でもOK
+${1:bs1} >>= ${2:n}; // rshift.  $1 = $1 >> $2 でもOK 

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: set_remove!(delete, erase)
+# key: set_remove!
+# --
+${1:ss}.erase(${2:val});

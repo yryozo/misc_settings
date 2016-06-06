@@ -1,0 +1,20 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: list-sort!(リストのソート)  [BANG!]   (リスト, 可変長配列(variable-length arrays))
+# key: list-sort!
+# --
+${1:ll}.sort()              # 昇順(小さい値ほど前)にソート
+$1.sort(reverse=True)  # 降順にソート
+# 比較方法のカスタマイズは key 引数. 比較基準値を返す1引数関数を指定する.
+# (なお, 複数条件で辞書式ソートしたい場合はタプルを返せばいい)
+#   ll.sort(key=str.lower)  # 大文字小文字の区別なし比較(小文字化して比較) 
+#   ll.sort(key=lambda student: student.age)   # ageで比較
+#   ll.sort(key=attrgetter('age')) # (上と同様)ageで比較 ("from operator import attrgetter" が必要)
+#   ll.sort(key=attrgetter('age', 'grade')) # ageで比較し, 同じならgradeで比較 ("from operator import attrgetter" が必要)
+#   ll.sort(key=itemgetter(2))  # 対象のタプルの第3要素で比較 ("from operator import itemgetter" が必要)
+#   ll.sort(key=itemgetter(2, 3))  # 対象のタプルの第3要素で比較し, 同じなら第4要素で比較 ("from operator import itemgetter" が必要)
+#   ll.sort(key=methodcaller('name'))  # 対象のname()メソッドの返り値で比較 ("from operator import methodcaller" が必要)
+# なお, 直接2値を比較する(-1/0/1を返す)関数を比較に使いたければ,  functools.cmp_to_key() を使えばいい.
+#   ll.sort(key=cmp_to_key(numeric_cmp))
+# 
+# 備考: Python 2.2 以降, ソートは stable (同じキー同士の順序は保たれる)
+# 備考: 比較は __lt__() で行われるため, __lt__() のオーバーライドにより独自クラスにも対応できる.

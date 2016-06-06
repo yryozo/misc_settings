@@ -1,0 +1,61 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name : file/directory: 種々のファイル操作/ディレクトリ操作 (ディレクトリ作成(mkdir),コピー(copy,cp,cp -r),リネーム(rename,mv),削除(rm,rmdir,rm -rf),存在テスト(test,[),権限の変更(chmod),作業ディレクトリの変更/取得(cd,pwd),ファイルの一覧取得(ls),etc)
+# --
+# import os
+# import shutil
+# import stat
+# import glob
+
+## ディレクトリの作成 (mkdir 相当, mkdir -p 相当)
+os.mkdir("path")
+os.makedirs("aaa/bbb")  # 再帰的に作成 (mkdir -p 相当)
+
+## ファイル/ディレクトリのコピー (cp 相当)
+## (注: 一部のファイル属性は copystat() や copy2() でもコピーできない (ACL、ファイルのオーナー、グループ、等))
+shutil.copy("srcdir/srcfile", "dst")  # ファイルをコピーする。 コピー先はディレクトリ名orファイル名を指定 (ディレクトリ名の場合は同名のファイルが作られる)
+shutil.copystat("srcdir/srcfile", "dstfile")  # ファイルの属性の一部(パーミッション、最終アクセス時間、最終更新時間、フラグ)をコピーする。 対象はファイル名を指定。  (注: 所有者、グループ、はコピーできない)
+shutil.copy2("srcdir/srcfile", "dst")  # copy() と copystat() をまとめて行う. (ファイルをコピーし属性もコピー. cp -p 相当)
+
+shutil.copytree("srcdir", "dstdir")  # ディレクトリを再帰的にコピーする。 対象はどちらもディレクトリ名を指定 (なお、dstはまだ存在しないディレクトリ名でないといけない。)。 各ファイルは copy2() でコピーされる。シンボリックリンクは, リンク先の本体がコピーされる。
+shutil.copytree("srcdir", "dstdir", symlinks=True)  # シンボリックリンクも, シンボリックリンクとしてコピー。
+shutil.copytree("srcdir", "dstdir", ignore=shutil.ignore_patterns('*.py'))  # コピーしないファイルのパターンも指定可能。
+
+# ファイルやディレクトリの移動/名前変更 (mv 相当)
+shutil.move("src", "dst")
+os.rename("src", "dst")     # 2つが異なるファイルシステム上にある場合, 失敗するケースがある
+
+# ファイルの削除 (rm 相当)
+os.remove("path")
+
+# ディレクトリの削除 (rmdir 相当, rm -rf 相当)
+os.rmdir("path")       # 空でないと削除できない (rmdir 相当)
+shutil.rmtree("path")  # 空でなくても削除できる (rm -rf 相当)
+
+# ファイル/ディレクトリの存在確認/種別確認 (test 相当)
+os.path.exists('path')  # 存在するかどうか
+os.path.isdir('path')   # ディレクトリかどうか
+os.path.isfile('path')  # ファイルかどうか
+os.path.islink('path')  # シンボリックリンクかどうか
+
+# ファイル権限の変更
+os.chmod("path", stat.S_IRUSR | stat.S_IWUSR)  # フラグは S_I + (R|W|X) + (USR|GRP|OTH) の9パターン
+
+# ファイルのオーナーの変更
+os.chown("path", uid, gid)  # uid/gidのどちらかを変更したくない場合は, そちらには-1を指定.
+
+# ファイルの更新日変更(最終アクセス時刻および最終修正時刻を設定) (なお第2引数は(アクセス日時,修正日時))
+os.utime("path", (1, 10000))
+
+# ファイルの詳細情報の取得
+st = os.stat("path")
+
+# 作業ディレクトリの変更 (cd 相当)
+os.chdir("/")
+
+# 作業ディレクトリの取得 (pwd 相当)
+cwd = os.getcwd()
+
+# ディレクトリ内の要素一覧の取得 (ls 相当)
+files = os.listdir(path)
+files = os.listdir()         # path を指定しなければ current directory が対象
+files = glob.glob('test/*')  # ワイルドカード(shell glob)が使いたい場合

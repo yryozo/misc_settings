@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: multiset_remove!(delete, erase)
+# key: multiset_remove!
+# --
+${1:ss}.erase($1.find(${2:val}));  // 値が val である要素を 1つ削除

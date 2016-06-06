@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: tuple_get-set
+# key: tuple_get-set
+# --
+std::get<${2:0}>(${1:tpl})
+
+std::get<${2:0}>(${1:tpl}) = ${3:val};

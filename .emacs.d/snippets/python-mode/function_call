@@ -1,0 +1,9 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: function-call (関数呼び出し, メソッド呼び出し, function application),  apply(関数適用を行う高階関数)
+# key: function-call
+# --
+${1:func}(${2:arg1, arg2})
+# $1(voltage=1000000, action='VOOOOOM')  # 仮引数名を使ってキーワード形式で呼び出すことも可能.
+# $1(*tuple)   # 引数が入ったタプルを多値に展開して呼び出すことも可能 (引数リストのアンパック, applyに相当)
+# $1(**dict)   # 引数が入った辞書をキーワード形式の引数に展開して呼び出すことも可能 (引数リストのアンパック, applyに相当)
+# apply($1, args)  # (Python 2 only) 引数リストのアンパックで代替可. apply() 関数は Python 3 で削除.

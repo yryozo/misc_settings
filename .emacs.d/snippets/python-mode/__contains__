@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: __contains__ (in(not in)演算子の定義) [演算子のオーバロード(operator overloading)]
+# --
+def __contains__(self, ${1:el}):
+    $0
+# 備考: __contains__() を定義しない場合, in(not in)演算子は __iter__() (それもなければ __getitem__()) を代わりに使用する.

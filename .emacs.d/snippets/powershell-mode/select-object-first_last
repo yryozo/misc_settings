@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: select-object-first_last [PIPELINE] (先頭のN要素を抽出, 最後のN要素を抽出, head, tail, take, drop)
+# key: select-object-first_last
+# --
+| Select-Object -First ${1:42}
+# | Select-Object -Last ${1:42}

@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: file-sed (sed -i s/.../..., ファイル中の指定の文字列を置き換える)
+# key: sed
+# --
+Get-Content ${1:.\foo.txt} | % { $_ -replace ${2:"posh"},${3:"PowerShell"} } | Set-Content -Encoding UTF8 $1

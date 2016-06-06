@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: math_log2
+# key: math_log2
+# --
+auto x = std::log2(${1:n});

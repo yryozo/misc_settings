@@ -1,0 +1,6 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: string-concat (文字列の結合, concatenatation)
+# key: string-concat
+# --
+${1:"hoge"} + ${2:"fuga"}
+# str += ${2:"aa"}

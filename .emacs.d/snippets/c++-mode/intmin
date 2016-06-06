@@ -1,0 +1,5 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: int_min
+# key: int_min
+# --
+INT_MIN

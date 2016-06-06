@@ -1,0 +1,7 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: do_while (do while)
+# key: do
+# --
+do {
+   $0
+} while (${1:$i -lt $arr.Length})

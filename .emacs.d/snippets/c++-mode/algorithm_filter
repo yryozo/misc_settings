@@ -1,0 +1,8 @@
+# -*- coding: utf-8; mode: snippet -*-
+# name: algorithm_filter(copy_if)
+# key: algorithm_filter
+# --
+${1:vector}< remove_reference<decltype(*begin($3))>::type > ${2:vv2};
+std::copy_if( ${3:vv}.begin(), $3.end(), std::back_inserter($2), [${4:=}](decltype(*begin($3)) ${5:x}) -> bool {
+  return ;$0 $5 > 42;
+});
